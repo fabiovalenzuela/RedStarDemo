@@ -8,7 +8,7 @@ import java.sql.SQLException;
 /**
  * Class: LoginDB
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 24, 2020
+ * Date: October 25, 2020
  * For: ITEC 3860 Project RedStar
  */
 public class LoginDB {
@@ -49,7 +49,7 @@ public class LoginDB {
     public boolean addUser(String userID, String pwd) {
         try {
             SQLiteDB sdb = LoginController.getDB();
-            String sql = "INSERT INTO User (" + userID + ", " + pwd + ")";
+            String sql = "INSERT INTO User(userID, pwd) Values('" + userID + "', '" + pwd + "')";
             sdb.updateDB(sql);
             /* Close the SQLiteDB connection since SQLite only allows one update */
             sdb.close();

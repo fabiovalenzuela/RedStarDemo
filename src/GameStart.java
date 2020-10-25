@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * Class: GameStart
  * Author: Annette Vinson
- * Date: October 17, 2020
+ * Date: October 24, 2020
  * For: ITEC 3860 Project RedStar
  */
 public class GameStart {

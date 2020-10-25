@@ -10,7 +10,7 @@ import javafx.stage.Stage;
  * Class: GameUI
  * Author: Annette Vinson
  * Date: October 24, 2020
- * For: ITEC 3860 Project
+ * For: ITEC 3860 Project RedStar
  * Copied/modified from Rick Price GameUI
  */
 

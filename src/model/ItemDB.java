@@ -9,8 +9,8 @@ import java.sql.SQLException;
 /**
  * Class: ItemDB
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 24, 2020
- * For: ITEC 3860 MiniGame3
+ * Date: October 2t, 2020
+ * For: ITEC 3860 Project RedStar
  * Copied/modified from Rick Price ItemDB
  */
 public class ItemDB {

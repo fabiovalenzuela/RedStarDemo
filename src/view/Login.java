@@ -4,7 +4,7 @@ package view;
  * Class: Login
  * Copied from: R. Price
  * Modifed by: Annette Vinson
- * October 24, 2020
+ * October 25, 2020
  * For: ITEC 3860 Project RedStar
  *
  */

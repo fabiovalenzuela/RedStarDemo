@@ -18,6 +18,7 @@ import java.util.ArrayList;
  */
 public class CharacterDB {
 
+
     /*
      * Method: getNextCharacterID
      * Purpose: Gets the id for the next character.

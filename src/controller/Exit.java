@@ -8,7 +8,7 @@ import java.sql.SQLException;
 /*
  * Class: Exit
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 6, 2020
+ * Date: October 24, 2020
  * For: ITEC 3860 MiniGame3
  */
 public class Exit {

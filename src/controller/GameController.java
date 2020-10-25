@@ -1,5 +1,12 @@
 package controller;
 
+/*
+ * Class: GameController
+ * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
+ * Date: October 25, 2020
+ * For: ITEC 3860 Project
+ */
+
 import exceptions.InvalidGameException;
 import model.RoomDB;
 import model.SQLiteDB;
@@ -122,7 +129,7 @@ public class GameController {
      -----------------------------------
     */
     public String getWelcome() {
-        return ("Welcome to Mini Game 3. \n" +
+        return ("Welcome to Project RedStar. \n" +
                 "You will proceed through rooms based upon your entries.\n" +
                 "You can navigate by using the entire direction \n" +
                 "or just the first letter.\n" +

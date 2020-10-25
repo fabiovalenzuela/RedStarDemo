@@ -9,9 +9,9 @@ import java.util.ArrayList;
 /*
  * Class: Character
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 17, 2020
+ * Date: October 24, 2020
  * For: ITEC 3860 Project
- * Copied/modified from Rick Price Character
+ * Copied/modified from Rick Price
  */
 public class Character extends Being {
 
