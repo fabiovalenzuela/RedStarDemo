@@ -7,7 +7,7 @@ import java.sql.SQLException;
 /**
  * Class: CreateFilesController
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 6, 2020
+ * Date: October 24, 2020
  * For: ITEC 3860 MiniGame3
  * Copied from Rick Price CreateFilesController
  */

@@ -5,7 +5,7 @@ import exceptions.InvalidGameException;
 /*
  * Class: Being
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 17, 2020
+ * Date: October 24, 2020
  * For: ITEC 3860 Project
  * Copied/modified from Rick Price Being
  */

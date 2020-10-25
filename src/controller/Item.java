@@ -4,7 +4,7 @@ package controller;
  * Class:   Item
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
  * Class:   ITEC 3860 Fall 2020
- * Date:    September 12, 2020
+ * Date:    October 25, 2020
  *
  * */
 

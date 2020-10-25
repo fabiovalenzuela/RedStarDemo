@@ -8,6 +8,8 @@ CREATE TABLE ItemRoom(roomID int Primary Key not Null, itemID int not null);
 CREATE TABLE MonsterRoom(roomID int Primary Key not Null, iD int not null);
 CREATE TABLE Item(itemID int Primary Key not Null, name text not null, description text not null, itemRoomID int not null);
 CREATE TABLE Puzzle(puzzleID int Primary Key not Null, puzzleName text not null, puzzleDesc text not null, puzzleType, puzzleRoomID int not null);
-CREATE TABLE User(userID text Primary Key not Null, pwd text not null);
+CREATE TABLE CharText(iD int Primary Key not Null, seq int not null, lineSeq int not null, text text not null, textUsed text not null);
+
+
 
 

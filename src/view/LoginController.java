@@ -4,7 +4,7 @@ package view;
  * Class:  LoginController
  * Copied/Modified from: R. Price
  * Modifed by: Annette Vinson
- * October 24, 2020
+ * October 25, 2020
  * For: ITEC 3860 Project RedStar
  */
 
@@ -28,6 +28,7 @@ public class LoginController {
     @FXML private TextField errorMsg;
 
     private static SQLiteDB sdb;
+    boolean validLogin;
 
     /*
      * Method: getDB
@@ -35,9 +36,9 @@ public class LoginController {
      */
     public static SQLiteDB getDB() {
         try {
-            sdb = new SQLiteDB("User");
+            sdb = new SQLiteDB("User.db");
         }
-        catch (ClassNotFoundException | SQLException e) {
+        catch (ClassNotFoundException | SQLException | RuntimeException e) {
             System.out.println("ERROR!\nThere was a problem opening the database \n" + e.getMessage());
         }
 
@@ -47,13 +48,13 @@ public class LoginController {
     @FXML
     protected void login(ActionEvent event) {
         errorMsg.setText("");
-        boolean valid;
+        validLogin = false;
         try {
             String userID = userTF.getText();
             String pwd = passwordPF.getText();
             LoginDB logDb = new LoginDB();
-            valid = logDb.getUser(userID, pwd);
-            if (!valid) {
+            validLogin = logDb.getUser(userID, pwd);
+            if (!validLogin) {
                 errorMsg.setText("Invalid login");
             }
 
@@ -64,18 +65,20 @@ public class LoginController {
             /* valid user?
                 fxml loader
              */
-        Stage stage = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            GridPane root = loader.load(getClass().getResource("GameUI.fxml"));
-            Scene scene = new Scene(root, 700, 425);
-            stage.setScene(scene);
-            stage.setTitle("Project RedStar");
-            ControllerUI uic = (ControllerUI) loader.getController();
+        if (validLogin) {
+            Stage stage = new Stage();
+            try {
+                FXMLLoader loader = new FXMLLoader();
+                GridPane root = loader.load(getClass().getResource("GameUI.fxml"));
+                Scene scene = new Scene(root, 700, 425);
+                stage.setScene(scene);
+                stage.setTitle("Project RedStar");
+                ControllerUI uic = (ControllerUI) loader.getController();
 //            uic.setUser(userID);
-            stage.show();
-        } catch (Exception e) {
-            errorMsg.setText("Error displaying screen");
+                stage.show();
+            } catch (Exception e) {
+                errorMsg.setText("Error displaying screen");
+            }
         }
     }
 

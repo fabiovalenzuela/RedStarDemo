@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * Class: Player
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
  * Date: October 24, 2020
- * For: ITEC 3860 MiniGame3
+ * For: ITEC 3860 Project RedStar
  */
 
 public class PuzzleDB {
