@@ -1,0 +1,1 @@
+CREATE TABLE User(userID String Primary Key not Null, pwd String not null);
