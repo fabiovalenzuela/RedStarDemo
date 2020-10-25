@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ControllerUI">
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+    </rowConstraints>
+    <columnConstraints>
+        <ColumnConstraints fillWidth="false" minWidth="40.0" prefWidth="250.0" />
+        <ColumnConstraints minWidth="40.0" prefWidth="250.0" />
+        <ColumnConstraints minWidth="30.0" prefWidth="250.0" />
+        <ColumnConstraints minWidth="40.0" prefWidth="250.0" />
+    </columnConstraints>
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+    </padding>
+    <children>
+        <Label text="Command:" GridPane.rowIndex="6">
+            <font>
+                <Font size="20.0" />
+            </font></Label>
+        <Label alignment="CENTER" prefHeight="30.0" prefWidth="1057.0" text="Mini Game 3" GridPane.columnSpan="2147483647">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <TextField id="#errorMsg" fx:id="commandTF" stylesheets="@game.css" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="6" />
+        <Button fx:id="okBtn" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#process" prefHeight="26.0" prefWidth="63.0" text="Start" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+        <Button mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="60.0" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+        <TextArea fx:id="descTA" editable="false" prefHeight="194.0" prefWidth="1126.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="5" />
+        <TextField id="#msgTF" fx:id="msgTF" alignment="CENTER" editable="false" prefHeight="26.0" prefWidth="1070.0" stylesheets="@game.css" GridPane.columnSpan="2147483647" GridPane.rowIndex="8">
+            <font>
+                <Font name="Arial Bold" size="14.0" />
+            </font>
+            <effect>
+                <ColorAdjust />
+            </effect>
+        </TextField>
+    </children>
+</GridPane>
