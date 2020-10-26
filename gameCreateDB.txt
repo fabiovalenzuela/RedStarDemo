@@ -1,7 +1,7 @@
 CREATE TABLE Room(roomID int Primary Key not Null, name text not null, description text not null, visited int not null);
-CREATE TABLE Monster(iD int Primary Key not Null, name text not null, description text not null, hitPoints int not null, minDamage int not null, maxDamage int not null, chanceHit int not null);
-CREATE TABLE Player(iD int Primary Key not Null, name text not null, description text not null, hitPoints int not null, minDamage int not null, maxDamage int not null, chanceHit int not null);
-CREATE TABLE Character(iD int Primary Key not Null, name text not null, description text not null, hitPoints int not null, minDamage int not null, maxDamage int not null, chanceHit int not null);
+CREATE TABLE Monster(iD int Primary Key not Null, name text not null, description text not null, hitPoints int not null, minDamage int not null, maxDamage int not null, chanceHit int not null, roomID int not null);
+CREATE TABLE Player(iD int Primary Key not Null, name text not null, description text not null, hitPoints int not null, minDamage int not null, maxDamage int not null, chanceHit int not null, roomID int not null);
+CREATE TABLE Character(iD int Primary Key not Null, name text not null, description text not null, hitPoints int not null, minDamage int not null, maxDamage int not null, chanceHit int not null, roomID int not null);
 CREATE TABLE Exit(exitID int Primary Key not Null, direction text not null, destination int not null);
 CREATE TABLE ExitRoom(roomID int Primary Key not Null, exitID int not null);
 CREATE TABLE ItemRoom(roomID int Primary Key not Null, itemID int not null);

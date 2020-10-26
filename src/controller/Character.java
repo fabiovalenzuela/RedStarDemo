@@ -64,7 +64,8 @@ public class Character extends Being {
                 "\ncharacter hitPoints = " + getHitPoints() +
                 "\ncharacter minDamage = " + getMinDamage() +
                 "\ncharacter maxDamage = " + getMaxDamage() +
-                "\ncharacter chanceHit = " + getChanceHit();
+                "\ncharacter chanceHit = " + getChanceHit() +
+                "\ncharacter roomID = " + getRoomID();
     }
 
 

@@ -56,6 +56,7 @@ public class PlayerDB {
                 player.setMaxDamage(rs.getInt("maxDamage"));
                 player.setMinDamage(rs.getInt("minDamage"));
                 player.setChanceHit(rs.getInt("chanceHit"));
+                player.setRoomID(rs.getInt("roomID"));
             } else {
                 throw new SQLException("Player " + id + " not found.");
             }
@@ -104,6 +105,7 @@ public class PlayerDB {
                 player.setMaxDamage(rs.getInt("maxDamage"));
                 player.setMinDamage(rs.getInt("minDamage"));
                 player.setChanceHit(rs.getInt("chanceHit"));
+                player.setRoomID(rs.getInt("roomID"));
                 players.add(player);
             }
         } catch (InvalidGameException ige) {

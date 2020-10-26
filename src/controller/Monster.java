@@ -64,7 +64,8 @@ public class Monster extends Being {
                 "\nmonster hitPoints = " + getHitPoints() +
                 "\nmonster minDamage = " + getMinDamage() +
                 "\nmonster maxDamage = " + getMaxDamage() +
-                "\nmonster chanceHit = " + getChanceHit();
+                "\nmonster chanceHit = " + getChanceHit() +
+                "\nMonster roomID = " + getRoomID();
     }
 
 
