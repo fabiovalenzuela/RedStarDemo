@@ -101,19 +101,23 @@ public class GameController {
         else if (command.equalsIgnoreCase("DOWN") ||
                 (firstChar.equalsIgnoreCase("D"))) {
             commandStr = "DOWN";
-//       }
-//        else if (command.equalsIgnoreCase("GET") ||
-//                (firstChar.equalsIgnoreCase("G"))) {
-//            commandStr = "GET";
-//        } else if (command.equalsIgnoreCase("REMOVE") ||
-//                (firstChar.equalsIgnoreCase("R"))) {
-//            commandStr = "REMOVE";
-//        } else if (command.equalsIgnoreCase("LOOK") ||
-//                (firstChar.equalsIgnoreCase("L"))) {
-//            commandStr = "LOOK";
-//        } else if (command.equalsIgnoreCase("BACKPACK") ||
-//                (firstChar.equalsIgnoreCase("B"))) {
-//            commandStr = "BACKPACK"; }
+       }
+        else if (command.equalsIgnoreCase("GET") ||
+                (command.equalsIgnoreCase("TAKE")) ||
+                (command.equalsIgnoreCase("PICKUP")) ||
+                (command.equalsIgnoreCase("PICK UP")) ||
+                (firstChar.equalsIgnoreCase("G"))) {
+            commandStr = "GET";
+        } else if (command.equalsIgnoreCase("REMOVE") ||
+                (command.equalsIgnoreCase("DROP")) ||
+                (firstChar.equalsIgnoreCase("R"))) {
+            commandStr = "REMOVE";
+        } else if (command.equalsIgnoreCase("LOOK") ||
+                (firstChar.equalsIgnoreCase("L"))) {
+            commandStr = "LOOK";
+        } else if (command.equalsIgnoreCase("BACKPACK") ||
+                (firstChar.equalsIgnoreCase("B"))) {
+            commandStr = "BACKPACK";
         } else {
             throw new InvalidGameException("Invalid Command");
         }

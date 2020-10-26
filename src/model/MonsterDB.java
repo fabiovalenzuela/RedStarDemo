@@ -57,6 +57,7 @@ public class MonsterDB {
                 monster.setMaxDamage(rs.getInt("maxDamage"));
                 monster.setMinDamage(rs.getInt("minDamage"));
                 monster.setChanceHit(rs.getInt("chanceHit"));
+                monster.setRoomID(rs.getInt("roomID"));
             } else {
                 throw new SQLException("Monster " + id + " not found.");
             }
@@ -105,6 +106,7 @@ public class MonsterDB {
                 monster.setMaxDamage(rs.getInt("maxDamage"));
                 monster.setMinDamage(rs.getInt("minDamage"));
                 monster.setChanceHit(rs.getInt("chanceHit"));
+                monster.setRoomID(rs.getInt("roomID"));
                 monsters.add(monster);
             }
         } catch (InvalidGameException ige) {

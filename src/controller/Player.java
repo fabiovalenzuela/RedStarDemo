@@ -64,7 +64,8 @@ public class Player extends Being {
                 "\nplayer hitPoints = " + getHitPoints() +
                 "\nplayer minDamage = " + getMinDamage() +
                 "\nplayer maxDamage = " + getMaxDamage() +
-                "\nplayer chanceHit = " + getChanceHit();
+                "\nplayer chanceHit = " + getChanceHit() +
+                "\nplayer roomID = " + getRoomID();
     }
 
 

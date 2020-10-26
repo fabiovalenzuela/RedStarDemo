@@ -59,6 +59,7 @@ public class CharacterDB {
                 character.setMaxDamage(rs.getInt("maxDamage"));
                 character.setMinDamage(rs.getInt("minDamage"));
                 character.setChanceHit(rs.getInt("chanceHit"));
+                character.setRoomID(rs.getInt("roomID"));
             } else {
                 throw new SQLException("Character " + id + " not found.");
             }
@@ -107,6 +108,7 @@ public class CharacterDB {
                 character.setMaxDamage(rs.getInt("maxDamage"));
                 character.setMinDamage(rs.getInt("minDamage"));
                 character.setChanceHit(rs.getInt("chanceHit"));
+                character.setRoomID(rs.getInt("roomID"));
                 characters.add(character);
             }
         } catch (InvalidGameException ige) {

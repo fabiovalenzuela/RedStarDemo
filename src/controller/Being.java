@@ -17,6 +17,7 @@ abstract public class Being {
     private int minDamage;
     private int maxDamage;
     private double chanceHit;
+    private int roomID;
 
     public Being() {
     }
@@ -30,10 +31,12 @@ abstract public class Being {
         setMinDamage(0);
         setMaxDamage(0);
         setChanceHit(0.0);
+        setRoomID(0);
     }
 
     public Being(int iD, String name, String description, int hitPoints,
-                 int minDamage, int maxDamage, double chanceHit) throws InvalidGameException {
+                 int minDamage, int maxDamage, double chanceHit, int roomID)
+            throws InvalidGameException {
         setID(iD);
         setName(name);
         setDescription(description);
@@ -41,6 +44,7 @@ abstract public class Being {
         setMinDamage(minDamage);
         setMaxDamage(maxDamage);
         setChanceHit(chanceHit);
+        setRoomID(roomID);
     }
 
     /*
@@ -113,6 +117,14 @@ abstract public class Being {
         }
     }
 
+    public int getiD() {
+        return iD;
+    }
+
+    public void setiD(int iD) {
+        this.iD = iD;
+    }
+
     /*
      * Method: getMinDamage
      * @return the minDamage
@@ -161,6 +173,14 @@ abstract public class Being {
         this.chanceHit = chanceHit;
     }
 
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+
     /*
      * Method: toString
      * Purpose: Returns a String of the Monster class
@@ -174,7 +194,8 @@ abstract public class Being {
                 "\nhitPoints = " + hitPoints +
                 "\nminDamage = " + minDamage +
                 "\nmaxDamage = " + maxDamage +
-                "\nchanceHit = " + chanceHit;
+                "\nchanceHit = " + chanceHit +
+                "\nroomID = " + getRoomID();
     }
 
 
