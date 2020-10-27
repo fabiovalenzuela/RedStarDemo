@@ -186,6 +186,21 @@ abstract public class Being {
      * Purpose: Returns a String of the Monster class
      * @return
      */
+
+    /*
+     * Method: Damage
+     * Purpose: Damages both the player and the monster using a random value within a range
+     * @return
+     */
+    public int Damage(){
+        int damageDealt = random.randint(20,30);
+        int damageRecieved = random.randint(0,damageDealt);
+        enemyHealth -= damageDealt;
+        playerHealth -= damageRecieved;
+
+    }
+
+
     @Override
     public String toString() {
         return "Monster iD = " + iD +
