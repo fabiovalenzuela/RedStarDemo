@@ -31,6 +31,8 @@ public class GameDBCreate {
         buildTable("BuildMonsterRoom.txt");
         buildTable("BuildExitRoom.txt");
         buildTable("BuildCharText.txt");
+        buildTable("BuildItem.txt");
+        buildTable("BuildItemRoom.txt");
     }
 
     /*

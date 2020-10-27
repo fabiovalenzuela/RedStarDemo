@@ -3,7 +3,7 @@ package controller;
 /*
  * Class:   Item
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Class:   ITEC 3860 Fall 2020
+ * Class:   ITEC 3860 Project RedStar
  * Date:    October 25, 2020
  *
  * */
@@ -14,6 +14,7 @@ public class Item {
     private String name;
     private String description;
     private int itemRoomID;
+    private int damageRate;
 
     /*
      ------------
@@ -26,11 +27,13 @@ public class Item {
 
     public Item(int itemID, String name,
                 String description,
-                int itemRoomID) {
+                int itemRoomID,
+                int damageRate) {
         setItemID(itemID);
         setName(name);
         setDescription(description);
         setItemRoomID(itemRoomID);
+        setDamageRate(damageRate);
 
     }
     /*
@@ -80,6 +83,11 @@ public class Item {
 
     public void setItemRoomID(int itemRoomID) { this.itemRoomID = itemRoomID; }
 
+    public int getDamageRate() {
+        return damageRate;
+    }
+
+    public void setDamageRate(int damageRate) { this.damageRate = damageRate; }
     /*
      --------
      ToString
@@ -91,7 +99,8 @@ public class Item {
                 "itemID = " + itemID +
                 ", name = " + name +
                 ", description = " + description +
-                ", current room ID = " + itemRoomID;
+                ", current room ID = " + itemRoomID +
+                ", damage rate = " + damageRate;
     }
 }
 

@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Copied/modified from Rick Price RoomDB
  */
 public class RoomDB {
-    /**
+    /*
      * Method: getNextRoomID
      * Purpose: gets the next ID for a room
      *
@@ -37,7 +37,7 @@ public class RoomDB {
         return next;
     }
 
-    /**
+    /*
      * Method: getRoomDisplay
      * Purpose: Gets a room based upon the supplied ID
      *
@@ -92,9 +92,10 @@ public class RoomDB {
 
         rm.setExits(exits);
 
-        // Get items
+        /* Get items */
         ArrayList<Item> items = new ArrayList<Item>();
-        sql = "Select a.itemID, a.name, a.description " +
+        sql = "Select a.itemID, a.name, a.description, " +
+                "a.damageRate " +
                 "from Item a Inner Join ItemRoom b " +
                 "ON a.itemID = b.itemID " +
                 "where roomID = " + id;
@@ -106,17 +107,18 @@ public class RoomDB {
             item.setItemID(rs.getInt("itemID"));
             item.setName(rs.getString("name"));
             item.setDescription(rs.getString("description"));
+            item.setDamageRate(rs.getInt("damageRate"));
             items.add(item);
         }
 
         rm.setItems(items);
 
-        //Close the SQLiteDB connection since SQLite only allows one update
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return rm;
     }
 
-    /**
+    /*
      * Method: updateVisited
      * Purpose: set visited = 0 for all rooms
      * @throws SQLException
@@ -128,7 +130,7 @@ public class RoomDB {
         //Close the SQLiteDB connection since SQLite only allows one updater
         sdb.close();
     }
-    /**
+    /*
      * Method: updateAllVisited
      * Purpose: set visited = 0 for all rooms
      * @throws SQLException
@@ -137,7 +139,7 @@ public class RoomDB {
         SQLiteDB sdb = GameController.getDB();
         String sql = "Update Room set visited = 0";
         sdb.updateDB(sql);
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one updater */
         sdb.close();
     }
 }
