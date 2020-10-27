@@ -32,7 +32,7 @@
             <font>
                 <Font size="20.0" />
             </font></Label>
-        <Label alignment="CENTER" prefHeight="30.0" prefWidth="1057.0" text="Mini Game 3" GridPane.columnSpan="2147483647">
+        <Label alignment="CENTER" prefHeight="30.0" prefWidth="1057.0" text="RedStar" GridPane.columnSpan="2147483647">
             <font>
                 <Font name="System Bold" size="20.0" />
             </font>

@@ -24,12 +24,12 @@ public class CharTextDB {
         SQLiteDB sdb = GameController.getDB();
         CharText charText = new CharText();
         String sql = "Select * from CharText WHERE iD = " + id +
-                " ORDER BY iD, seq, lineSeq";
+                " ORDER BY iD, seq, usedFlag";
         ResultSet rs = sdb.queryDB(sql);
         if (rs.next()) {
             charText.setiD(rs.getInt("iD"));
             charText.setSeq(rs.getInt("seq"));
-            charText.setLineSeq(rs.getInt("lineSeq"));
+            charText.setUsedFlag(rs.getInt("usedFlag"));
             charText.setText(rs.getString("text"));
         }
         else {
