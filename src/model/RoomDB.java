@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Class: RoomDB
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 24, 2020
+ * Date: October 27, 2020
  * For: ITEC 3860 Project RedStar
  * Copied/modified from Rick Price RoomDB
  */
@@ -75,8 +75,8 @@ public class RoomDB {
         }
         // Get exits
         ArrayList<Exit> exits = new ArrayList<Exit>();
-        sql = "Select a.exitID, a.direction, a.destination " +
-                "from Exit a Inner Join ExitRoom b " +
+        sql = "Select b.exitID, b.direction, b.destination " +
+                "from ExitRoom a Inner Join Exit b " +
                 "ON a.exitID = b.exitID " +
                 "where roomID = " + id;
 
@@ -98,7 +98,7 @@ public class RoomDB {
                 "a.damageRate " +
                 "from Item a Inner Join ItemRoom b " +
                 "ON a.itemID = b.itemID " +
-                "where roomID = " + id;
+                "where itemRoomID = " + id;
 
         rs = sdb.queryDB(sql);
 
