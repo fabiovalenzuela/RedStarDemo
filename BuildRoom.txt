@@ -1,4 +1,4 @@
 CREATE TABLE Room(roomID int Primary Key not Null, name text not null, description text not null, visited int not null, visible int not null)
-INSERT INTO Room(roomID, name, description, visited) Values(1, 'Entrance', 'A dark, spooky, hole in the ground', 0, 1)
-INSERT INTO Room(roomID, name, description, visited) Values(2, 'Hall', 'A dark, slimy, tunnel leading down', 0, 1)
-INSERT INTO Room(roomID, name, description, visited) Values(3, 'Cavern', 'A huge, dark, cave. You cannot see across the cave, it disappears to the east.', 0, 1)
+INSERT INTO Room(roomID, name, description, visited, visible) Values(1, 'Entrance', 'A dark, spooky, hole in the ground', 0, 1)
+INSERT INTO Room(roomID, name, description, visited, visible) Values(2, 'Hall', 'A dark, slimy, tunnel leading down', 0, 1)
+INSERT INTO Room(roomID, name, description, visited, visible) Values(3, 'Cavern', 'A huge, dark, cave. You cannot see across the cave, it disappears to the east.', 0, 1)
