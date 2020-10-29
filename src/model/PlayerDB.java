@@ -52,7 +52,7 @@ public class PlayerDB {
                 player.setID(rs.getInt("iD"));
                 player.setName(rs.getString("name"));
                 player.setDescription(rs.getString("description"));
-                player.setHitPoints(rs.getInt("hitPoints"));
+                player.setHealth(rs.getInt("health"));
                 player.setMaxDamage(rs.getInt("maxDamage"));
                 player.setMinDamage(rs.getInt("minDamage"));
                 player.setChanceHit(rs.getInt("chanceHit"));
@@ -76,7 +76,7 @@ public class PlayerDB {
      */
     public void updateHp(int hp) throws SQLException {
         SQLiteDB sdb = GameController.getDB();
-        String sql = "Update Player set hitPoints = " + hp;
+        String sql = "Update Player set health = " + hp;
         sdb.updateDB(sql);
         //Close the SQLiteDB connection since SQLite only allows one updater
         sdb.close();
@@ -101,7 +101,7 @@ public class PlayerDB {
                 player.setID(rs.getInt("iD"));
                 player.setName(rs.getString("name"));
                 player.setDescription(rs.getString("description"));
-                player.setHitPoints(rs.getInt("hitPoints"));
+                player.setHealth(rs.getInt("health"));
                 player.setMaxDamage(rs.getInt("maxDamage"));
                 player.setMinDamage(rs.getInt("minDamage"));
                 player.setChanceHit(rs.getInt("chanceHit"));

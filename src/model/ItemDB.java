@@ -35,7 +35,7 @@ public class ItemDB {
     }
 
     /*
-     * Method: getItemDisplay
+     * Method: getItem
      * Purpose: Gets a item based upon the supplied ID
      *
      * @param id

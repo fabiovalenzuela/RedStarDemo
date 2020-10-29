@@ -1,7 +1,10 @@
 package controller;
 
 import exceptions.InvalidGameException;
+import model.ItemDB;
+import model.RoomDB;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 /*
  * Class: Room
@@ -43,6 +46,17 @@ public class Room {
         setItems(items);
     }
 
+    /*
+     * Method: getRoom
+     * Purpose: Gets a specified room from the Room table
+     * @param id
+     * @return Room
+     * @throws SQLException
+     */
+    public Room getRoom(int id) throws SQLException, InvalidGameException {
+        RoomDB rdb = new RoomDB();
+        return rdb.getRoom(id);
+    }
 
     /*
      --------------------------
