@@ -3,7 +3,7 @@ package view;
 /**
  * Class: ControllerUI
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 25, 2020
+ * Date: October 27, 2020
  * For: ITEC 3860 Project RedStar
  */
 
@@ -34,6 +34,8 @@ public class ControllerUI {
         descTA.setText(gc.getWelcome());
         okBtn.setText("Start");
         msgTF.clear();
+        commandTF.setVisible(false);
+        msgTF.setVisible(false);
     }
 
     @FXML
@@ -48,8 +50,10 @@ public class ControllerUI {
                 gc.updateVisited();
                 // Get room 1
                 descTA.setText(gc.getRoomData(1));
+                commandTF.setVisible(true);
             } catch (SQLException sqe) {
                 msgTF.setId("#errorMsg");
+                msgTF.setVisible(true);
                 msgTF.setText(sqe.getMessage());
             }
         // ---------------
@@ -65,14 +69,17 @@ public class ControllerUI {
                 }
                 descTA.setText(gc.getRoomData(nextRoomID));
                 commandTF.setText("");
+                msgTF.setVisible(false);
             } catch (InvalidGameException e) {
                 msgTF.setId("#errorMsg");
                 msgTF.setText(e.getMessage());
+                msgTF.setVisible(true);
             }
         }
         // Invalid command entered
         else {
             msgTF.setText("Must enter a valid command");
+            msgTF.setVisible(true);
         }
 
 

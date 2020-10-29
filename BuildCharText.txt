@@ -1,3 +1,3 @@
-CREATE TABLE CharText(iD int Primary Key not Null, seq int not null, lineSeq int not null, text text not null, textUsed text not null)
-INSERT INTO CharText(iD, seq, lineSeq, text) Values(1,1,1,"Hi.  You're in a dark place.  Where are you going?")
-INSERT INTO CharText(iD, seq, lineSeq, text) Values(1,2,1,"I am a magic worm.  I come from the land of giant magic worms.  My father is the king | of magic worms.  Would you like to meet my family?")
+CREATE TABLE CharText(iD int not Null, seq int not null, usedFlag int not null, text text not null)
+INSERT INTO CharText(iD, seq, usedFlag, text) Values(1,1,1,"Hi.  You're in a dark place.  Where are you going?")
+INSERT INTO CharText(iD, seq, usedFlag, text) Values(1,2,1,"I am a magic worm.  I come from the land of giant magic worms.  My father is the king | of magic worms.  Would you like to meet my family?")

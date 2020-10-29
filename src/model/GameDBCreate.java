@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * Class: GameDBCreate
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 25, 2020
+ * Date: October 27, 2020
  * For: ITEC 3860 Project RedStar
  * Copied/modified from Rick Price GameDBCreate
  */
@@ -25,17 +25,20 @@ public class GameDBCreate {
      */
     public void buildTables() throws SQLException {
         buildTable("BuildRoom.txt");
+        buildTable("BuildExit.txt");
         buildTable("BuildMonster.txt");
         buildTable("BuildPlayer.txt");
         buildTable("BuildCharacter.txt");
         buildTable("BuildMonsterRoom.txt");
         buildTable("BuildExitRoom.txt");
         buildTable("BuildCharText.txt");
+        buildTable("BuildItem.txt");
+        buildTable("BuildItemRoom.txt");
     }
 
     /*
      * Method: buildTable
-     * Purpose: Build the Room table and load data
+     * Purpose: Build a table and load data
      * @return void
      * @throws SQLException
      */

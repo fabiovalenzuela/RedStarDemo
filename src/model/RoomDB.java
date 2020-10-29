@@ -12,12 +12,12 @@ import java.util.ArrayList;
 /**
  * Class: RoomDB
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 24, 2020
+ * Date: October 27, 2020
  * For: ITEC 3860 Project RedStar
  * Copied/modified from Rick Price RoomDB
  */
 public class RoomDB {
-    /**
+    /*
      * Method: getNextRoomID
      * Purpose: gets the next ID for a room
      *
@@ -37,7 +37,7 @@ public class RoomDB {
         return next;
     }
 
-    /**
+    /*
      * Method: getRoomDisplay
      * Purpose: Gets a room based upon the supplied ID
      *
@@ -75,8 +75,8 @@ public class RoomDB {
         }
         // Get exits
         ArrayList<Exit> exits = new ArrayList<Exit>();
-        sql = "Select a.exitID, a.direction, a.destination " +
-                "from Exit a Inner Join ExitRoom b " +
+        sql = "Select b.exitID, b.direction, b.destination " +
+                "from ExitRoom a Inner Join Exit b " +
                 "ON a.exitID = b.exitID " +
                 "where roomID = " + id;
 
@@ -92,12 +92,13 @@ public class RoomDB {
 
         rm.setExits(exits);
 
-        // Get items
+        /* Get items */
         ArrayList<Item> items = new ArrayList<Item>();
-        sql = "Select a.itemID, a.name, a.description " +
+        sql = "Select a.itemID, a.name, a.description, " +
+                "a.damageRate " +
                 "from Item a Inner Join ItemRoom b " +
                 "ON a.itemID = b.itemID " +
-                "where roomID = " + id;
+                "where itemRoomID = " + id;
 
         rs = sdb.queryDB(sql);
 
@@ -106,17 +107,18 @@ public class RoomDB {
             item.setItemID(rs.getInt("itemID"));
             item.setName(rs.getString("name"));
             item.setDescription(rs.getString("description"));
+            item.setDamageRate(rs.getInt("damageRate"));
             items.add(item);
         }
 
         rm.setItems(items);
 
-        //Close the SQLiteDB connection since SQLite only allows one update
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return rm;
     }
 
-    /**
+    /*
      * Method: updateVisited
      * Purpose: set visited = 0 for all rooms
      * @throws SQLException
@@ -128,7 +130,7 @@ public class RoomDB {
         //Close the SQLiteDB connection since SQLite only allows one updater
         sdb.close();
     }
-    /**
+    /*
      * Method: updateAllVisited
      * Purpose: set visited = 0 for all rooms
      * @throws SQLException
@@ -137,7 +139,7 @@ public class RoomDB {
         SQLiteDB sdb = GameController.getDB();
         String sql = "Update Room set visited = 0";
         sdb.updateDB(sql);
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one updater */
         sdb.close();
     }
 }

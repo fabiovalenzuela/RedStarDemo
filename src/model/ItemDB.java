@@ -51,6 +51,7 @@ public class ItemDB {
             it.setItemID(rs.getInt("itemID"));
             it.setName(rs.getString("name"));
             it.setDescription(rs.getString("description"));
+            it.setDamageRate(rs.getInt("damageRate"));
         } else {
             throw new SQLException("Item " + id + " not found");
         }
@@ -69,7 +70,7 @@ public class ItemDB {
         SQLiteDB sdb = GameController.getDB();
         String sql = "Update ItemRoom set roomID = " + roomID + "where itemID = " + itemID;
         sdb.updateDB(sql);
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one updater */
         sdb.close();
     }
 

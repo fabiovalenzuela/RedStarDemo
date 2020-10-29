@@ -10,16 +10,16 @@ package controller;
 public class CharText {
     private int iD;
     private int seq;
-    private int lineSeq;
+    private int usedFlag;
     private String text;
 
     public CharText() {
     }
 
-    public CharText(int iD, int seq, int lineSeq, String text) {
+    public CharText(int iD, int seq, int usedFlag, String text) {
         this.iD = iD;
         this.seq = seq;
-        this.lineSeq = lineSeq;
+        this.usedFlag = usedFlag;
         this.text = text;
     }
 
@@ -43,12 +43,12 @@ public class CharText {
         this.seq = seq;
     }
 
-    public int getLineSeq() {
-        return lineSeq;
+    public int getUsedFlag() {
+        return usedFlag;
     }
 
-    public void setLineSeq(int lineSeq) {
-        this.lineSeq = lineSeq;
+    public void setUsedFlag(int usedFlag) {
+        this.usedFlag = usedFlag;
     }
 
     public String getText() {

@@ -1,0 +1,3 @@
+CREATE TABLE Item(itemID int Primary Key not Null, name text not null, description text not null, damageRate int not null)
+INSERT INTO Item(itemID, name, description, damageRate) Values(1, 'Sword', 'A shiny, sharp sword with rubies on the hilt.', 80)
+INSERT INTO Item(itemID, name, description, damageRate) Values(2, 'Hammer', 'A rusty hammer', 30)
