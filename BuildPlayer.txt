@@ -1,2 +1,2 @@
-CREATE TABLE Player(iD int Primary Key not Null, name text not null, description text not null, hitPoints int not null, minDamage int not null, maxDamage int not null, chanceHit int not null, roomID int not null)
-INSERT INTO Player(iD, name, description, hitPoints, minDamage, maxDamage, chanceHit, roomID) Values(1, 'Annette', ' ', 10, 5, 20, 5.0, 1)
+CREATE TABLE Player(iD int Primary Key not Null, name text not null, description text not null, health int not null, minDamage int not null, maxDamage int not null, chanceHit int not null, roomID int not null)
+INSERT INTO Player(iD, name, description, health, minDamage, maxDamage, chanceHit, roomID) Values(1, 'Annette', ' ', 10, 5, 20, 5.0, 1)

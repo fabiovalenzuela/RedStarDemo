@@ -61,7 +61,7 @@ public class Monster extends Being {
         return "Monster iD = " + getID() +
                 "\nmonster name = " + getName() +
                 "\nmonster description = " + getDescription() +
-                "\nmonster hitPoints = " + getHitPoints() +
+                "\nmonster health = " + getHealth() +
                 "\nmonster minDamage = " + getMinDamage() +
                 "\nmonster maxDamage = " + getMaxDamage() +
                 "\nmonster chanceHit = " + getChanceHit() +

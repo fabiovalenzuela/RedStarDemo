@@ -8,6 +8,11 @@ package controller;
  *
  * */
 
+import exceptions.InvalidGameException;
+import model.ItemDB;
+
+import java.sql.SQLException;
+
 public class Item {
 
     private int itemID;
@@ -36,6 +41,19 @@ public class Item {
         setDamageRate(damageRate);
 
     }
+
+    /*
+     * Method: getItem
+     * Purpose: Gets a specified item from the Item table
+     * @param id
+     * @return Item
+     * @throws SQLException
+     */
+    public Item getItem(int id) throws SQLException, InvalidGameException {
+        ItemDB idb = new ItemDB();
+        return idb.getItem(id);
+    }
+
     /*
      --------------------------------
      Item added to player's inventory

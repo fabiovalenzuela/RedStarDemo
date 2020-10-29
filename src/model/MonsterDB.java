@@ -53,7 +53,7 @@ public class MonsterDB {
                 monster.setID(rs.getInt("iD"));
                 monster.setName(rs.getString("name"));
                 monster.setDescription(rs.getString("description"));
-                monster.setHitPoints(rs.getInt("hitPoints"));
+                monster.setHealth(rs.getInt("health"));
                 monster.setMaxDamage(rs.getInt("maxDamage"));
                 monster.setMinDamage(rs.getInt("minDamage"));
                 monster.setChanceHit(rs.getInt("chanceHit"));
@@ -77,7 +77,7 @@ public class MonsterDB {
      */
     public void updateHp(int hp) throws SQLException {
         SQLiteDB sdb = GameController.getDB();
-        String sql = "Update Monster set hitPoints = " + hp;
+        String sql = "Update Monster set health = " + hp;
         sdb.updateDB(sql);
         //Close the SQLiteDB connection since SQLite only allows one updater
         sdb.close();
@@ -102,7 +102,7 @@ public class MonsterDB {
                 monster.setID(rs.getInt("iD"));
                 monster.setName(rs.getString("name"));
                 monster.setDescription(rs.getString("description"));
-                monster.setHitPoints(rs.getInt("hitPoints"));
+                monster.setHealth(rs.getInt("health"));
                 monster.setMaxDamage(rs.getInt("maxDamage"));
                 monster.setMinDamage(rs.getInt("minDamage"));
                 monster.setChanceHit(rs.getInt("chanceHit"));
