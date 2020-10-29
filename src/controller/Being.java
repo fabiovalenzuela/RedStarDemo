@@ -13,7 +13,7 @@ abstract public class Being {
     private int iD;
     private String name;
     private String description;
-    private int hitPoints;
+    private int health;
     private int minDamage;
     private int maxDamage;
     private double chanceHit;
@@ -27,20 +27,20 @@ abstract public class Being {
         setID(iD);
         setName("");
         setDescription("");
-        setHitPoints(0);
+        setHealth(0);
         setMinDamage(0);
         setMaxDamage(0);
         setChanceHit(0.0);
         setRoomID(0);
     }
 
-    public Being(int iD, String name, String description, int hitPoints,
+    public Being(int iD, String name, String description, int health,
                  int minDamage, int maxDamage, double chanceHit, int roomID)
             throws InvalidGameException {
         setID(iD);
         setName(name);
         setDescription(description);
-        setHitPoints(hitPoints);
+        setHealth(health);
         setMinDamage(minDamage);
         setMaxDamage(maxDamage);
         setChanceHit(chanceHit);
@@ -97,24 +97,19 @@ abstract public class Being {
     }
 
     /*
-     * Method: getHitPoints
-     * @return the hitPoints
+     * Method: getHealth
+     * @return the health
      */
-    public int getHitPoints() {
-        return hitPoints;
+    public int getHealth() {
+        return health;
     }
 
     /*
-     * Method: setHitPoints
-     * @param hitPoints the hitPoints to set
+     * Method: setHealth
+     * @param health the health to set
      */
-    public void setHitPoints(int hitPoints) throws InvalidGameException {
-        if (hitPoints >= 0 && hitPoints <= 1) {
-            this.hitPoints = hitPoints;
-        }
-        else {
-            throw new InvalidGameException("hitPoints must be 0 thru 1");
-        }
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public int getiD() {
@@ -169,8 +164,13 @@ abstract public class Being {
      * Method: setChanceHit
      * @param chanceHit the chanceHit to set
      */
-    public void setChanceHit(double chanceHit) {
-        this.chanceHit = chanceHit;
+    public void setChanceHit(double chanceHit) throws InvalidGameException {
+        if (chanceHit >= 0 && chanceHit <= 1) {
+            this.chanceHit = chanceHit;
+        }
+        else {
+            throw new InvalidGameException("chance hit must be 0 thru 1");
+        }
     }
 
     public int getRoomID() {
@@ -206,7 +206,7 @@ abstract public class Being {
         return "Monster iD = " + iD +
                 "\nname = " + name +
                 "\ndescription = " + description +
-                "\nhitPoints = " + hitPoints +
+                "\nhealth = " + health +
                 "\nminDamage = " + minDamage +
                 "\nmaxDamage = " + maxDamage +
                 "\nchanceHit = " + chanceHit +

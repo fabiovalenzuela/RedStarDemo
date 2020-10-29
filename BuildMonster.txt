@@ -1,2 +1,2 @@
-CREATE TABLE Monster(iD int Primary Key not Null, name text not null, description text not null, hitPoints int not null, minDamage int not null, maxDamage int not null, chanceHit int not null, roomID int not null)
-INSERT INTO Monster(iD, name, description, hitPoints, minDamage, maxDamage, chanceHit, roomID) Values(1, 'Giant Rat', 'A large snarling rat with an extremely long pointed tooth and a long snout filled snout', 10, 10, 30, 8.0, 3)
+CREATE TABLE Monster(iD int Primary Key not Null, name text not null, description text not null, health int not null, minDamage int not null, maxDamage int not null, chanceHit int not null, roomID int not null)
+INSERT INTO Monster(iD, name, description, health, minDamage, maxDamage, chanceHit, roomID) Values(1, 'Giant Rat', 'A large snarling rat with an extremely long pointed tooth and a long snout filled snout', 10, 10, 30, 8.0, 3)

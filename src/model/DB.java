@@ -88,4 +88,26 @@ abstract public class DB {
         }
         return max;
     }
+
+    /*
+     * Method: getMinMax
+     * Purpose: Pass in the sql statement and get the min or max
+     * sql statement must be:
+     * sql = "Select MAX(" + columnName + ") from " + table;
+     *    (or MIN instead of MAX)
+     * @param sql
+     * @return int
+     */
+    public int getMinMax(String sql) {
+        int minMax = 0;
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            minMax = rs.getInt(1);
+        } catch (SQLException sqe) {
+            System.out.println(sqe.getMessage());
+        }
+        return minMax;
+    }
+
 }

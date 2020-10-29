@@ -14,15 +14,17 @@ import java.sql.SQLException;
  */
 public class CharTextDB {
 
+    public CharTextDB() {
+    }
+
     /*
-     -----------------
-     getCharText for
-     Get one character
-     -----------------
-    */
-    public String getCharText(int id) throws SQLException {
+         -----------------
+         getCharText for
+         Get one character
+         -----------------
+        */
+    public String getCharText(int id, CharText charText) throws SQLException {
         SQLiteDB sdb = GameController.getDB();
-        CharText charText = new CharText();
         String sql = "Select * from CharText WHERE iD = " + id +
                 " ORDER BY iD, seq, usedFlag";
         ResultSet rs = sdb.queryDB(sql);
@@ -31,6 +33,9 @@ public class CharTextDB {
             charText.setSeq(rs.getInt("seq"));
             charText.setUsedFlag(rs.getInt("usedFlag"));
             charText.setText(rs.getString("text"));
+            charText.setMonID(rs.getInt("monID"));
+            charText.setItemID(rs.getInt("itemID"));
+            charText.setRoomID(rs.getInt("roomID"));
         }
         else {
             throw new SQLException("Character Text " + id + " not found.");

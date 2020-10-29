@@ -61,7 +61,7 @@ public class Player extends Being {
         return "Player iD = " + getID() +
                 "\nplayer name = " + getName() +
                 "\nplayer description = " + getDescription() +
-                "\nplayer hitPoints = " + getHitPoints() +
+                "\nplayer health = " + getHealth() +
                 "\nplayer minDamage = " + getMinDamage() +
                 "\nplayer maxDamage = " + getMaxDamage() +
                 "\nplayer chanceHit = " + getChanceHit() +

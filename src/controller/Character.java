@@ -61,11 +61,11 @@ public class Character extends Being {
         return "Character iD = " + getID() +
                 "\ncharacter name = " + getName() +
                 "\ncharacter description = " + getDescription() +
-                "\ncharacter hitPoints = " + getHitPoints() +
+                "\ncharacter health  = " + getHealth() +
                 "\ncharacter minDamage = " + getMinDamage() +
                 "\ncharacter maxDamage = " + getMaxDamage() +
                 "\ncharacter chanceHit = " + getChanceHit() +
-                "\ncharacter roomID = " + getRoomID();
+                "\n roomID = " + getRoomID();
     }
 
 
