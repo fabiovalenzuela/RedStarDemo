@@ -3,7 +3,7 @@ package controller;
 /*
  * Class: GameController
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 25, 2020
+ * Date: October 27, 2020
  * For: ITEC 3860 Project
  */
 
@@ -23,6 +23,10 @@ import java.sql.SQLException;
 public class GameController {
     private static SQLiteDB sdb;
     public Room room = new Room();
+
+    public GameController() {
+        super();
+    }
 
     /*
      * Method: getDB
@@ -45,7 +49,7 @@ public class GameController {
      * @return String
      * @throws SQLException
      */
-    public String getRoomData(int roomID) throws SQLException {
+    public String getRoomData(int roomID) throws SQLException, InvalidGameException {
         RoomDB rdb = new RoomDB();
         room = rdb.getRoom(roomID);
         rdb.updateVisited(roomID);
@@ -74,10 +78,11 @@ public class GameController {
         String firstChar;
         String commandStr = "";
 
-        // get the 1st character of the command entered
+        /* get the 1st character of the command entered */
         firstChar = command.substring(0, 1);
 
-        // Set command string
+        /* Set command string */
+        /* if (command.matches("north|south|east|west|n|s|e|w")) { */
         if (command.equalsIgnoreCase("EAST") ||
                 (firstChar.equalsIgnoreCase("E"))) {
             commandStr = "EAST";
@@ -105,7 +110,6 @@ public class GameController {
         else if (command.equalsIgnoreCase("GET") ||
                 (command.equalsIgnoreCase("TAKE")) ||
                 (command.equalsIgnoreCase("PICKUP")) ||
-                (command.equalsIgnoreCase("PICK UP")) ||
                 (firstChar.equalsIgnoreCase("G"))) {
             commandStr = "GET";
         } else if (command.equalsIgnoreCase("REMOVE") ||
