@@ -9,7 +9,7 @@ package controller;
 
 import exceptions.InvalidGameException;
 import model.CharTextDB;
-import model.CharacterDB;
+import model.SQLiteDB;
 
 import java.sql.SQLException;
 
@@ -30,10 +30,10 @@ public class CharText {
 
     public CharText(int iD, int seq, int usedFlag, String text,
                     int monID, int itemID, int roomID) {
-        this.iD = iD;
-        this.seq = seq;
-        this.usedFlag = usedFlag;
-        this.text = text;
+        this.setiD(iD);
+        this.setSeq(seq);
+        this.setUsedFlag(usedFlag);
+        this.setText(text);
         this.setMonID(monID);
         this.setItemID(itemID);
         this.setRoomID(roomID);
@@ -47,7 +47,7 @@ public class CharText {
      * @return Character
      * @throws SQLException
      */
-    public String getCharText() throws SQLException, InvalidGameException {
+    public String getCharTextDisplay() throws SQLException, InvalidGameException {
         CharText ct = new CharText();
         int id = 0;
         CharTextDB cdb = new CharTextDB();
@@ -56,6 +56,7 @@ public class CharText {
         Item item = new Item();
         Room room = new Room();
         String charDisplay = "";
+        String saveDisplay = "";
         try {
             do {
                 id += 1;
@@ -70,19 +71,45 @@ public class CharText {
                     if (ct.roomID != 0){
                         room = room.getRoom(roomID);
                     }
-                    if (((ct.monID != 0 && mon.getHealth() == 0) ||
-                            ct.monID == 0)){
 
+                    if ((ct.monID == 0 || mon.getHealth() == 0) ||
+                            (ct.itemID == 0 || item.getItemRoomID() == 0) ||
+                            (ct.roomID == 0 || room.getVisited())) {
+                        valid = true;
+                        ct.updateUsedFlag();
                     }
+
+                }
+                else {
+                    saveDisplay = charDisplay;
                 }
             } while(!valid);
         } catch (SQLException sqe) {
             /* no character text found */
-            throw new InvalidGameException("No character text found");
+            if (!saveDisplay.isEmpty()) {
+                return saveDisplay;
+            } else {
+                throw new InvalidGameException("No character text found");
+            }
         }
 
         return charDisplay;
     }
+
+
+    /*
+     * Method: updateUsedFlag
+     * Purpose: set visited = 0 for all rooms
+     * @throws SQLException
+     */
+    public void updateUsedFlag() throws SQLException {
+        SQLiteDB sdb = GameController.getDB();
+        String sql = "Update CharText set usedFlag = 1 where iD = " + this.getiD();
+        sdb.updateDB(sql);
+        /* Close the SQLiteDB connection since SQLite only allows one update */
+        sdb.close();
+    }
+
 
     /*
     Getters & Setters

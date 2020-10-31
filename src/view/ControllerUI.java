@@ -7,6 +7,8 @@ package view;
  * For: ITEC 3860 Project RedStar
  */
 
+import controller.Character;
+import controller.CharText;
 import controller.GameController;
 import controller.Item;
 import controller.Room;
@@ -18,9 +20,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.CharTextDB;
+import model.CharacterDB;
 import model.ItemDB;
 import model.RoomDB;
-
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -47,7 +50,6 @@ public class ControllerUI {
     protected void process(ActionEvent event) throws SQLException {
         String btnText = okBtn.getText();
         msgTF.clear();
-        ControllerUI cui = new ControllerUI();
 
         /* -------- */
         /* 1st time */
@@ -120,11 +122,14 @@ public class ControllerUI {
                 case "REMOVE":
                     processREMOVE(noun);
                     break;
-                case "LOOK":
-                    processLOOK(noun);
+                case "TALK":
+                    processTALK(noun);
                     break;
                 case "BACKPACK":
                     processBACKPACK(noun);
+                    break;
+                case "LOOK":
+                    processLOOK(noun);
                     break;
                 /* Default checks for direction */
                 default:
@@ -219,7 +224,46 @@ public class ControllerUI {
         msgTF.setVisible(false);
     }
 
-    private void processLOOK(String noun) {
+    private void processTALK(String noun) throws SQLException, InvalidGameException {
+        String talkText = "";
+        Character character = new Character();
+        CharText charText = new CharText();
+
+        /* get current room ID */
+        int roomID = gc.room.getRoomID();
+
+        /* split noun to check for to/with/the */
+        String[] words = noun.split(" ");
+        String name = noun;
+
+        /* find the 1st word that is not to/with/the/a */
+        for (String s : words) {
+            if ((!s.equalsIgnoreCase("to")) &&
+                    (!s.equalsIgnoreCase("with")) &&
+                    (!s.equalsIgnoreCase("the")) &&
+                    (!s.equalsIgnoreCase("a"))) {
+                name = s;
+                break;
+            }
+        }
+
+        try {
+            /* get character by name */
+            CharacterDB cdb = new CharacterDB();
+            character = cdb.getCharByName(name);
+            talkText = charText.getCharTextDisplay();
+
+
+
+
+            /* get room data to update item list */
+            String display = descTA.getText() + "\n" + talkText;
+            descTA.setText(display);
+            commandTF.setText("");
+            msgTF.setVisible(false);
+        } catch (InvalidGameException | SQLException ige) {
+            throw new InvalidGameException("This character has nothing to say");
+        }
 
     }
 
@@ -244,6 +288,10 @@ public class ControllerUI {
         commandTF.setText("");
         msgTF.setVisible(false);
 
+
+    }
+
+    private void processLOOK(String noun) {
 
     }
 
@@ -286,6 +334,7 @@ public class ControllerUI {
         }
         return item;
     }
+
 
     /*
      ----------------------------------------------------

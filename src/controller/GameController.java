@@ -122,6 +122,9 @@ public class GameController {
         } else if (command.equalsIgnoreCase("BACKPACK") ||
                 (firstChar.equalsIgnoreCase("B"))) {
             commandStr = "BACKPACK";
+        } else if (command.equalsIgnoreCase("TALK") ||
+                (firstChar.equalsIgnoreCase("T"))) {
+            commandStr = "TALK";
         } else {
             throw new InvalidGameException("Invalid Command");
         }
