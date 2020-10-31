@@ -32,7 +32,7 @@ public class CharacterDB {
         catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-        int next = sdb.getMaxValue("characterNumber", "Character") + 1;
+        int next = sdb.getMaxValue("iD", "Character") + 1;
         //Close the SQLiteDB connection since SQLite only allows one updater
         sdb.close();
         return next;
@@ -48,7 +48,7 @@ public class CharacterDB {
     public Character getCharacter(int id) throws SQLException, InvalidGameException {
         SQLiteDB sdb = GameController.getDB();
         Character character = new Character();
-        String sql = "Select * from Character WHERE characterNumber = " + id;
+        String sql = "Select * from Character WHERE iD = " + id;
         ResultSet rs = sdb.queryDB(sql);
         try {
             if (rs.next()) {
@@ -58,7 +58,7 @@ public class CharacterDB {
                 character.setHealth(rs.getInt("health"));
                 character.setMaxDamage(rs.getInt("maxDamage"));
                 character.setMinDamage(rs.getInt("minDamage"));
-                character.setChanceHit(rs.getInt("chanceHit"));
+                character.setChanceHit(rs.getDouble("chanceHit"));
                 character.setRoomID(rs.getInt("roomID"));
             } else {
                 throw new SQLException("Character " + id + " not found.");

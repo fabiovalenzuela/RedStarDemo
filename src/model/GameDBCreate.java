@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * Class: GameDBCreate
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 27, 2020
+ * Date: October 28, 2020
  * For: ITEC 3860 Project RedStar
  * Copied/modified from Rick Price GameDBCreate
  */
@@ -33,7 +33,6 @@ public class GameDBCreate {
         buildTable("BuildExitRoom.txt");
         buildTable("BuildCharText.txt");
         buildTable("BuildItem.txt");
-        buildTable("BuildItemRoom.txt");
     }
 
     /*

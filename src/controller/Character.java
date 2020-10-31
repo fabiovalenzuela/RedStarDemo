@@ -20,12 +20,13 @@ public class Character extends Being {
      * Constructor: Character
      */
     public Character() {
-        CharacterDB mdb = new CharacterDB();
-        try {
-            setID(mdb.getNextCharacterID());
-        } catch (SQLException sqe) {
-            System.out.println(sqe.getMessage());
-        }
+        super();
+//        CharacterDB mdb = new CharacterDB();
+//        try {
+//            setID(mdb.getNextCharacterID());
+//        } catch (SQLException sqe) {
+//            System.out.println(sqe.getMessage());
+//        }
     }
 
     /*
