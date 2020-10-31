@@ -72,6 +72,42 @@ public class CharacterDB {
         return character;
     }
 
+
+    /*
+     * Method: getCharacter
+     * Purpose: handles db interactions to retrieve a single Character
+     * @param id
+     * @return Character
+     * @throws SQLException
+     */
+    public Character getCharByName(String name) throws SQLException, InvalidGameException {
+        SQLiteDB sdb = GameController.getDB();
+        Character character = new Character();
+        String sql = "select * from Character where LOWER(name) LIKE LOWER('%" +
+                      name +"%');";
+        ResultSet rs = sdb.queryDB(sql);
+        try {
+            if (rs.next()) {
+                character.setID(rs.getInt("iD"));
+                character.setName(rs.getString("name"));
+                character.setDescription(rs.getString("description"));
+                character.setHealth(rs.getInt("health"));
+                character.setMaxDamage(rs.getInt("maxDamage"));
+                character.setMinDamage(rs.getInt("minDamage"));
+                character.setChanceHit(rs.getDouble("chanceHit"));
+                character.setRoomID(rs.getInt("roomID"));
+            } else {
+                throw new SQLException("Character " + name + " not found.");
+            }
+        } catch (InvalidGameException ige) {
+            throw new InvalidGameException(ige.getMessage());
+        }
+
+        /* Close the SQLiteDB connection since SQLite only allows one updater */
+        sdb.close();
+        return character;
+    }
+
     /*
      * Method: updateVisited
      * Purpose: set visited = 0 for all rooms

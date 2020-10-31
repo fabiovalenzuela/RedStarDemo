@@ -26,7 +26,7 @@ public class CharTextDB {
     public String getCharText(int id, CharText charText) throws SQLException {
         SQLiteDB sdb = GameController.getDB();
         String sql = "Select * from CharText WHERE iD = " + id +
-                " ORDER BY iD, seq, usedFlag";
+                " ORDER BY iD, seq";
         ResultSet rs = sdb.queryDB(sql);
         if (rs.next()) {
             charText.setiD(rs.getInt("iD"));

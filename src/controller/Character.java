@@ -42,6 +42,17 @@ public class Character extends Being {
     }
 
     /*
+     * Method: getCharByName
+     * Purpose: Gets a specified character from the Character table
+     * @param name
+     * @return Character
+     * @throws SQLException
+     */
+    public Character getCharByName(String name) throws SQLException, InvalidGameException {
+        CharacterDB mdb = new CharacterDB();
+        return mdb.getCharByName(name);
+    }
+    /*
      * Method: getAllCharacters
      * Purpose: gets all characters from the Character table
      * @return ArrayList<Character>
