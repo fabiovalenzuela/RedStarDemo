@@ -3,7 +3,7 @@ package controller;
 /*
  * Class: CharText
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 25, 2020
+ * Date: October 27, 2020
  * For: ITEC 3860 Project
  */
 

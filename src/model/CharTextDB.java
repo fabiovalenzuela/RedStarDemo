@@ -2,7 +2,6 @@ package model;
 
 import controller.CharText;
 import controller.GameController;
-import exceptions.InvalidGameException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
