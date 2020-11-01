@@ -3,11 +3,12 @@ package controller;
 /*
  * Class: GameController
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 27, 2020
+ * Date: October 28, 2020
  * For: ITEC 3860 Project
  */
 
 import exceptions.InvalidGameException;
+import model.CharTextDB;
 import model.RoomDB;
 import model.SQLiteDB;
 
@@ -61,11 +62,21 @@ public class GameController {
      * Purpose: sets visited flag to zero for all rooms
      * @throws SQLException
      */
-    public void updateVisited() throws SQLException {
+    public void updateAllVisited() throws SQLException {
         RoomDB rdb = new RoomDB();
         rdb.updateAllVisited();
     }
 
+
+    /*
+     * Method: updateAllUsed
+     * Purpose: sets usedFlag to zero for all CharText
+     * @throws SQLException
+     */
+    public void updateAllUsed() throws SQLException {
+        CharTextDB cdb = new CharTextDB();
+        cdb.updateAllUsed();
+    }
     /*
      ---------------------------------------------
      checkCommand
