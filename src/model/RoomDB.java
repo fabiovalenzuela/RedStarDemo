@@ -4,6 +4,7 @@ import controller.Character;
 import controller.Exit;
 import controller.GameController;
 import controller.Item;
+import controller.Monster;
 import controller.Room;
 import exceptions.InvalidGameException;
 
@@ -125,6 +126,10 @@ public class RoomDB {
         items = getRoomItems(id);
         rm.setItems(items);
 
+        /* Get monsters */
+        ArrayList<Monster> monsters = new ArrayList<>();
+        monsters = getRoomMonsters(id);
+        rm.setMonsters(monsters);
         return rm;
     }
 
@@ -159,6 +164,39 @@ public class RoomDB {
         /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return items;
+    }
+
+    /* ---------------------------------------
+        Method: getRoomMonsters
+        Purpose: get all monsters in the room
+                 and return in arraylist monsters
+        --------------------------------------
+    */
+    public ArrayList<Monster> getRoomMonsters(int roomID) throws SQLException, InvalidGameException {
+        SQLiteDB sdb = GameController.getDB();
+
+        /* Get monsters */
+        ArrayList<Monster> monsters = new ArrayList<Monster>();
+        String sql = "Select * from Monster where roomID = " + roomID;
+
+        ResultSet rs = sdb.queryDB(sql);
+
+        while (rs.next()) {
+            Monster monster = new Monster();
+            monster.setID(rs.getInt("iD"));
+            monster.setName(rs.getString("name"));
+            monster.setDescription(rs.getString("description"));
+            monster.setHealth(rs.getInt("health"));
+            monster.setMaxDamage(rs.getInt("maxDamage"));
+            monster.setMinDamage(rs.getInt("minDamage"));
+            monster.setChanceHit(rs.getDouble("chanceHit"));
+            monster.setRoomID(rs.getInt("roomID"));
+            monsters.add(monster);
+        }
+
+        /* Close the SQLiteDB connection since SQLite only allows one update */
+        sdb.close();
+        return monsters;
     }
 
     /*
