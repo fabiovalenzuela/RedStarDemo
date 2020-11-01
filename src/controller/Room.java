@@ -21,6 +21,7 @@ public class Room {
     private ArrayList<Exit> exits = new ArrayList<Exit>();
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Character> chars = new ArrayList<>();
+    private ArrayList<Monster> monsters = new ArrayList<>();
 
     /*
      ------------
@@ -37,7 +38,8 @@ public class Room {
                 boolean visible,
                 ArrayList<Exit> exits,
                 ArrayList<Item> items,
-                ArrayList<Character> chars) {
+                ArrayList<Character> chars,
+                ArrayList<Monster> monsters) {
         setRoomID(roomID);
         setName(name);
         setDescription(description);
@@ -46,6 +48,7 @@ public class Room {
         setExits(exits);
         setItems(items);
         setChars(chars);
+        setMonsters(monsters);
     }
 
     /*
@@ -121,6 +124,26 @@ public class Room {
             }
             display = display + "\n";
         }
+
+
+        /*
+        display monsters in room
+        */
+        if (monsters.size() > 0) {
+            display = display + "There is ";
+            Monster mon = new Monster();
+            for (int i = 0; i < monsters.size(); i++) {
+                mon = monsters.get(i);
+                display = display + mon.getDescription();
+                if ((i < (monsters.size() - 2))) {
+                    display = display + ", a ";
+                } else if ((monsters.size() > 1) && (i != (monsters.size() - 1))) {
+                    display = display + " and ";
+                }
+            }
+            display = display + "\n";
+        }
+
 
         /*
         display directions user can go
@@ -247,11 +270,19 @@ public class Room {
         this.chars = chars;
     }
 
+    public ArrayList<Monster> getMonsters() {
+        return monsters;
+    }
+
+    public void setMonsters(ArrayList<Monster> monsters) {
+        this.monsters = monsters;
+    }
+
     /*
-         --------
-         ToString
-         --------
-        */
+             --------
+             ToString
+             --------
+            */
     @Override
     public String toString() {
         return "Room{" +
@@ -261,6 +292,7 @@ public class Room {
                 ", exits = " + exits +
                 ", items = " + items +
                 ", characters = " + chars +
+                ", monsters = " + monsters +
                 '}';
     }
 

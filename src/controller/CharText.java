@@ -64,7 +64,7 @@ public class CharText {
 
         for (int index=0; index < charTexts.size(); index++) {
             charText = charTexts.get(index);
-            System.out.println(charText.toString());
+
             /* ------------------------------- */
             /*   Extract CharText to Display   */
             /* ------------------------------- */

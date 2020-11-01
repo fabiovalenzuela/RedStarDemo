@@ -20,12 +20,13 @@ public class Player extends Being {
      * Constructor: Player
      */
     public Player() {
-        PlayerDB mdb = new PlayerDB();
-        try {
-            setID(mdb.getNextPlayerID());
-        } catch (SQLException sqe) {
-            System.out.println(sqe.getMessage());
-        }
+        super();
+//        PlayerDB mdb = new PlayerDB();
+//        try {
+//            setID(mdb.getNextPlayerID());
+//        } catch (SQLException sqe) {
+//            System.out.println(sqe.getMessage());
+//        }
     }
 
     /*
