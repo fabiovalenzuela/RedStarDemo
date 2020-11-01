@@ -26,6 +26,7 @@ public class GameDBCreate {
     public void buildTables() throws SQLException {
         buildTable("BuildRoom.txt");
         buildTable("BuildExit.txt");
+        buildTable("BuildMonster.txt");
         buildTable("BuildPlayer.txt");
         buildTable("BuildCharacter.txt");
         buildTable("BuildExitRoom.txt");
