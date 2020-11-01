@@ -20,12 +20,13 @@ public class Monster extends Being {
      * Constructor: Monster
      */
     public Monster() {
-        MonsterDB mdb = new MonsterDB();
-        try {
-            setID(mdb.getNextMonsterID());
-        } catch (SQLException sqe) {
-            System.out.println(sqe.getMessage());
-        }
+        super();
+//        MonsterDB mdb = new MonsterDB();
+//        try {
+//            setID(mdb.getNextMonsterID());
+//        } catch (SQLException sqe) {
+//            System.out.println(sqe.getMessage());
+//        }
     }
 
     /*

@@ -112,14 +112,6 @@ abstract public class Being {
         this.health = health;
     }
 
-    public int getiD() {
-        return iD;
-    }
-
-    public void setiD(int iD) {
-        this.iD = iD;
-    }
-
     /*
      * Method: getMinDamage
      * @return the minDamage

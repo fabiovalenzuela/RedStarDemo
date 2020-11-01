@@ -21,12 +21,6 @@ public class Character extends Being {
      */
     public Character() {
         super();
-//        CharacterDB mdb = new CharacterDB();
-//        try {
-//            setID(mdb.getNextCharacterID());
-//        } catch (SQLException sqe) {
-//            System.out.println(sqe.getMessage());
-//        }
     }
 
     /*

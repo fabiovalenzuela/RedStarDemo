@@ -30,7 +30,7 @@ public class MonsterDB {
         catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-        int next = sdb.getMaxValue("monsterNumber", "Monster") + 1;
+        int next = sdb.getMaxValue("iD", "Monster") + 1;
         //Close the SQLiteDB connection since SQLite only allows one updater
         sdb.close();
         return next;
@@ -46,7 +46,7 @@ public class MonsterDB {
     public Monster getMonster(int id) throws SQLException, InvalidGameException {
         SQLiteDB sdb = GameController.getDB();
         Monster monster = new Monster();
-        String sql = "Select * from Monster WHERE monsterNumber = " + id;
+        String sql = "Select * from Monster WHERE iD = " + id;
         ResultSet rs = sdb.queryDB(sql);
         try {
             if (rs.next()) {

@@ -8,6 +8,7 @@ package controller;
  */
 
 import exceptions.InvalidGameException;
+import model.CharTextDB;
 import model.RoomDB;
 import model.SQLiteDB;
 
@@ -61,11 +62,21 @@ public class GameController {
      * Purpose: sets visited flag to zero for all rooms
      * @throws SQLException
      */
-    public void updateVisited() throws SQLException {
+    public void updateAllVisited() throws SQLException {
         RoomDB rdb = new RoomDB();
         rdb.updateAllVisited();
     }
 
+
+    /*
+     * Method: updateAllUsed
+     * Purpose: sets usedFlag to zero for all CharText
+     * @throws SQLException
+     */
+    public void updateAllUsed() throws SQLException {
+        CharTextDB cdb = new CharTextDB();
+        cdb.updateAllUsed();
+    }
     /*
      ---------------------------------------------
      checkCommand

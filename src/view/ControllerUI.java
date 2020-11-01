@@ -20,7 +20,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.CharTextDB;
 import model.CharacterDB;
 import model.ItemDB;
 import model.RoomDB;
@@ -46,6 +45,12 @@ public class ControllerUI {
         msgTF.setVisible(false);
     }
 
+    /*
+     ------------------------------------------------------------
+     Method: process
+     Process action when OK or ENTER pressed
+     ------------------------------------------------------------
+    */
     @FXML
     protected void process(ActionEvent event) throws SQLException {
         String btnText = okBtn.getText();
@@ -57,8 +62,10 @@ public class ControllerUI {
         if (btnText.equalsIgnoreCase("Start")) {
             okBtn.setText("Ok");
             try {
-                /* Set visited = 0 */
-                gc.updateVisited();
+                /* Set visited = 0 in Room */
+                gc.updateAllVisited();
+                /* Set usedFlag in CharText = 0 */
+                gc.updateAllUsed();
                 /* Get room 1 */
                 descTA.setText(gc.getRoomData(1));
                 commandTF.setVisible(true);
@@ -251,13 +258,13 @@ public class ControllerUI {
             /* get character by name */
             CharacterDB cdb = new CharacterDB();
             character = cdb.getCharByName(name);
-            talkText = charText.getCharTextDisplay();
+            talkText = charText.getCharTextDisplay(character.getID());
 
 
 
 
-            /* get room data to update item list */
-            String display = descTA.getText() + "\n" + talkText;
+            /* get room data to update display text */
+            String display = descTA.getText() + talkText;
             descTA.setText(display);
             commandTF.setText("");
             msgTF.setVisible(false);
