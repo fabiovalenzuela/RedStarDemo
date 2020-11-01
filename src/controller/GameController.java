@@ -124,6 +124,10 @@ public class GameController {
             commandStr = "TALK";
         } else if (command.matches("ATTACK|A")) {
             commandStr = "ATTACK";
+        } else if (command.matches("PUSH")) {
+            commandStr = "PUSH";
+        } else if (command.matches("THROW")) {
+            commandStr = "THROW";
         } else {
             throw new InvalidGameException("Invalid Command");
         }

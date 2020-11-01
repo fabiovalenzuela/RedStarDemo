@@ -55,6 +55,13 @@ public class ItemDB {
             item.setDescription(rs.getString("description"));
             item.setDamageRate(rs.getInt("damageRate"));
             item.setItemRoomID(rs.getInt("itemRoomID"));
+            int used = rs.getInt("itemUsed");
+            if (used == 0) {
+                item.setItemUsed(false);
+            }
+            else {
+                item.setItemUsed(true);
+            }
         } else {
             throw new SQLException("Item " + id + " not found");
         }
@@ -64,6 +71,41 @@ public class ItemDB {
         return item;
     }
 
+    /*
+     * Method: getItemByName
+     * Purpose: Gets a item based upon the supplied item name
+     *
+     * @param name
+     * @return Item
+     * @throws SQLException
+     */
+    public Item getItemByName(String name) throws SQLException, InvalidGameException {
+        SQLiteDB sdb = GameController.getDB();
+        Item item = new Item();
+        String sql = "Select * from Item where LOWER(name) LIKE LOWER('%" +
+                name +"%');";
+        ResultSet rs = sdb.queryDB(sql);
+        if (rs.next()) {
+            item.setItemID(rs.getInt("itemID"));
+            item.setName(rs.getString("name"));
+            item.setDescription(rs.getString("description"));
+            item.setDamageRate(rs.getInt("damageRate"));
+            item.setItemRoomID(rs.getInt("itemRoomID"));
+            int used = rs.getInt("itemUsed");
+            if (used == 0) {
+                item.setItemUsed(false);
+            }
+            else {
+                item.setItemUsed(true);
+            }
+        } else {
+            throw new InvalidGameException("Item " + name + " not found");
+        }
+
+        //Close the SQLiteDB connection since SQLite only allows one updater
+        sdb.close();
+        return item;
+    }
     /*
      * Method: updateItemRoom
      * Purpose: set visited = 0 for all items
@@ -104,6 +146,13 @@ public class ItemDB {
                 item.setDescription(rs.getString("description"));
                 item.setDamageRate(rs.getInt("damageRate"));
                 item.setItemRoomID(rs.getInt("itemRoomID"));
+                int used = rs.getInt("itemUsed");
+                if (used == 0) {
+                    item.setItemUsed(false);
+                }
+                else {
+                    item.setItemUsed(true);
+                }
                 itemDesc = itemDesc + "itemID = " + item.getItemID() +
                         ", name = " + item.getName() +
                         ", description = " + item.getDescription() + "\n";
@@ -136,6 +185,13 @@ public class ItemDB {
                 item.setDescription(rs.getString("description"));
                 item.setDamageRate(rs.getInt("damageRate"));
                 item.setItemRoomID(rs.getInt("itemRoomID"));
+                int used = rs.getInt("itemUsed");
+                if (used == 0) {
+                    item.setItemUsed(false);
+                }
+                else {
+                    item.setItemUsed(true);
+                }
                 items.add(item);
             }
         } catch (SQLException ige) {
