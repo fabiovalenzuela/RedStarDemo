@@ -70,6 +70,10 @@ public class LoginController {
             try {
                 stage = (Stage) userTF.getScene().getWindow();
                 stage.close();
+
+                /* --------------------------- */
+                /* Load stage for first screen */
+                /* --------------------------- */
                 FXMLLoader loader = new FXMLLoader();
                 GridPane root = loader.load(getClass().getResource("GameUI.fxml"));
                 Scene scene = new Scene(root, 700, 425);

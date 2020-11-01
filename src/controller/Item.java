@@ -20,6 +20,7 @@ public class Item {
     private String description;
     private int itemRoomID;
     private int damageRate;
+    private boolean itemUsed;
 
     /*
      ------------
@@ -33,12 +34,14 @@ public class Item {
     public Item(int itemID, String name,
                 String description,
                 int itemRoomID,
-                int damageRate) {
+                int damageRate,
+                boolean itemUsed) {
         setItemID(itemID);
         setName(name);
         setDescription(description);
         setItemRoomID(itemRoomID);
         setDamageRate(damageRate);
+        setItemUsed(itemUsed);
 
     }
 
@@ -106,11 +109,20 @@ public class Item {
     }
 
     public void setDamageRate(int damageRate) { this.damageRate = damageRate; }
+
+    public boolean isItemUsed() {
+        return itemUsed;
+    }
+
+    public void setItemUsed(boolean itemUsed) {
+        this.itemUsed = itemUsed;
+    }
+
     /*
-     --------
-     ToString
-     --------
-    */
+         --------
+         ToString
+         --------
+        */
     @Override
     public String toString() {
         return "Item: " +

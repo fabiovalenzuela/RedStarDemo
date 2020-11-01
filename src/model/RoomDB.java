@@ -147,7 +147,8 @@ public class RoomDB {
         String sql = "Select itemID, name, description, " +
                 "damageRate, itemRoomID " +
                 "from Item " +
-                "where itemRoomID = " + roomID;
+                "where itemRoomID = " + roomID +
+                " and itemUsed = 0";
 
         ResultSet rs = sdb.queryDB(sql);
 
@@ -166,11 +167,11 @@ public class RoomDB {
         return items;
     }
 
-    /* ---------------------------------------
+    /* ------------------------------------------
         Method: getRoomMonsters
         Purpose: get all monsters in the room
                  and return in arraylist monsters
-        --------------------------------------
+        -----------------------------------------
     */
     public ArrayList<Monster> getRoomMonsters(int roomID) throws SQLException, InvalidGameException {
         SQLiteDB sdb = GameController.getDB();

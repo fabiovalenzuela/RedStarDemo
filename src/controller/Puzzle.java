@@ -7,13 +7,20 @@ package controller;
  * For: ITEC 3860 Project
  */
 
+import model.PuzzleDB;
+
+import java.sql.SQLException;
+
 public class Puzzle {
     private int puzzleID;
     private String puzzleName;
     private String puzzleDescription;
     private String puzzleType;
     private int puzzleRoomID;
-
+    private boolean puzzleUsed;
+    private String puzzleVerb;
+    private String puzzleNoun;
+    private String puzzleSql;
 
     /*
      ------------
@@ -32,6 +39,11 @@ public class Puzzle {
         setPuzzleDescription(puzzleDescription);
         setPuzzleType(puzzleType);
         setPuzzleRoomID(puzzleRoomID);
+    }
+
+    public Puzzle getPuzzle (int id) throws SQLException {
+        PuzzleDB idb = new PuzzleDB();
+        return idb.getPuzzle(id);
     }
 
 

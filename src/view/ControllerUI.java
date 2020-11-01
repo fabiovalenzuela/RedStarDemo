@@ -138,6 +138,15 @@ public class ControllerUI {
                 case "LOOK":
                     processLOOK(noun);
                     break;
+                case "ATTACK":
+                    processATTACK(noun);
+                    break;
+                case "PUSH":
+                    processPUSH(noun);
+                    break;
+                case "THROW":
+                    processTHROW(noun);
+                    break;
                 /* Default checks for direction */
                 default:
                     processROOM(command);
@@ -231,7 +240,11 @@ public class ControllerUI {
         msgTF.setVisible(false);
     }
 
-    private void processTALK(String noun) throws SQLException, InvalidGameException {
+    /* ------------------------------------------
+        Method: processTALK
+        Talk to a character
+    ------------------------------------------ */
+    private void processTALK(String noun) throws InvalidGameException {
         String talkText = "";
         Character character = new Character();
         CharText charText = new CharText();
@@ -248,6 +261,7 @@ public class ControllerUI {
             if ((!s.equalsIgnoreCase("to")) &&
                     (!s.equalsIgnoreCase("with")) &&
                     (!s.equalsIgnoreCase("the")) &&
+                    (!s.equalsIgnoreCase("on")) &&
                     (!s.equalsIgnoreCase("a"))) {
                 name = s;
                 break;
@@ -258,10 +272,14 @@ public class ControllerUI {
             /* get character by name */
             CharacterDB cdb = new CharacterDB();
             character = cdb.getCharByName(name);
-            talkText = charText.getCharTextDisplay(character.getID());
 
+            /* Is the character in this room? */
+            if (roomID != character.getRoomID()) {
+                talkText = "\nThe " + name + " is not here";
+            } else {
 
-
+                talkText = charText.getCharTextDisplay(character.getID());
+            }
 
             /* get room data to update display text */
             String display = descTA.getText() + talkText;
@@ -274,6 +292,10 @@ public class ControllerUI {
 
     }
 
+    /* ------------------------------------------
+        Method: processBACKPACK
+        Show inventory in backpack
+    ------------------------------------------ */
     private void processBACKPACK(String noun) throws InvalidGameException, SQLException {
         String display = "";
 
@@ -298,7 +320,20 @@ public class ControllerUI {
 
     }
 
-    private void processLOOK(String noun) {
+    private void processLOOK(String noun) throws SQLException, InvalidGameException {
+        descTA.setText(gc.getRoomData(gc.room.getRoomID()));
+        commandTF.setText("");
+        commandTF.setVisible(false);
+    }
+
+    private void processATTACK(String noun) {
+
+    }
+
+    private void processPUSH(String noun) {
+
+    }
+    private void processTHROW(String noun) {
 
     }
 
@@ -319,27 +354,20 @@ public class ControllerUI {
 
     private Item getSelectedItem(String noun) throws InvalidGameException {
         ArrayList<Item> items = new ArrayList<>();
+        ItemDB idb = new ItemDB();
         try {
-            ItemDB idb = new ItemDB();
             items = idb.getAllItems();
         } catch (SQLException | InvalidGameException sqe) {
             throw new InvalidGameException("No items available");
         }
 
         Item item = new Item();
-        boolean foundItem = false;
-
-        for (Item it : items){
-            if (it.getName().equalsIgnoreCase(noun)) {
-                item = it;
-                foundItem = true;
-                break;
-            }
-        }
-        if (!foundItem) {
+        try {
+            item = idb.getItemByName(noun);
+        } catch (InvalidGameException | SQLException ige) {
             throw new InvalidGameException("No item with that name");
         }
-        return item;
+            return item;
     }
 
 
