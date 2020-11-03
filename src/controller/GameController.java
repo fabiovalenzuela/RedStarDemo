@@ -3,11 +3,12 @@ package controller;
 /*
  * Class: GameController
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 25, 2020
+ * Date: October 28, 2020
  * For: ITEC 3860 Project
  */
 
 import exceptions.InvalidGameException;
+import model.CharTextDB;
 import model.RoomDB;
 import model.SQLiteDB;
 
@@ -23,6 +24,10 @@ import java.sql.SQLException;
 public class GameController {
     private static SQLiteDB sdb;
     public Room room = new Room();
+
+    public GameController() {
+        super();
+    }
 
     /*
      * Method: getDB
@@ -45,7 +50,7 @@ public class GameController {
      * @return String
      * @throws SQLException
      */
-    public String getRoomData(int roomID) throws SQLException {
+    public String getRoomData(int roomID) throws SQLException, InvalidGameException {
         RoomDB rdb = new RoomDB();
         room = rdb.getRoom(roomID);
         rdb.updateVisited(roomID);
@@ -57,11 +62,21 @@ public class GameController {
      * Purpose: sets visited flag to zero for all rooms
      * @throws SQLException
      */
-    public void updateVisited() throws SQLException {
+    public void updateAllVisited() throws SQLException {
         RoomDB rdb = new RoomDB();
         rdb.updateAllVisited();
     }
 
+
+    /*
+     * Method: updateAllUsed
+     * Purpose: sets usedFlag to zero for all CharText
+     * @throws SQLException
+     */
+    public void updateAllUsed() throws SQLException {
+        CharTextDB cdb = new CharTextDB();
+        cdb.updateAllUsed();
+    }
     /*
      ---------------------------------------------
      checkCommand
@@ -71,53 +86,48 @@ public class GameController {
     */
     public String checkCommand(String command) throws InvalidGameException {
 
-        String firstChar;
         String commandStr = "";
+        command = command.toUpperCase();
 
-        // get the 1st character of the command entered
-        firstChar = command.substring(0, 1);
+        /* get the 1st character of the command entered */
+        String firstChar = command.substring(0, 1);
 
-        // Set command string
-        if (command.equalsIgnoreCase("EAST") ||
-                (firstChar.equalsIgnoreCase("E"))) {
+        /* Set command string */
+
+        if (command.matches("EAST|E")) {
             commandStr = "EAST";
         }
-        else if (command.equalsIgnoreCase("WEST") ||
-                (firstChar.equalsIgnoreCase("W"))) {
+        else if (command.matches("WEST|W")) {
             commandStr = "WEST";
         }
-        else if (command.equalsIgnoreCase("NORTH") ||
-                (firstChar.equalsIgnoreCase("N"))) {
+        else if (command.matches("NORTH|N")) {
             commandStr = "NORTH";
         }
-        else if (command.equalsIgnoreCase("SOUTH") ||
-                (firstChar.equalsIgnoreCase("S"))) {
+        else if (command.matches("SOUTH|S")) {
             commandStr = "SOUTH";
         }
-        else if (command.equalsIgnoreCase("UP") ||
-                (firstChar.equalsIgnoreCase("U"))) {
+        else if (command.matches("UP|U")) {
             commandStr = "UP";
         }
-        else if (command.equalsIgnoreCase("DOWN") ||
-                (firstChar.equalsIgnoreCase("D"))) {
+        else if (command.matches("DOWN|D")) {
             commandStr = "DOWN";
        }
-        else if (command.equalsIgnoreCase("GET") ||
-                (command.equalsIgnoreCase("TAKE")) ||
-                (command.equalsIgnoreCase("PICKUP")) ||
-                (command.equalsIgnoreCase("PICK UP")) ||
-                (firstChar.equalsIgnoreCase("G"))) {
+        else if ((command.matches("GET|TAKE|PICKUP|G"))) {
             commandStr = "GET";
-        } else if (command.equalsIgnoreCase("REMOVE") ||
-                (command.equalsIgnoreCase("DROP")) ||
-                (firstChar.equalsIgnoreCase("R"))) {
+        } else if (command.matches("REMOVE|R|DROP")) {
             commandStr = "REMOVE";
-        } else if (command.equalsIgnoreCase("LOOK") ||
-                (firstChar.equalsIgnoreCase("L"))) {
+        } else if (command.matches("LOOK|L")) {
             commandStr = "LOOK";
-        } else if (command.equalsIgnoreCase("BACKPACK") ||
-                (firstChar.equalsIgnoreCase("B"))) {
+        } else if (command.matches("BACKPACK|B")) {
             commandStr = "BACKPACK";
+        } else if (command.matches("TALK|T")) {
+            commandStr = "TALK";
+        } else if (command.matches("ATTACK|A")) {
+            commandStr = "ATTACK";
+        } else if (command.matches("PUSH")) {
+            commandStr = "PUSH";
+        } else if (command.matches("THROW")) {
+            commandStr = "THROW";
         } else {
             throw new InvalidGameException("Invalid Command");
         }

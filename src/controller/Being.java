@@ -2,10 +2,12 @@ package controller;
 
 import exceptions.InvalidGameException;
 
+import java.util.Random;
+
 /*
  * Class: Being
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 24, 2020
+ * Date: October 27, 2020
  * For: ITEC 3860 Project
  * Copied/modified from Rick Price Being
  */
@@ -45,6 +47,19 @@ abstract public class Being {
         setMaxDamage(maxDamage);
         setChanceHit(chanceHit);
         setRoomID(roomID);
+    }
+
+
+    /*---------------------------------
+     * Method: updateHealth
+     * @param health the health to set
+     ----------------------------------*/
+    public void updateHealth() {
+        /* create instance of Random class */
+        Random rand = new Random();
+        int change = rand.nextInt(maxDamage-minDamage);
+        health -= change;
+        setHealth(health);
     }
 
     /*
@@ -110,14 +125,6 @@ abstract public class Being {
      */
     public void setHealth(int health) {
         this.health = health;
-    }
-
-    public int getiD() {
-        return iD;
-    }
-
-    public void setiD(int iD) {
-        this.iD = iD;
     }
 
     /*

@@ -6,8 +6,8 @@ import controller.Puzzle;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Class: Player
+/*
+ * Class: PuzzleDB
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
  * Date: October 24, 2020
  * For: ITEC 3860 Project RedStar
@@ -29,7 +29,7 @@ public class PuzzleDB {
             e.printStackTrace();
         }
         int next = sdb.getMaxValue("puzzleID", "puzzle") + 1;
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
 
         return next;

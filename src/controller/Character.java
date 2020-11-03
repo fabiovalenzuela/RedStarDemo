@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /*
  * Class: Character
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 24, 2020
+ * Date: October 27, 2020
  * For: ITEC 3860 Project
  * Copied/modified from Rick Price
  */
@@ -20,12 +20,7 @@ public class Character extends Being {
      * Constructor: Character
      */
     public Character() {
-        CharacterDB mdb = new CharacterDB();
-        try {
-            setID(mdb.getNextCharacterID());
-        } catch (SQLException sqe) {
-            System.out.println(sqe.getMessage());
-        }
+        super();
     }
 
     /*
@@ -40,6 +35,17 @@ public class Character extends Being {
         return mdb.getCharacter(id);
     }
 
+    /*
+     * Method: getCharByName
+     * Purpose: Gets a specified character from the Character table
+     * @param name
+     * @return Character
+     * @throws SQLException
+     */
+    public Character getCharByName(String name) throws SQLException, InvalidGameException {
+        CharacterDB mdb = new CharacterDB();
+        return mdb.getCharByName(name);
+    }
     /*
      * Method: getAllCharacters
      * Purpose: gets all characters from the Character table

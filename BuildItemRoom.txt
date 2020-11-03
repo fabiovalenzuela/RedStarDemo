@@ -1,3 +1,0 @@
-CREATE TABLE ItemRoom(itemID int not null, name text not null, description text not null, itemRoomID int not null)
-INSERT INTO ItemRoom(itemID, name, description, itemRoomID) Values(1, 'Sword', 'A shiny, sharp sword with rubies on the hilt.', 2)
-INSERT INTO ItemRoom(itemID, name, description, itemRoomID) Values(2, 'Hammer', 'A rusty hammer', 1)

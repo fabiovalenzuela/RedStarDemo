@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Class: Monster
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 24, 2020
+ * Date: October 27, 2020
  * For: ITEC 3860 Project RedStar
  * Copied/modified from Rick Price Monster
  */
@@ -30,7 +30,7 @@ public class MonsterDB {
         catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-        int next = sdb.getMaxValue("monsterNumber", "Monster") + 1;
+        int next = sdb.getMaxValue("iD", "Monster") + 1;
         //Close the SQLiteDB connection since SQLite only allows one updater
         sdb.close();
         return next;
@@ -46,7 +46,7 @@ public class MonsterDB {
     public Monster getMonster(int id) throws SQLException, InvalidGameException {
         SQLiteDB sdb = GameController.getDB();
         Monster monster = new Monster();
-        String sql = "Select * from Monster WHERE monsterNumber = " + id;
+        String sql = "Select * from Monster WHERE iD = " + id;
         ResultSet rs = sdb.queryDB(sql);
         try {
             if (rs.next()) {
@@ -56,10 +56,10 @@ public class MonsterDB {
                 monster.setHealth(rs.getInt("health"));
                 monster.setMaxDamage(rs.getInt("maxDamage"));
                 monster.setMinDamage(rs.getInt("minDamage"));
-                monster.setChanceHit(rs.getInt("chanceHit"));
+                monster.setChanceHit(rs.getDouble("chanceHit"));
                 monster.setRoomID(rs.getInt("roomID"));
             } else {
-                throw new SQLException("Monster " + id + " not found.");
+                throw new SQLException("Monster " + id + " not found or invalid.");
             }
         } catch (InvalidGameException ige) {
             throw new InvalidGameException(ige.getMessage());
@@ -105,7 +105,7 @@ public class MonsterDB {
                 monster.setHealth(rs.getInt("health"));
                 monster.setMaxDamage(rs.getInt("maxDamage"));
                 monster.setMinDamage(rs.getInt("minDamage"));
-                monster.setChanceHit(rs.getInt("chanceHit"));
+                monster.setChanceHit(rs.getDouble("chanceHit"));
                 monster.setRoomID(rs.getInt("roomID"));
                 monsters.add(monster);
             }

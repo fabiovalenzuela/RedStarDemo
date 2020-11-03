@@ -1,7 +1,6 @@
 package controller;
 
 import exceptions.InvalidGameException;
-import model.ItemDB;
 import model.RoomDB;
 
 import java.sql.SQLException;
@@ -21,6 +20,8 @@ public class Room {
     private boolean visible;
     private ArrayList<Exit> exits = new ArrayList<Exit>();
     private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Character> chars = new ArrayList<>();
+    private ArrayList<Monster> monsters = new ArrayList<>();
 
     /*
      ------------
@@ -36,7 +37,9 @@ public class Room {
                 boolean visited,
                 boolean visible,
                 ArrayList<Exit> exits,
-                ArrayList<Item> items) {
+                ArrayList<Item> items,
+                ArrayList<Character> chars,
+                ArrayList<Monster> monsters) {
         setRoomID(roomID);
         setName(name);
         setDescription(description);
@@ -44,6 +47,8 @@ public class Room {
         setVisible(visible);
         setExits(exits);
         setItems(items);
+        setChars(chars);
+        setMonsters(monsters);
     }
 
     /*
@@ -58,23 +63,6 @@ public class Room {
         return rdb.getRoom(id);
     }
 
-    /*
-     --------------------------
-     look
-     Get String to look at room
-     --------------------------
-    */
-    public String look() {
-        String lookStr = getRoomDisplay();
-        Exit exit = new Exit();
-
-        for (int i=0; i<exits.size(); i++) {
-            exit = exits.get(i);
-            lookStr = lookStr + "\n" + exit.getDirection();
-        }
-
-        return lookStr;
-    }
 
     /*
      -------------------------------
@@ -102,22 +90,60 @@ public class Room {
         }
 
         /*
+        display characters in room
+        */
+        if (chars.size() > 0) {
+            display = display + "You see a ";
+            Character character = new Character();
+            for (int i = 0; i < chars.size(); i++) {
+                character = chars.get(i);
+                display = display + character.getName();
+                if ((i < (chars.size() - 2))) {
+                    display = display + ", ";
+                } else if ((chars.size() > 1) && (i != (chars.size() - 1))) {
+                    display = display + " and a ";
+                }
+            }
+            display = display + "\n";
+        }
+
+        /*
         display items in room
         */
         if (items.size() > 0) {
-            display = display + "Items in the room include: ";
+            display = display + "Items in the room include a ";
             Item item = new Item();
             for (int i = 0; i < items.size(); i++) {
                 item = items.get(i);
-                display = display + item.getDescription();
+                display = display + item.getName();
                 if ((i < (items.size() - 2))) {
-                    display = display + ", ";
+                    display = display + ", a ";
                 } else if ((items.size() > 1) && (i != (items.size() - 1))) {
+                    display = display + " and a ";
+                }
+            }
+            display = display + "\n";
+        }
+
+
+        /*
+        display monsters in room
+        */
+        if (monsters.size() > 0) {
+            display = display + "There is ";
+            Monster mon = new Monster();
+            for (int i = 0; i < monsters.size(); i++) {
+                mon = monsters.get(i);
+                display = display + mon.getDescription();
+                if ((i < (monsters.size() - 2))) {
+                    display = display + ", a ";
+                } else if ((monsters.size() > 1) && (i != (monsters.size() - 1))) {
                     display = display + " and ";
                 }
             }
             display = display + "\n";
         }
+
 
         /*
         display directions user can go
@@ -236,11 +262,27 @@ public class Room {
 
     public ArrayList<Item> getItems() { return items; }
 
+    public ArrayList<Character> getChars() {
+        return chars;
+    }
+
+    public void setChars(ArrayList<Character> chars) {
+        this.chars = chars;
+    }
+
+    public ArrayList<Monster> getMonsters() {
+        return monsters;
+    }
+
+    public void setMonsters(ArrayList<Monster> monsters) {
+        this.monsters = monsters;
+    }
+
     /*
-     --------
-     ToString
-     --------
-    */
+             --------
+             ToString
+             --------
+            */
     @Override
     public String toString() {
         return "Room{" +
@@ -249,6 +291,8 @@ public class Room {
                 ", room description = " + description +
                 ", exits = " + exits +
                 ", items = " + items +
+                ", characters = " + chars +
+                ", monsters = " + monsters +
                 '}';
     }
 

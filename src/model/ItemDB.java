@@ -2,9 +2,11 @@ package model;
 
 import controller.GameController;
 import controller.Item;
+import exceptions.InvalidGameException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Class: ItemDB
@@ -44,23 +46,66 @@ public class ItemDB {
      */
     public Item getItem(int id) throws SQLException {
         SQLiteDB sdb = GameController.getDB();
-        Item it = new Item();
+        Item item = new Item();
         String sql = "Select * from Item WHERE itemID = " + id;
         ResultSet rs = sdb.queryDB(sql);
         if (rs.next()) {
-            it.setItemID(rs.getInt("itemID"));
-            it.setName(rs.getString("name"));
-            it.setDescription(rs.getString("description"));
-            it.setDamageRate(rs.getInt("damageRate"));
+            item.setItemID(rs.getInt("itemID"));
+            item.setName(rs.getString("name"));
+            item.setDescription(rs.getString("description"));
+            item.setDamageRate(rs.getInt("damageRate"));
+            item.setItemRoomID(rs.getInt("itemRoomID"));
+            int used = rs.getInt("itemUsed");
+            if (used == 0) {
+                item.setItemUsed(false);
+            }
+            else {
+                item.setItemUsed(true);
+            }
         } else {
             throw new SQLException("Item " + id + " not found");
         }
 
         //Close the SQLiteDB connection since SQLite only allows one updater
         sdb.close();
-        return it;
+        return item;
     }
 
+    /*
+     * Method: getItemByName
+     * Purpose: Gets a item based upon the supplied item name
+     *
+     * @param name
+     * @return Item
+     * @throws SQLException
+     */
+    public Item getItemByName(String name) throws SQLException, InvalidGameException {
+        SQLiteDB sdb = GameController.getDB();
+        Item item = new Item();
+        String sql = "Select * from Item where LOWER(name) LIKE LOWER('%" +
+                name +"%');";
+        ResultSet rs = sdb.queryDB(sql);
+        if (rs.next()) {
+            item.setItemID(rs.getInt("itemID"));
+            item.setName(rs.getString("name"));
+            item.setDescription(rs.getString("description"));
+            item.setDamageRate(rs.getInt("damageRate"));
+            item.setItemRoomID(rs.getInt("itemRoomID"));
+            int used = rs.getInt("itemUsed");
+            if (used == 0) {
+                item.setItemUsed(false);
+            }
+            else {
+                item.setItemUsed(true);
+            }
+        } else {
+            throw new InvalidGameException("Item " + name + " not found");
+        }
+
+        //Close the SQLiteDB connection since SQLite only allows one updater
+        sdb.close();
+        return item;
+    }
     /*
      * Method: updateItemRoom
      * Purpose: set visited = 0 for all items
@@ -68,11 +113,96 @@ public class ItemDB {
      */
     public void updateItemRoom(int itemID, int roomID) throws SQLException {
         SQLiteDB sdb = GameController.getDB();
-        String sql = "Update ItemRoom set roomID = " + roomID + "where itemID = " + itemID;
+        String sql = "Update Item set itemRoomID = " + roomID + " where itemID = " + itemID;
         sdb.updateDB(sql);
-        /* Close the SQLiteDB connection since SQLite only allows one updater */
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
 
+    /**
+     * Method: getItemDesc
+     * Purpose: Get item descriptions for a room
+     * @return String
+     * @throws SQLException
+     */
+    public String getItemDesc(int roomID) throws SQLException, InvalidGameException {
+        String itemDesc = "";
+        SQLiteDB sdb = GameController.getDB();
+        String sql = "Select * from Item where itemRoomID = " + roomID;
+
+        if (roomID == 0) {
+            itemDesc = "\nItems in backpack:  ";
+        } else {
+            itemDesc = "\nItems in room " + roomID + ":  ";
+        }
+
+        ResultSet rs = sdb.queryDB(sql);
+
+        try {
+            while (rs.next()) {
+                Item item = new Item();
+                item.setItemID(rs.getInt("itemID"));
+                item.setName(rs.getString("name"));
+                item.setDescription(rs.getString("description"));
+                item.setDamageRate(rs.getInt("damageRate"));
+                item.setItemRoomID(rs.getInt("itemRoomID"));
+                int used = rs.getInt("itemUsed");
+                if (used == 0) {
+                    item.setItemUsed(false);
+                }
+                else {
+                    item.setItemUsed(true);
+                }
+                itemDesc = itemDesc + "itemID = " + item.getItemID() +
+                        ", name = " + item.getName() +
+                        ", description = " + item.getDescription() + "\n";
+            }
+        } catch (SQLException ige) {
+            throw new InvalidGameException(ige.getMessage());
+        }
+
+        return itemDesc;
+    }
+
+    /**
+     * Method: getAllItems
+     * Purpose: Handles the DB interactions to retrieve all items
+     * @return ArrayList<Item>
+     * @throws SQLException
+     */
+    public ArrayList<Item> getAllItems() throws SQLException, InvalidGameException {
+        ArrayList<Item> items = new ArrayList<Item>();
+        SQLiteDB sdb = GameController.getDB();
+        String sql = "Select * from Item";
+
+        ResultSet rs = sdb.queryDB(sql);
+
+        try {
+            while (rs.next()) {
+                Item item = new Item();
+                item.setItemID(rs.getInt("itemID"));
+                item.setName(rs.getString("name"));
+                item.setDescription(rs.getString("description"));
+                item.setDamageRate(rs.getInt("damageRate"));
+                item.setItemRoomID(rs.getInt("itemRoomID"));
+                int used = rs.getInt("itemUsed");
+                if (used == 0) {
+                    item.setItemUsed(false);
+                }
+                else {
+                    item.setItemUsed(true);
+                }
+                items.add(item);
+            }
+        } catch (SQLException ige) {
+            throw new InvalidGameException(ige.getMessage());
+        }
+
+        //Close the SQLiteDB connection since SQLite only allows one updater
+        sdb.close();
+        return items;
+    }
 }
+
+
 

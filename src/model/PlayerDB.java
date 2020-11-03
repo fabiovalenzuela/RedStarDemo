@@ -1,5 +1,6 @@
 package model;
 
+import controller.Character;
 import controller.GameController;
 import controller.Player;
 import exceptions.InvalidGameException;
@@ -33,6 +34,41 @@ public class PlayerDB {
         //Close the SQLiteDB connection since SQLite only allows one updater
         sdb.close();
         return next;
+    }
+
+    /*
+     * Method: getPlayerByName
+     * Purpose: Get the Player using the Player sign-on ID
+     * @param name
+     * @return Player
+     * @throws SQLException
+     */
+    public Player getPlayerByName(String name) throws SQLException, InvalidGameException {
+        SQLiteDB sdb = GameController.getDB();
+        Player player = new Player();
+        String sql = "select * from Player where LOWER(name) LIKE LOWER('%" +
+                name +"%');";
+        ResultSet rs = sdb.queryDB(sql);
+        try {
+            if (rs.next()) {
+                player.setID(rs.getInt("iD"));
+                player.setName(rs.getString("name"));
+                player.setDescription(rs.getString("description"));
+                player.setHealth(rs.getInt("health"));
+                player.setMaxDamage(rs.getInt("maxDamage"));
+                player.setMinDamage(rs.getInt("minDamage"));
+                player.setChanceHit(rs.getDouble("chanceHit"));
+                player.setRoomID(rs.getInt("roomID"));
+            } else {
+                throw new SQLException("Player " + name + " not found.");
+            }
+        } catch (InvalidGameException ige) {
+            throw new InvalidGameException(ige.getMessage());
+        }
+
+        /* Close the SQLiteDB connection since SQLite only allows one updater */
+        sdb.close();
+        return player;
     }
 
     /**
