@@ -25,6 +25,7 @@ public class Puzzle {
     private String puzzleNoun;
     private String puzzleSql;
     private String puzzleObject;
+    private String puzzleText;
 
     /*
      ------------
@@ -41,7 +42,7 @@ public class Puzzle {
                   int puzzleItemID, int puzzleRoomID,
                   boolean puzzleUsed, String puzzleVerb,
                   String puzzleNoun, String puzzleSql,
-                  String puzzleObject) {
+                  String puzzleObject, String puzzleText) {
 
         setPuzzleID(puzzleID);
         setPuzzleName(puzzleName);
@@ -56,6 +57,7 @@ public class Puzzle {
         setPuzzleNoun(puzzleNoun);
         setPuzzleSql(puzzleSql);
         setPuzzleObject(puzzleObject);
+        setPuzzleText(puzzleText);
     }
 
     public Puzzle getPuzzle (int id) throws SQLException {
@@ -172,5 +174,13 @@ public class Puzzle {
 
     public void setPuzzleObject(String puzzleObject) {
         this.puzzleObject = puzzleObject;
+    }
+
+    public String getPuzzleText() {
+        return puzzleText;
+    }
+
+    public void setPuzzleText(String puzzleText) {
+        this.puzzleText = puzzleText;
     }
 }
