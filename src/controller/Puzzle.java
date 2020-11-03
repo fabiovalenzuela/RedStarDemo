@@ -3,7 +3,7 @@ package controller;
 /*
  * Class: Puzzle
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 25, 2020
+ * Date: November 2, 2020
  * For: ITEC 3860 Project
  */
 
@@ -14,13 +14,18 @@ import java.sql.SQLException;
 public class Puzzle {
     private int puzzleID;
     private String puzzleName;
-    private String puzzleDescription;
+    private String puzzleDesc;
     private String puzzleType;
+    private int puzzleInRoom;
+    private int puzzleMonID;
+    private int puzzleItemID;
     private int puzzleRoomID;
     private boolean puzzleUsed;
     private String puzzleVerb;
     private String puzzleNoun;
     private String puzzleSql;
+    private String puzzleObject;
+    private String puzzleText;
 
     /*
      ------------
@@ -32,13 +37,27 @@ public class Puzzle {
     }
 
     public Puzzle(int puzzleID, String puzzleName,
-                String puzzleDescription,
-                  String puzzleType, int puzzleRoomID) {
+                  String puzzleDesc, String puzzleType,
+                  int puzzleInRoom, int puzzleMonID,
+                  int puzzleItemID, int puzzleRoomID,
+                  boolean puzzleUsed, String puzzleVerb,
+                  String puzzleNoun, String puzzleSql,
+                  String puzzleObject, String puzzleText) {
+
         setPuzzleID(puzzleID);
         setPuzzleName(puzzleName);
-        setPuzzleDescription(puzzleDescription);
+        setPuzzleDesc(puzzleDesc);
         setPuzzleType(puzzleType);
+        setPuzzleInRoom(puzzleInRoom);
+        setPuzzleMonID(puzzleMonID);
+        setPuzzleItemID(puzzleItemID);
         setPuzzleRoomID(puzzleRoomID);
+        setPuzzleUsed(puzzleUsed);
+        setPuzzleVerb(puzzleVerb);
+        setPuzzleNoun(puzzleNoun);
+        setPuzzleSql(puzzleSql);
+        setPuzzleObject(puzzleObject);
+        setPuzzleText(puzzleText);
     }
 
     public Puzzle getPuzzle (int id) throws SQLException {
@@ -69,12 +88,12 @@ public class Puzzle {
         this.puzzleName = puzzleName;
     }
 
-    public String getPuzzleDescription() {
-        return puzzleDescription;
+    public String getPuzzleDesc() {
+        return puzzleDesc;
     }
 
-    public void setPuzzleDescription(String puzzleDescription) {
-        this.puzzleDescription = puzzleDescription;
+    public void setPuzzleDesc(String puzzleDesc) {
+        this.puzzleDesc = puzzleDesc;
     }
 
     public String getPuzzleType() {
@@ -85,11 +104,83 @@ public class Puzzle {
         this.puzzleType = puzzleType;
     }
 
+    public int getPuzzleInRoom() {
+        return puzzleInRoom;
+    }
+
+    public void setPuzzleInRoom(int puzzleInRoom) {
+        this.puzzleInRoom = puzzleInRoom;
+    }
+
+    public int getPuzzleMonID() {
+        return puzzleMonID;
+    }
+
+    public void setPuzzleMonID(int puzzleMonID) {
+        this.puzzleMonID = puzzleMonID;
+    }
+
+    public int getPuzzleItemID() {
+        return puzzleItemID;
+    }
+
+    public void setPuzzleItemID(int puzzleItemID) {
+        this.puzzleItemID = puzzleItemID;
+    }
+
     public int getPuzzleRoomID() {
         return puzzleRoomID;
     }
 
     public void setPuzzleRoomID(int puzzleRoomID) {
         this.puzzleRoomID = puzzleRoomID;
+    }
+
+    public boolean isPuzzleUsed() {
+        return puzzleUsed;
+    }
+
+    public void setPuzzleUsed(boolean puzzleUsed) {
+        this.puzzleUsed = puzzleUsed;
+    }
+
+    public String getPuzzleVerb() {
+        return puzzleVerb;
+    }
+
+    public void setPuzzleVerb(String puzzleVerb) {
+        this.puzzleVerb = puzzleVerb;
+    }
+
+    public String getPuzzleNoun() {
+        return puzzleNoun;
+    }
+
+    public void setPuzzleNoun(String puzzleNoun) {
+        this.puzzleNoun = puzzleNoun;
+    }
+
+    public String getPuzzleSql() {
+        return puzzleSql;
+    }
+
+    public void setPuzzleSql(String puzzleSql) {
+        this.puzzleSql = puzzleSql;
+    }
+
+    public String getPuzzleObject() {
+        return puzzleObject;
+    }
+
+    public void setPuzzleObject(String puzzleObject) {
+        this.puzzleObject = puzzleObject;
+    }
+
+    public String getPuzzleText() {
+        return puzzleText;
+    }
+
+    public void setPuzzleText(String puzzleText) {
+        this.puzzleText = puzzleText;
     }
 }
