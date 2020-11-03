@@ -46,19 +46,35 @@ public class PuzzleDB {
     public Puzzle getPuzzle(int id) throws SQLException {
         SQLiteDB sdb = GameController.getDB();
         Puzzle puzzle = new Puzzle();
+
         String sql = "Select * from Puzzle WHERE puzzleID = " + id;
         ResultSet rs = sdb.queryDB(sql);
+
         if (rs.next()) {
             puzzle.setPuzzleID(rs.getInt("puzzleID"));
             puzzle.setPuzzleName(rs.getString("puzzleName"));
-            puzzle.setPuzzleDescription(rs.getString("puzzleDescription"));
+            puzzle.setPuzzleDesc(rs.getString("puzzleDesc"));
             puzzle.setPuzzleType(rs.getString("puzzleType"));
+            puzzle.setPuzzleInRoom(rs.getInt("puzzleInRoom"));
+            puzzle.setPuzzleMonID(rs.getInt("puzzleMonID"));
+            puzzle.setPuzzleItemID(rs.getInt("puzzleItemID");
             puzzle.setPuzzleRoomID(rs.getInt("puzzleRoomID"));
+            int used = (rs.getInt("puzzleUsed"));
+            if (used == 0) {
+                puzzle.setPuzzleUsed(false);
+            }
+            else {
+                puzzle.setPuzzleUsed(true);
+            }
+            puzzle.setPuzzleVerb(rs.getString("puzzleVerb"));
+            puzzle.setPuzzleNoun(rs.getString("puzzleNoun"));
+            puzzle.setPuzzleSql(rs.getString("puzzleSql"));
+            puzzle.setPuzzleObject(rs.getString("puzzleOObject"));
         } else {
             throw new SQLException("Puzzle " + id + " not found");
         }
 
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one updater */
         sdb.close();
         return puzzle;
     }
@@ -68,11 +84,11 @@ public class PuzzleDB {
      * Purpose: set visited = 0 for all puzzles
      * @throws SQLException
      */
-    public void updatePuzzleRoom(int puzzleID, int roomID) throws SQLException {
+    public void updatePuzzleUsed(int puzzleID) throws SQLException {
         SQLiteDB sdb = GameController.getDB();
-        String sql = "Update PuzzleRoom set roomID = " + roomID + "where puzzleID = " + puzzleID;
+        String sql = "Update Puzzle set puzzleUsed = 1 where puzzleID = " + puzzleID;
         sdb.updateDB(sql);
-        //Close the SQLiteDB connection since SQLite only allows one update
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
 }

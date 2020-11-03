@@ -24,6 +24,9 @@ import java.sql.SQLException;
 public class GameController {
     private static SQLiteDB sdb;
     public Room room = new Room();
+    private String userID;
+    private String gameID;
+    private String dbName;
 
     public GameController() {
         super();
@@ -136,6 +139,21 @@ public class GameController {
 
     }
 
+    /* Set userID */
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    /* Set gameID */
+    public void setGameID(String gameID) {
+        this.gameID = gameID;
+    }
+
+    /* Set dbName -- database name */
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
+    }
+
     /*
      -----------------------------------
      getWelcome
@@ -143,13 +161,11 @@ public class GameController {
      -----------------------------------
     */
     public String getWelcome() {
-        return ("Welcome to Project RedStar. \n" +
+        return ("Welcome to The Great Cave Offensive. \n" +
                 "You will proceed through rooms based upon your entries.\n" +
                 "You can navigate by using the entire direction \n" +
                 "or just the first letter.\n" +
                 "To exit the game, press Cancel\n\n" +
                 "Press Start to begin.");
     }
-
-
 }
