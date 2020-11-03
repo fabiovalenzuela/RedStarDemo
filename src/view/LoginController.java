@@ -28,6 +28,7 @@ public class LoginController {
     @FXML private TextField errorMsg;
 
     private static SQLiteDB sdb;
+    private String userID;
     boolean validLogin;
 
     /*
@@ -50,7 +51,7 @@ public class LoginController {
         errorMsg.setText("");
         validLogin = false;
         try {
-            String userID = userTF.getText();
+            userID = userTF.getText();
             String pwd = passwordPF.getText();
             LoginDB logDb = new LoginDB();
             validLogin = logDb.getUser(userID, pwd);
@@ -80,7 +81,8 @@ public class LoginController {
                 stage.setScene(scene);
                 stage.setTitle("Project RedStar");
                 ControllerUI uic = (ControllerUI) loader.getController();
-//            uic.setUser(userID);
+//                uic.setUserID(userID);
+//                uic.setGameID("GCO");
                 stage.show();
             } catch (Exception e) {
                 errorMsg.setText("Error displaying screen");

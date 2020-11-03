@@ -35,6 +35,8 @@ public class ControllerUI {
     @FXML private TextField msgTF;
 
     private GameController gc = new GameController();
+    private String userID;
+    private String gameID;
 
     @FXML
     public void initialize() {
@@ -83,17 +85,21 @@ public class ControllerUI {
             try {
                 /* extract command text to a string */
                 String commandText = commandTF.getText();
+
                 /* the first word in commandText should be a verb */
                 String verb = this.getVerb(commandText);
                 /* the 2nd word in commandText should be a noun or blanks */
                 String noun = this.getNoun(commandText);
+
                 /* check the verb for accuracy */
                 String command = gc.checkCommand(verb);
                 /* process the command */
                 this.processCommand(command, noun);
+
             } catch (InvalidGameException e) {
                 msgTF.setId("#errorMsg");
                 msgTF.setText(e.getMessage());
+                /* set the msgTF field to display */
                 msgTF.setVisible(true);
             }
         }
@@ -418,4 +424,17 @@ public class ControllerUI {
         }
         return noun;
     }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+        gc.setUserID(userID);
+        gc.setDbName(this.gameID + userID);
+    }
+
+    public void setGameID(String gameID) {
+        this.gameID = gameID;
+        gc.setGameID(gameID);
+        gc.setDbName(this.gameID + userID);
+    }
+
 }
