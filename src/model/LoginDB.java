@@ -88,7 +88,7 @@ public class LoginDB {
             System.out.println("Error creating User file");
         }
 
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
 }

@@ -17,11 +17,12 @@ public class GameStart {
     SQLiteDB sdb;
 
     public static void main(String[] args) {
-        File dbFile = new File("GCO.db");
-        if (!dbFile.exists()) {
-            CreateFilesController cfc = new CreateFilesController();
-            cfc.createFile();
-        }
+        File dbFile;
+//        File dbFile = new File("GCO.db");
+//        if (!dbFile.exists()) {
+//            CreateFilesController cfc = new CreateFilesController();
+//            cfc.createFile();
+//        }
 
 //        GameUI.launch(GameUI.class);
 

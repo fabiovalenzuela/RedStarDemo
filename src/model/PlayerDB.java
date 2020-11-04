@@ -1,6 +1,5 @@
 package model;
 
-import controller.Character;
 import controller.GameController;
 import controller.Player;
 import exceptions.InvalidGameException;
@@ -25,13 +24,13 @@ public class PlayerDB {
     public int getNextPlayerID() throws SQLException {
         SQLiteDB sdb = null;
         try {
-            sdb = new SQLiteDB();
+            sdb = new SQLiteDB(GameController.dbName);
         }
         catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         int next = sdb.getMaxValue("playerNumber", "Player") + 1;
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return next;
     }
@@ -66,7 +65,7 @@ public class PlayerDB {
             throw new InvalidGameException(ige.getMessage());
         }
 
-        /* Close the SQLiteDB connection since SQLite only allows one updater */
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return player;
     }
@@ -100,7 +99,7 @@ public class PlayerDB {
             throw new InvalidGameException(ige.getMessage());
         }
 
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return player;
     }
@@ -114,7 +113,7 @@ public class PlayerDB {
         SQLiteDB sdb = GameController.getDB();
         String sql = "Update Player set health = " + hp;
         sdb.updateDB(sql);
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
 
@@ -148,7 +147,7 @@ public class PlayerDB {
             throw new InvalidGameException(ige.getMessage());
         }
 
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return players;
     }

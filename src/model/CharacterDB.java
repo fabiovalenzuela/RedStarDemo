@@ -27,13 +27,13 @@ public class CharacterDB {
     public int getNextCharacterID() throws SQLException {
         SQLiteDB sdb = null;
         try {
-            sdb = new SQLiteDB();
+            sdb = new SQLiteDB(GameController.dbName);
         }
         catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         int next = sdb.getMaxValue("iD", "Character") + 1;
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return next;
     }
@@ -67,7 +67,7 @@ public class CharacterDB {
             throw new InvalidGameException(ige.getMessage());
         }
 
-        /* Close the SQLiteDB connection since SQLite only allows one updater */
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return character;
     }
@@ -103,7 +103,7 @@ public class CharacterDB {
             throw new InvalidGameException(ige.getMessage());
         }
 
-        /* Close the SQLiteDB connection since SQLite only allows one updater */
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return character;
     }
@@ -151,7 +151,7 @@ public class CharacterDB {
             throw new InvalidGameException(ige.getMessage());
         }
 
-        /* Close the SQLiteDB connection since SQLite only allows one updater */
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return characters;
     }

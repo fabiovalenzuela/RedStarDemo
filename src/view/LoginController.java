@@ -75,14 +75,16 @@ public class LoginController {
                 /* --------------------------- */
                 /* Load stage for first screen */
                 /* --------------------------- */
-                FXMLLoader loader = new FXMLLoader();
-                GridPane root = loader.load(getClass().getResource("GameUI.fxml"));
+//                FXMLLoader loader = new FXMLLoader();
+//                GridPane root = loader.load(getClass().getResource("GameUI.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("GameUI.fxml"));
+                GridPane root = loader.load();
                 Scene scene = new Scene(root, 700, 425);
                 stage.setScene(scene);
                 stage.setTitle("Project RedStar");
                 ControllerUI uic = (ControllerUI) loader.getController();
-//                uic.setUserID(userID);
-//                uic.setGameID("GCO");
+                uic.setUserID(userID);
+                uic.setGameID("GCO");
                 stage.show();
             } catch (Exception e) {
                 errorMsg.setText("Error displaying screen");

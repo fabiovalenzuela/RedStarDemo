@@ -24,15 +24,18 @@ public class GameDBCreate {
      * @throws SQLException
      */
     public void buildTables() throws SQLException {
-        buildTable("BuildRoom.txt");
-        buildTable("BuildExit.txt");
-        buildTable("BuildMonster.txt");
-        buildTable("BuildPlayer.txt");
-        buildTable("BuildCharacter.txt");
-        buildTable("BuildExitRoom.txt");
-        buildTable("BuildCharText.txt");
-        buildTable("BuildItem.txt");
-        buildTable("BuildPuzzle.txt");
+
+        String gameID = GameController.gameID;
+
+        buildTable(gameID + "BuildRoom.txt");
+        buildTable(gameID + "BuildExit.txt");
+        buildTable(gameID + "BuildMonster.txt");
+        buildTable(gameID + "BuildPlayer.txt");
+        buildTable(gameID + "BuildCharacter.txt");
+        buildTable(gameID + "BuildExitRoom.txt");
+        buildTable(gameID + "BuildCharText.txt");
+        buildTable(gameID + "BuildItem.txt");
+        buildTable(gameID + "BuildPuzzle.txt");
     }
 
     /*
@@ -58,7 +61,7 @@ public class GameDBCreate {
             e.printStackTrace();
         }
 
-        /* Close the SQLiteDB connection since SQLite only allows one updater */
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
 
