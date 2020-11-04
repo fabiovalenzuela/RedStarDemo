@@ -24,9 +24,9 @@ import java.sql.SQLException;
 public class GameController {
     private static SQLiteDB sdb;
     public Room room = new Room();
-    private String userID;
-    private String gameID;
-    private String dbName;
+    public static String userID;
+    public static String gameID;
+    public static String dbName;
 
     public GameController() {
         super();
@@ -38,7 +38,7 @@ public class GameController {
      */
     public static SQLiteDB getDB() {
         try {
-            sdb = new SQLiteDB();
+            sdb = new SQLiteDB(dbName);
         }
         catch (ClassNotFoundException | SQLException e) {
             System.out.println("ERROR!\nThere was a problem opening the database \n" + e.getMessage());
@@ -147,6 +147,11 @@ public class GameController {
     /* Set gameID */
     public void setGameID(String gameID) {
         this.gameID = gameID;
+    }
+
+    /* Get gameID */
+    public String getGameID() {
+        return gameID;
     }
 
     /* Set dbName -- database name */
