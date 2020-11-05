@@ -25,12 +25,12 @@ public class ItemDB {
     public int getNextItemID() throws SQLException {
         SQLiteDB sdb = null;
         try {
-            sdb = new SQLiteDB();
+            sdb = new SQLiteDB(GameController.dbName);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         int next = sdb.getMaxValue("itemID", "item") + 1;
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
 
         return next;
@@ -66,7 +66,7 @@ public class ItemDB {
             throw new SQLException("Item " + id + " not found");
         }
 
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return item;
     }
@@ -102,7 +102,7 @@ public class ItemDB {
             throw new InvalidGameException("Item " + name + " not found");
         }
 
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return item;
     }
@@ -198,7 +198,7 @@ public class ItemDB {
             throw new InvalidGameException(ige.getMessage());
         }
 
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return items;
     }

@@ -40,6 +40,8 @@ public class CharTextDB {
                 charText.setMonID(rs.getInt("monID"));
                 charText.setItemID(rs.getInt("itemID"));
                 charText.setRoomID(rs.getInt("roomID"));
+                charText.setAnswers(rs.getString("answers"));
+                charText.setPuzzleID(rs.getInt("puzzleID"));
                 charTexts.add(charText);
             }
         } catch (SQLException sqe) {
@@ -60,7 +62,20 @@ public class CharTextDB {
         String sql = "Update CharText set usedFlag = 1 where iD = " + iD +
                      " and seq = " + seq;
         sdb.updateDB(sql);
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
+        sdb.close();
+    }
+
+
+    /*
+     * Method: updatePuzzleSql
+     * Purpose: If Sql is stated, use to update
+     * @throws SQLException
+     */
+    public void updatePuzzleSql(String sql) throws SQLException {
+        SQLiteDB sdb = GameController.getDB();
+        sdb.updateDB(sql);
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
 
@@ -73,7 +88,7 @@ public class CharTextDB {
         SQLiteDB sdb = GameController.getDB();
         String sql = "Update CharText set usedFlag = 0 where usedFlag = 1";
         sdb.updateDB(sql);
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
 }

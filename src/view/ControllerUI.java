@@ -7,11 +7,8 @@ package view;
  * For: ITEC 3860 Project RedStar
  */
 
+import controller.*;
 import controller.Character;
-import controller.CharText;
-import controller.GameController;
-import controller.Item;
-import controller.Room;
 import exceptions.InvalidGameException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -24,6 +21,7 @@ import model.CharacterDB;
 import model.ItemDB;
 import model.RoomDB;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -35,8 +33,9 @@ public class ControllerUI {
     @FXML private TextField msgTF;
 
     private GameController gc = new GameController();
-    private String userID;
-    private String gameID;
+    private static String userID;
+    private static String gameID;
+    private static String dbName;
 
     @FXML
     public void initialize() {
@@ -434,7 +433,13 @@ public class ControllerUI {
     public void setGameID(String gameID) {
         this.gameID = gameID;
         gc.setGameID(gameID);
-        gc.setDbName(this.gameID + userID);
+        dbName = gameID + userID + ".db";
+        gc.setDbName(dbName);
+        File dbFile = new File(dbName);
+        if (!dbFile.exists()) {
+            CreateFilesController cfc = new CreateFilesController();
+            cfc.createFile();
+        }
     }
 
 }

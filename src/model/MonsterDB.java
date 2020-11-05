@@ -25,13 +25,13 @@ public class MonsterDB {
     public int getNextMonsterID() throws SQLException {
         SQLiteDB sdb = null;
         try {
-            sdb = new SQLiteDB();
+            sdb = new SQLiteDB(GameController.dbName);
         }
         catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         int next = sdb.getMaxValue("iD", "Monster") + 1;
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return next;
     }
@@ -65,7 +65,7 @@ public class MonsterDB {
             throw new InvalidGameException(ige.getMessage());
         }
 
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return monster;
     }
@@ -79,7 +79,7 @@ public class MonsterDB {
         SQLiteDB sdb = GameController.getDB();
         String sql = "Update Monster set health = " + hp;
         sdb.updateDB(sql);
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
 
@@ -113,7 +113,7 @@ public class MonsterDB {
             throw new InvalidGameException(ige.getMessage());
         }
 
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return monsters;
     }

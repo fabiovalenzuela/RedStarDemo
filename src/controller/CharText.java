@@ -25,12 +25,15 @@ public class CharText {
     private int itemID;
     /* visited this room to use this text */
     private int roomID;
+    private String answers;
+    private int puzzleID;
 
     public CharText() {
     }
 
     public CharText(int iD, int seq, int usedFlag, String text,
-                    int monID, int itemID, int roomID) {
+                    int monID, int itemID, int roomID,
+                    String answers, int puzzleID) {
         this.setID(iD);
         this.setSeq(seq);
         this.setUsedFlag(usedFlag);
@@ -38,6 +41,8 @@ public class CharText {
         this.setMonID(monID);
         this.setItemID(itemID);
         this.setRoomID(roomID);
+        this.setAnswers(answers);
+        this.setPuzzleID(puzzleID);
     }
 
 
@@ -132,6 +137,18 @@ public class CharText {
         return textStr;
     }
 
+    public boolean checkAnswers (String userAnswer) {
+        boolean valid = false;
+        String answer[] = this.answers.split("[|]");
+        for (String a : answer) {
+            if (a.equalsIgnoreCase(userAnswer)) {
+                valid = true;
+                break;
+            }
+        }
+        return valid;
+    }
+
     /*
      * Method: updateUsedFlag
      * Purpose: set visited = 0 for all rooms
@@ -201,6 +218,22 @@ public class CharText {
 
     public int getRoomID() {
         return roomID;
+    }
+
+    public String getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(String answers) {
+        this.answers = answers;
+    }
+
+    public int getPuzzleID() {
+        return puzzleID;
+    }
+
+    public void setPuzzleID(int puzzleID) {
+        this.puzzleID = puzzleID;
     }
 
     public void setRoomID(int roomID) {

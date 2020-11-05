@@ -24,13 +24,13 @@ public class ExitDB {
     public int getNextExitID() throws SQLException, InvalidGameException {
         SQLiteDB sdb = null;
         try {
-            sdb = new SQLiteDB();
+            sdb = new SQLiteDB(GameController.dbName);
         }
         catch (ClassNotFoundException | SQLException ige) {
             throw new InvalidGameException(ige.getMessage());
         }
         int next = sdb.getMaxValue("exitID", "Exit") + 1;
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return next;
     }
@@ -55,7 +55,7 @@ public class ExitDB {
         	throw new SQLException("Exit " + id + " not found.");
 		}
 
-        /* Close the SQLiteDB connection since SQLite only allows one updater */
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return exit;
     }

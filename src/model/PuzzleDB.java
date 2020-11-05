@@ -24,7 +24,7 @@ public class PuzzleDB {
     public int getNextPuzzleID() throws SQLException {
         SQLiteDB sdb = null;
         try {
-            sdb = new SQLiteDB();
+            sdb = new SQLiteDB(GameController.dbName);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -75,7 +75,7 @@ public class PuzzleDB {
             throw new SQLException("Puzzle " + id + " not found");
         }
 
-        /* Close the SQLiteDB connection since SQLite only allows one updater */
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return puzzle;
     }

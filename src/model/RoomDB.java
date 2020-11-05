@@ -29,12 +29,12 @@ public class RoomDB {
     public int getNextRoomID() throws SQLException {
         SQLiteDB sdb = null;
         try {
-            sdb = new SQLiteDB();
+            sdb = new SQLiteDB(GameController.dbName);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         int next = sdb.getMaxValue("roomID", "room") + 1;
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
 
         return next;
@@ -209,7 +209,7 @@ public class RoomDB {
         SQLiteDB sdb = GameController.getDB();
         String sql = "Update Room set visited = 1 where roomID = " + roomID;               ;
         sdb.updateDB(sql);
-        //Close the SQLiteDB connection since SQLite only allows one updater
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
     /*
@@ -221,7 +221,7 @@ public class RoomDB {
         SQLiteDB sdb = GameController.getDB();
         String sql = "Update Room set visited = 0";
         sdb.updateDB(sql);
-        /* Close the SQLiteDB connection since SQLite only allows one updater */
+        /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
 }
