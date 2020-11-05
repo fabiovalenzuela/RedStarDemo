@@ -137,6 +137,7 @@ public class GameController {
 
         if(command.matches("North|South|East|West|Up|Down|Get|Remove|Look|Backpack|Talk|Attack|Push|Throw" +
                 "N|S|W|E|U|D|G|R|L|B|T|A|P|T")){
+            command.toUpperCase();
             commandStr=command;
         }
 
