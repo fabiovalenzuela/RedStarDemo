@@ -60,7 +60,7 @@ public class ControllerUI {
         /* -------- */
         /* 1st time */
         /* -------- */
-        if (btnText.equalsIgnoreCase("Start")) {
+        if (btnText.matches("Start")) {
             okBtn.setText("Ok");
             try {
                 /* Set visited = 0 in Room */
@@ -263,11 +263,7 @@ public class ControllerUI {
 
         /* find the 1st word that is not to/with/the/a */
         for (String s : words) {
-            if ((!s.equalsIgnoreCase("to")) &&
-                    (!s.equalsIgnoreCase("with")) &&
-                    (!s.equalsIgnoreCase("the")) &&
-                    (!s.equalsIgnoreCase("on")) &&
-                    (!s.equalsIgnoreCase("a"))) {
+            if (!s.matches("to|with|the|on|a")) {
                 name = s;
                 break;
             }

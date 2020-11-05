@@ -199,13 +199,13 @@ abstract public class Being {
      * Purpose: Damages both the player and the monster using a random value within a range
      * @return
      */
-    public int Damage(){
-        int damageDealt = random.randint(20,30);
-        int damageRecieved = random.randint(0,damageDealt);
-        enemyHealth -= damageDealt;
-        playerHealth -= damageRecieved;
-
-    }
+//    public int Damage(){
+//        int damageDealt = random.randint(20,30);
+//        int damageRecieved = random.randint(0,damageDealt);
+//        int enemyHealth;-= damageDealt;
+//        int playerHealth -= damageRecieved;
+//
+//    }
 
 
     @Override
