@@ -1,0 +1,2 @@
+CREATE TABLE MonsterRoom(roomID int not Null, iD int not null)
+INSERT INTO MonsterRoom(roomID, iD) Values(3, 1)

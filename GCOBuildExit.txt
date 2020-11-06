@@ -1,0 +1,7 @@
+CREATE TABLE Exit(exitID int Primary Key not Null, direction text not null, destination int not null)
+INSERT INTO Exit(exitID, direction, destination) Values(1, 'EAST', 2)
+INSERT INTO Exit(exitID, direction, destination) Values(2, 'WEST', 3)
+INSERT INTO Exit(exitID, direction, destination) Values(3, 'EAST', 3)
+INSERT INTO Exit(exitID, direction, destination) Values(4, 'WEST', 1)
+INSERT INTO Exit(exitID, direction, destination) Values(5, 'EAST', 1)
+INSERT INTO Exit(exitID, direction, destination) Values(6, 'WEST', 2)
