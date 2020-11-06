@@ -80,7 +80,7 @@ public class PlayerDB {
     public Player getPlayer(int id) throws SQLException, InvalidGameException {
         SQLiteDB sdb = GameController.getDB();
         Player player = new Player();
-        String sql = "Select * from Player WHERE playerNumber = " + id;
+        String sql = "Select * from Player WHERE iD = " + id;
         ResultSet rs = sdb.queryDB(sql);
         try {
             if (rs.next()) {

@@ -2,6 +2,7 @@ package controller;
 
 import exceptions.InvalidGameException;
 import model.PlayerDB;
+import model.SQLiteDB;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -52,6 +53,26 @@ public class Player extends Being {
         return mdb.getAllPlayers();
     }
 
+    /*
+     * Method: updateVisited
+     * Purpose: set visited = 0 for all rooms
+     * @throws SQLException
+     */
+    public void updatePlayer() throws SQLException {
+        SQLiteDB sdb = GameController.getDB();
+        String sql = "Update Player set iD = " + getID() +
+                ", name = '" + getName() +
+                "', description = '" + getDescription() +
+                "', health = " + getHealth() +
+                ", minDamage = " + getMinDamage() +
+                ", maxDamage = " + getMaxDamage() +
+                ", chanceHit = " + getChanceHit() +
+                ", roomID = " + getRoomID() +
+                " where iD = 1";
+        sdb.updateDB(sql);
+        /* Close the SQLiteDB connection since SQLite only allows one update */
+        sdb.close();
+    }
     /*
      * Method: toString
      * Purpose: Returns a String of the Player class

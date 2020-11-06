@@ -14,11 +14,13 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.CharacterDB;
 import model.ItemDB;
+import model.PlayerDB;
 import model.RoomDB;
 
 import java.io.File;
@@ -31,8 +33,12 @@ public class ControllerUI {
     @FXML private TextField commandTF;
     @FXML private Button okBtn;
     @FXML private TextField msgTF;
+    @FXML private Label commandLBL;
+    @FXML private TextArea healthTA;
 
     private GameController gc = new GameController();
+    private Player player = new Player();
+    private PlayerDB pdb = new PlayerDB();
     private static String userID;
     private static String gameID;
     private static String dbName;
@@ -44,6 +50,8 @@ public class ControllerUI {
         msgTF.clear();
         commandTF.setVisible(false);
         msgTF.setVisible(false);
+        commandLBL.setVisible(false);
+        healthTA.setVisible(false);
     }
 
     /*
@@ -57,19 +65,29 @@ public class ControllerUI {
         String btnText = okBtn.getText();
         msgTF.clear();
 
-        /* -------- */
-        /* 1st time */
-        /* -------- */
+        /* -------------------------------------------------- */
+        /*                    1st time                        */
+        /* -------------------------------------------------- */
         if (btnText.equalsIgnoreCase("Start")) {
             okBtn.setText("Ok");
             try {
                 /* Set visited = 0 in Room */
-                gc.updateAllVisited();
+//                gc.updateAllVisited();
                 /* Set usedFlag in CharText = 0 */
-                gc.updateAllUsed();
+//                gc.updateAllUsed();
+                /* Get Player */
+                player = pdb.getPlayer(1);
+                if (!player.getName().equalsIgnoreCase(userID)) {
+                    updPlayer();
+                }
                 /* Get room 1 */
-                descTA.setText(gc.getRoomData(1));
+                descTA.setText(gc.getRoomData(player.getRoomID()));
                 commandTF.setVisible(true);
+                commandLBL.setText("Command:");
+                commandLBL.setVisible(true);
+                healthTA.setVisible(true);
+                healthTA.setText("Player Health: " + player.getHealth());
+
             } catch (SQLException | InvalidGameException sqe) {
                 msgTF.setId("#errorMsg");
                 msgTF.setVisible(true);
@@ -355,6 +373,7 @@ public class ControllerUI {
         descTA.setText(gc.getRoomData(nextRoomID));
         commandTF.setText("");
         msgTF.setVisible(false);
+        player.setRoomID(nextRoomID);
     }
 
     private Item getSelectedItem(String noun) throws InvalidGameException {
@@ -440,6 +459,22 @@ public class ControllerUI {
             CreateFilesController cfc = new CreateFilesController();
             cfc.createFile();
         }
+    }
+
+    /* -------------------------------
+        Method: updPlayer
+        Set initial player information
+        if player name is different.
+     */
+    public void updPlayer() throws SQLException, InvalidGameException {
+            player.setName(userID);
+            player.setDescription("Player " + userID);
+            player.setHealth(100);
+            player.setID(1);
+            player.setRoomID(1);
+            player.setMaxDamage(20);
+            player.setMinDamage(5);
+            player.updatePlayer();
     }
 
 }
