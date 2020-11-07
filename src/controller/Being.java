@@ -59,6 +59,7 @@ abstract public class Being {
         Random rand = new Random();
         int change = rand.nextInt(maxDamage-minDamage);
         health -= change;
+        if (health<0) { health = 0; }
         setHealth(health);
     }
 

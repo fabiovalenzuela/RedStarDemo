@@ -50,14 +50,7 @@ public class MonsterDB {
         ResultSet rs = sdb.queryDB(sql);
         try {
             if (rs.next()) {
-                monster.setID(rs.getInt("iD"));
-                monster.setName(rs.getString("name"));
-                monster.setDescription(rs.getString("description"));
-                monster.setHealth(rs.getInt("health"));
-                monster.setMaxDamage(rs.getInt("maxDamage"));
-                monster.setMinDamage(rs.getInt("minDamage"));
-                monster.setChanceHit(rs.getDouble("chanceHit"));
-                monster.setRoomID(rs.getInt("roomID"));
+                loadMonster(rs, monster);
             } else {
                 throw new SQLException("Monster " + id + " not found or invalid.");
             }
@@ -71,8 +64,8 @@ public class MonsterDB {
     }
 
     /**
-     * Method: updateVisited
-     * Purpose: set visited = 0 for all rooms
+     * Method: updateHp
+     * Purpose: set health for Monster
      * @throws SQLException
      */
     public void updateHp(int hp) throws SQLException {
@@ -99,14 +92,7 @@ public class MonsterDB {
         try {
             while (rs.next()) {
                 Monster monster = new Monster();
-                monster.setID(rs.getInt("iD"));
-                monster.setName(rs.getString("name"));
-                monster.setDescription(rs.getString("description"));
-                monster.setHealth(rs.getInt("health"));
-                monster.setMaxDamage(rs.getInt("maxDamage"));
-                monster.setMinDamage(rs.getInt("minDamage"));
-                monster.setChanceHit(rs.getDouble("chanceHit"));
-                monster.setRoomID(rs.getInt("roomID"));
+                loadMonster(rs,monster);
                 monsters.add(monster);
             }
         } catch (InvalidGameException ige) {
@@ -116,5 +102,16 @@ public class MonsterDB {
         /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return monsters;
+    }
+
+    public void loadMonster(ResultSet rs, Monster monster) throws SQLException, InvalidGameException {
+        monster.setID(rs.getInt("iD"));
+        monster.setName(rs.getString("name"));
+        monster.setDescription(rs.getString("description"));
+        monster.setHealth(rs.getInt("health"));
+        monster.setMaxDamage(rs.getInt("maxDamage"));
+        monster.setMinDamage(rs.getInt("minDamage"));
+        monster.setChanceHit(rs.getDouble("chanceHit"));
+        monster.setRoomID(rs.getInt("roomID"));
     }
 }

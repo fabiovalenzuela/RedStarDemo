@@ -52,14 +52,7 @@ public class CharacterDB {
         ResultSet rs = sdb.queryDB(sql);
         try {
             if (rs.next()) {
-                character.setID(rs.getInt("iD"));
-                character.setName(rs.getString("name"));
-                character.setDescription(rs.getString("description"));
-                character.setHealth(rs.getInt("health"));
-                character.setMaxDamage(rs.getInt("maxDamage"));
-                character.setMinDamage(rs.getInt("minDamage"));
-                character.setChanceHit(rs.getDouble("chanceHit"));
-                character.setRoomID(rs.getInt("roomID"));
+                loadCharacter(rs,character);
             } else {
                 throw new SQLException("Character " + id + " not found.");
             }
@@ -86,26 +79,26 @@ public class CharacterDB {
         String sql = "select * from Character where LOWER(name) LIKE LOWER('%" +
                       name +"%');";
         ResultSet rs = sdb.queryDB(sql);
-        try {
-            if (rs.next()) {
-                character.setID(rs.getInt("iD"));
-                character.setName(rs.getString("name"));
-                character.setDescription(rs.getString("description"));
-                character.setHealth(rs.getInt("health"));
-                character.setMaxDamage(rs.getInt("maxDamage"));
-                character.setMinDamage(rs.getInt("minDamage"));
-                character.setChanceHit(rs.getDouble("chanceHit"));
-                character.setRoomID(rs.getInt("roomID"));
-            } else {
-                throw new SQLException("Character " + name + " not found.");
-            }
-        } catch (InvalidGameException ige) {
-            throw new InvalidGameException(ige.getMessage());
+        if (rs.next()) {
+            loadCharacter(rs,character);
+        } else {
+            throw new SQLException("Character " + name + " not found.");
         }
 
         /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return character;
+    }
+
+    private void loadCharacter(ResultSet rs, Character character) throws SQLException, InvalidGameException {
+        character.setID(rs.getInt("iD"));
+        character.setName(rs.getString("name"));
+        character.setDescription(rs.getString("description"));
+        character.setHealth(rs.getInt("health"));
+        character.setMaxDamage(rs.getInt("maxDamage"));
+        character.setMinDamage(rs.getInt("minDamage"));
+        character.setChanceHit(rs.getDouble("chanceHit"));
+        character.setRoomID(rs.getInt("roomID"));
     }
 
     /*
@@ -137,14 +130,7 @@ public class CharacterDB {
         try {
             while (rs.next()) {
                 Character character = new Character();
-                character.setID(rs.getInt("iD"));
-                character.setName(rs.getString("name"));
-                character.setDescription(rs.getString("description"));
-                character.setHealth(rs.getInt("health"));
-                character.setMaxDamage(rs.getInt("maxDamage"));
-                character.setMinDamage(rs.getInt("minDamage"));
-                character.setChanceHit(rs.getInt("chanceHit"));
-                character.setRoomID(rs.getInt("roomID"));
+                loadCharacter(rs,character);
                 characters.add(character);
             }
         } catch (InvalidGameException ige) {
@@ -155,4 +141,5 @@ public class CharacterDB {
         sdb.close();
         return characters;
     }
+
 }

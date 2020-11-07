@@ -80,7 +80,10 @@ public class ControllerUI {
                 if (!player.getName().equalsIgnoreCase(userID)) {
                     updPlayer();
                 }
-                /* Get room 1 */
+                if (player.getHealth() <=0) {
+                    player.setHealth(50);
+                }
+                /* Get current room for the player */
                 descTA.setText(gc.getRoomData(player.getRoomID()));
                 commandTF.setVisible(true);
                 commandLBL.setText("Command:");
@@ -110,6 +113,12 @@ public class ControllerUI {
 
                 /* check the verb for accuracy */
                 String command = gc.checkCommand(verb);
+
+                /* If player is dead -- Exit */
+                if (player.getHealth() <= 0) {
+                    command = "EXIT";
+                }
+
                 /* process the command */
                 this.processCommand(command, noun);
 
@@ -146,6 +155,8 @@ public class ControllerUI {
     public void processCommand(String command, String noun) {
         try {
             switch (command) {
+                case "EXIT":
+                    processExit();
                 case "GET":
                     processGET(noun);
                     break;
@@ -315,6 +326,14 @@ public class ControllerUI {
 
     }
 
+    /* Exit due to death or X being entered */
+    protected void processExit() {
+        Stage stage = (Stage) commandTF.getScene().getWindow();
+        stage.close();
+        Platform.exit();
+    }
+
+
     /* ------------------------------------------
         Method: processBACKPACK
         Show inventory in backpack
@@ -349,8 +368,50 @@ public class ControllerUI {
         commandTF.setVisible(false);
     }
 
-    private void processATTACK(String noun) {
-
+    private void processATTACK(String noun) throws SQLException, InvalidGameException {
+        boolean win = false;
+        int hp = 0;
+        int sizeM = gc.room.getMonsters().size();
+        int sizeC = gc.room.getChars().size();
+        commandTF.setText("");
+        if ((sizeC==0 && sizeM==0) || (sizeC>0 && sizeM>0) || (sizeC>1) || (sizeM>1) ) {
+            descTA.setText(descTA.getText() + "\nWho do you want to attack?");
+        } else {
+            /* Fight a monster           */
+            if (gc.room.getMonsters().size() > 0) {
+                Monster monster = gc.room.getMonsters().get(0);
+                monster.updateHealth();
+                hp = monster.getHealth();
+                if (hp <= 0) {
+                    descTA.setText(descTA.getText() + "\nYou have defeated the monster");
+                    gc.room.getMonsters().remove(0);
+                    healthTA.setText("Player Health: " + player.getHealth());
+                    win = true;
+                }
+            } else {
+                /*  Fight a Character */
+                Character character = gc.room.getChars().get(0);
+                character.updateHealth();
+                hp = character.getHealth();
+                if (hp <= 0) {
+                    descTA.setText(descTA.getText() + "\nYou have defeated your enemy");
+                    gc.room.getChars().remove(0);
+                    healthTA.setText("Player Health: " + player.getHealth());
+                    win = true;
+                }
+            }
+            if (!win) {
+                player.updateHealth();
+                if (player.getHealth() <= 0) {
+                    descTA.setText(descTA.getText() + "\nYou have lost. Better luck next time.");
+                    healthTA.setText("Player Health: " + player.getHealth() +
+                            "\nEnemy Health: " + hp);
+                } else {
+                    healthTA.setText("Player Health: " + player.getHealth() +
+                                     "\nEnemy Health: " + hp);
+                }
+            }
+        }
     }
 
     private void processPUSH(String noun) {

@@ -46,6 +46,7 @@ public class Character extends Being {
         CharacterDB mdb = new CharacterDB();
         return mdb.getCharByName(name);
     }
+    
     /*
      * Method: getAllCharacters
      * Purpose: gets all characters from the Character table
