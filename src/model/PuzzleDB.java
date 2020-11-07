@@ -2,6 +2,7 @@ package model;
 
 import controller.GameController;
 import controller.Puzzle;
+import exceptions.InvalidGameException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,7 +44,7 @@ public class PuzzleDB {
      * @return Puzzle
      * @throws SQLException
      */
-    public Puzzle getPuzzle(int id) throws SQLException {
+    public Puzzle getPuzzle(int id) throws SQLException, InvalidGameException {
         SQLiteDB sdb = GameController.getDB();
         Puzzle puzzle = new Puzzle();
 
@@ -51,26 +52,7 @@ public class PuzzleDB {
         ResultSet rs = sdb.queryDB(sql);
 
         if (rs.next()) {
-            puzzle.setPuzzleID(rs.getInt("puzzleID"));
-            puzzle.setPuzzleName(rs.getString("puzzleName"));
-            puzzle.setPuzzleDesc(rs.getString("puzzleDesc"));
-            puzzle.setPuzzleType(rs.getString("puzzleType"));
-            puzzle.setPuzzleInRoom(rs.getInt("puzzleInRoom"));
-            puzzle.setPuzzleMonID(rs.getInt("puzzleMonID"));
-            puzzle.setPuzzleItemID(rs.getInt("puzzleItemID"));
-            puzzle.setPuzzleRoomID(rs.getInt("puzzleRoomID"));
-            int used = (rs.getInt("puzzleUsed"));
-            if (used == 0) {
-                puzzle.setPuzzleUsed(false);
-            }
-            else {
-                puzzle.setPuzzleUsed(true);
-            }
-            puzzle.setPuzzleVerb(rs.getString("puzzleVerb"));
-            puzzle.setPuzzleNoun(rs.getString("puzzleNoun"));
-            puzzle.setPuzzleSql(rs.getString("puzzleSql"));
-            puzzle.setPuzzleObject(rs.getString("puzzleObject"));
-            puzzle.setPuzzleText(rs.getString("puzzleText"));
+            loadPuzzle(rs, puzzle);
         } else {
             throw new SQLException("Puzzle " + id + " not found");
         }
@@ -91,5 +73,28 @@ public class PuzzleDB {
         sdb.updateDB(sql);
         /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
+    }
+
+    public void loadPuzzle(ResultSet rs, Puzzle puzzle) throws SQLException, InvalidGameException {
+        puzzle.setPuzzleID(rs.getInt("puzzleID"));
+        puzzle.setPuzzleName(rs.getString("puzzleName"));
+        puzzle.setPuzzleDesc(rs.getString("puzzleDesc"));
+        puzzle.setPuzzleType(rs.getString("puzzleType"));
+        puzzle.setPuzzleInRoom(rs.getInt("puzzleInRoom"));
+        puzzle.setPuzzleMonID(rs.getInt("puzzleMonID"));
+        puzzle.setPuzzleItemID(rs.getInt("puzzleItemID"));
+        puzzle.setPuzzleRoomID(rs.getInt("puzzleRoomID"));
+        int used = (rs.getInt("puzzleUsed"));
+        if (used == 0) {
+            puzzle.setPuzzleUsed(false);
+        }
+        else {
+            puzzle.setPuzzleUsed(true);
+        }
+        puzzle.setPuzzleVerb(rs.getString("puzzleVerb"));
+        puzzle.setPuzzleNoun(rs.getString("puzzleNoun"));
+        puzzle.setPuzzleSql(rs.getString("puzzleSql"));
+        puzzle.setPuzzleObject(rs.getString("puzzleObject"));
+        puzzle.setPuzzleText(rs.getString("puzzleText"));
     }
 }

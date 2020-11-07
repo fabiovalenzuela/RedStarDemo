@@ -90,7 +90,7 @@ public class CharacterDB {
         return character;
     }
 
-    private void loadCharacter(ResultSet rs, Character character) throws SQLException, InvalidGameException {
+    public void loadCharacter(ResultSet rs, Character character) throws SQLException, InvalidGameException {
         character.setID(rs.getInt("iD"));
         character.setName(rs.getString("name"));
         character.setDescription(rs.getString("description"));
