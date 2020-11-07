@@ -97,48 +97,22 @@ public class GameController {
 
         /* Set command string */
 
-//        if (command.matches("EAST|E")) {
-//            commandStr = "EAST";
-//        }
-//        else if (command.matches("WEST|W")) {
-//            commandStr = "WEST";
-//        }
-//        else if (command.matches("NORTH|N")) {
-//            commandStr = "NORTH";
-//        }
-//        else if (command.matches("SOUTH|S")) {
-//            commandStr = "SOUTH";
-//        }
-//        else if (command.matches("UP|U")) {
-//            commandStr = "UP";
-//        }
-//        else if (command.matches("DOWN|D")) {
-//            commandStr = "DOWN";
-//       }
-//        else if ((command.matches("GET|TAKE|PICKUP|G"))) {
-//            commandStr = "GET";
-//        } else if (command.matches("REMOVE|R|DROP")) {
-//            commandStr = "REMOVE";
-//        } else if (command.matches("LOOK|L")) {
-//            commandStr = "LOOK";
-//        } else if (command.matches("BACKPACK|B")) {
-//            commandStr = "BACKPACK";
-//        } else if (command.matches("TALK|T")) {
-//            commandStr = "TALK";
-//        } else if (command.matches("ATTACK|A")) {
-//            commandStr = "ATTACK";
-//        } else if (command.matches("PUSH")) {
-//            commandStr = "PUSH";
-//        } else if (command.matches("THROW")) {
-//            commandStr = "THROW";
-//        } else {
-//            throw new InvalidGameException("Invalid Command");
-//        }
-
-        if(command.matches("North|South|East|West|Up|Down|Get|Remove|Look|Backpack|Talk|Attack|Push|Throw" +
-                "N|S|W|E|U|D|G|R|L|B|T|A|P|T")){
-            command.toUpperCase();
-            commandStr=command;
+        if (command.matches("EAST|E")) { commandStr = "EAST"; }
+        else if (command.matches("WEST|W")) { commandStr = "WEST"; }
+        else if (command.matches("NORTH|N")) { commandStr = "NORTH"; }
+        else if (command.matches("SOUTH|S")) { commandStr = "SOUTH"; }
+        else if (command.matches("UP|U")) { commandStr = "UP"; }
+        else if (command.matches("DOWN|D")) { commandStr = "DOWN"; }
+        else if ((command.matches("GET|TAKE|PICKUP|G"))) { commandStr = "GET";}
+        else if (command.matches("REMOVE|R|DROP")) { commandStr = "REMOVE"; }
+        else if (command.matches("LOOK|L")) { commandStr = "LOOK"; }
+        else if (command.matches("BACKPACK|B")) { commandStr = "BACKPACK"; }
+        else if (command.matches("TALK|T")) { commandStr = "TALK"; }
+        else if (command.matches("ATTACK|A")) { commandStr = "ATTACK"; }
+        else if (command.matches("PUSH")) { commandStr = "PUSH"; }
+        else if (command.matches("THROW")) { commandStr = "THROW"; }
+        else {
+            throw new InvalidGameException("Invalid Command");
         }
 
         return commandStr;

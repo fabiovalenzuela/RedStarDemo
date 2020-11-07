@@ -80,7 +80,7 @@ public class PlayerDB {
     public Player getPlayer(int id) throws SQLException, InvalidGameException {
         SQLiteDB sdb = GameController.getDB();
         Player player = new Player();
-        String sql = "Select * from Player WHERE playerNumber = " + id;
+        String sql = "Select * from Player WHERE iD = " + id;
         ResultSet rs = sdb.queryDB(sql);
         try {
             if (rs.next()) {
@@ -105,18 +105,30 @@ public class PlayerDB {
     }
 
     /**
-     * Method: updateVisited
-     * Purpose: set visited = 0 for all rooms
+     * Method: updateHealth
+     * Purpose: update the health
      * @throws SQLException
      */
-    public void updateHp(int hp) throws SQLException {
+    public void updateHealth(int health) throws SQLException {
         SQLiteDB sdb = GameController.getDB();
-        String sql = "Update Player set health = " + hp;
+        String sql = "Update Player set health = " + health;
         sdb.updateDB(sql);
         /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
 
+    /**
+     * Method: updateRoomID
+     * Purpose: set current roomID
+     * @throws SQLException
+     */
+    public void updateRoomID(int roomID) throws SQLException {
+        SQLiteDB sdb = GameController.getDB();
+        String sql = "Update Player set roomID = " + roomID;
+        sdb.updateDB(sql);
+        /* Close the SQLiteDB connection since SQLite only allows one update */
+        sdb.close();
+    }
     /**
      * Method: getAllPlayers
      * Purpose: Handles the DB interactions to retrieve all players
