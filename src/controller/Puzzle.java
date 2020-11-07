@@ -7,8 +7,8 @@ package controller;
  * For: ITEC 3860 Project
  */
 
+import exceptions.InvalidGameException;
 import model.PuzzleDB;
-
 import java.sql.SQLException;
 
 public class Puzzle {
@@ -60,9 +60,60 @@ public class Puzzle {
         setPuzzleText(puzzleText);
     }
 
-    public Puzzle getPuzzle (int id) throws SQLException {
+    public Puzzle getPuzzle (int id) throws SQLException, InvalidGameException {
         PuzzleDB idb = new PuzzleDB();
         return idb.getPuzzle(id);
+    }
+
+    /*
+     * Method: checkPuzzle
+     * Purpose: Checks to see if puzzle has been met
+     * @param id
+     * @return Character
+     * @throws SQLException
+     */
+    public boolean checkPuzzle(int iD) throws SQLException, InvalidGameException {
+        Puzzle puzzle = getPuzzle(iD);
+        PuzzleDB cdb = new PuzzleDB();
+
+        boolean valid = false;
+        Monster mon = new Monster();
+        Item item = new Item();
+        Room room = new Room();
+
+        /* ------------------------------- */
+        /*   Check puzzle                  */
+        /* ------------------------------- */
+        valid = true;
+        if (!puzzleUsed) {
+            int mID = getPuzzleMonID();
+            int iID = getPuzzleItemID();
+            int rID = getPuzzleRoomID();
+            if (mID != 0) {
+                mon = mon.getMonster(mID);
+                if (mon.getHealth() <= 0) {
+                    valid = false;
+                }
+            }
+            if (valid && iID != 0) {
+                item = item.getItem(iID);
+                if (item.getItemRoomID() != 0) {
+                    valid = false;
+                }
+            }
+            if (valid && rID != 0) {
+                room = room.getRoom(rID);
+                if (!room.getVisited()) {
+                    valid = false;
+                }
+            }
+
+            if (valid) {
+                cdb.updatePuzzleUsed(iD);
+                /* exit the loop when a valid CharText is found */
+            }
+        }
+        return valid;
     }
 
 

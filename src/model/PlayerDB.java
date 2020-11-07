@@ -50,14 +50,7 @@ public class PlayerDB {
         ResultSet rs = sdb.queryDB(sql);
         try {
             if (rs.next()) {
-                player.setID(rs.getInt("iD"));
-                player.setName(rs.getString("name"));
-                player.setDescription(rs.getString("description"));
-                player.setHealth(rs.getInt("health"));
-                player.setMaxDamage(rs.getInt("maxDamage"));
-                player.setMinDamage(rs.getInt("minDamage"));
-                player.setChanceHit(rs.getDouble("chanceHit"));
-                player.setRoomID(rs.getInt("roomID"));
+                loadPlayer(rs, player);
             } else {
                 throw new SQLException("Player " + name + " not found.");
             }
@@ -84,14 +77,7 @@ public class PlayerDB {
         ResultSet rs = sdb.queryDB(sql);
         try {
             if (rs.next()) {
-                player.setID(rs.getInt("iD"));
-                player.setName(rs.getString("name"));
-                player.setDescription(rs.getString("description"));
-                player.setHealth(rs.getInt("health"));
-                player.setMaxDamage(rs.getInt("maxDamage"));
-                player.setMinDamage(rs.getInt("minDamage"));
-                player.setChanceHit(rs.getInt("chanceHit"));
-                player.setRoomID(rs.getInt("roomID"));
+                loadPlayer(rs, player);
             } else {
                 throw new SQLException("Player " + id + " not found.");
             }
@@ -145,14 +131,7 @@ public class PlayerDB {
         try {
             while (rs.next()) {
                 Player player = new Player();
-                player.setID(rs.getInt("iD"));
-                player.setName(rs.getString("name"));
-                player.setDescription(rs.getString("description"));
-                player.setHealth(rs.getInt("health"));
-                player.setMaxDamage(rs.getInt("maxDamage"));
-                player.setMinDamage(rs.getInt("minDamage"));
-                player.setChanceHit(rs.getInt("chanceHit"));
-                player.setRoomID(rs.getInt("roomID"));
+                loadPlayer(rs, player);
                 players.add(player);
             }
         } catch (InvalidGameException ige) {
@@ -162,5 +141,16 @@ public class PlayerDB {
         /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return players;
+    }
+
+    public void loadPlayer(ResultSet rs, Player player) throws SQLException, InvalidGameException {
+        player.setID(rs.getInt("iD"));
+        player.setName(rs.getString("name"));
+        player.setDescription(rs.getString("description"));
+        player.setHealth(rs.getInt("health"));
+        player.setMaxDamage(rs.getInt("maxDamage"));
+        player.setMinDamage(rs.getInt("minDamage"));
+        player.setChanceHit(rs.getInt("chanceHit"));
+        player.setRoomID(rs.getInt("roomID"));
     }
 }

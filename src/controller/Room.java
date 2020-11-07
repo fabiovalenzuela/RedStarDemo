@@ -22,6 +22,7 @@ public class Room {
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Character> chars = new ArrayList<>();
     private ArrayList<Monster> monsters = new ArrayList<>();
+    private ArrayList<Puzzle> puzzles = new ArrayList<>();
 
     /*
      ------------
@@ -39,7 +40,8 @@ public class Room {
                 ArrayList<Exit> exits,
                 ArrayList<Item> items,
                 ArrayList<Character> chars,
-                ArrayList<Monster> monsters) {
+                ArrayList<Monster> monsters,
+                ArrayList<Puzzle> puzzles) {
         setRoomID(roomID);
         setName(name);
         setDescription(description);
@@ -49,6 +51,7 @@ public class Room {
         setItems(items);
         setChars(chars);
         setMonsters(monsters);
+        setPuzzles(puzzles);
     }
 
     /*
@@ -277,6 +280,15 @@ public class Room {
     public void setMonsters(ArrayList<Monster> monsters) {
         this.monsters = monsters;
     }
+
+    public ArrayList<Puzzle> getPuzzles() {
+        return puzzles;
+    }
+
+    public void setPuzzles(ArrayList<Puzzle> puzzles) {
+        this.puzzles = puzzles;
+    }
+
 
     /*
              --------

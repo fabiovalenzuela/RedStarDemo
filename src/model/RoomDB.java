@@ -1,11 +1,7 @@
 package model;
 
+import controller.*;
 import controller.Character;
-import controller.Exit;
-import controller.GameController;
-import controller.Item;
-import controller.Monster;
-import controller.Room;
 import exceptions.InvalidGameException;
 
 import java.sql.ResultSet;
@@ -103,16 +99,11 @@ public class RoomDB {
                 "where roomID = " + id;
 
         rs = sdb.queryDB(sql);
+        CharacterDB charDB = new CharacterDB();
 
         while (rs.next()) {
             Character character = new Character();
-            character.setID(rs.getInt("iD"));
-            character.setName(rs.getString("name"));
-            character.setHealth(rs.getInt("health"));
-            character.setMaxDamage(rs.getInt("maxDamage"));
-            character.setMinDamage(rs.getInt("minDamage"));
-            character.setChanceHit(rs.getDouble("chanceHit"));
-            character.setRoomID(rs.getInt("roomID"));
+            charDB.loadCharacter(rs, character);
             characters.add(character);
         }
 
@@ -139,26 +130,22 @@ public class RoomDB {
                  and return in arraylist items
         --------------------------------------
     */
-    public ArrayList<Item> getRoomItems(int roomID) throws SQLException {
+    public ArrayList<Item> getRoomItems(int roomID) throws SQLException, InvalidGameException {
         SQLiteDB sdb = GameController.getDB();
 
         /* Get items */
         ArrayList<Item> items = new ArrayList<Item>();
-        String sql = "Select itemID, name, description, " +
-                "damageRate, itemRoomID " +
+        String sql = "Select * " +
                 "from Item " +
                 "where itemRoomID = " + roomID +
                 " and itemUsed = 0";
 
         ResultSet rs = sdb.queryDB(sql);
+        ItemDB idb = new ItemDB();
 
         while (rs.next()) {
             Item item = new Item();
-            item.setItemID(rs.getInt("itemID"));
-            item.setName(rs.getString("name"));
-            item.setDescription(rs.getString("description"));
-            item.setDamageRate(rs.getInt("damageRate"));
-            item.setItemRoomID(rs.getInt("itemRoomID"));
+            idb.loadItem(rs, item);
             items.add(item);
         }
 
@@ -183,21 +170,43 @@ public class RoomDB {
         ResultSet rs = sdb.queryDB(sql);
 
         while (rs.next()) {
+            MonsterDB mdb = new MonsterDB();
             Monster monster = new Monster();
-            monster.setID(rs.getInt("iD"));
-            monster.setName(rs.getString("name"));
-            monster.setDescription(rs.getString("description"));
-            monster.setHealth(rs.getInt("health"));
-            monster.setMaxDamage(rs.getInt("maxDamage"));
-            monster.setMinDamage(rs.getInt("minDamage"));
-            monster.setChanceHit(rs.getDouble("chanceHit"));
-            monster.setRoomID(rs.getInt("roomID"));
+            mdb.loadMonster(rs, monster);
             monsters.add(monster);
         }
 
         /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return monsters;
+    }
+
+
+    /* ------------------------------------------
+        Method: getRoomPuzzles
+        Purpose: get all puzzles in the room
+                 and return in arraylist puzzles
+        -----------------------------------------
+    */
+    public ArrayList<Puzzle> getRoomPuzzles(int roomID) throws SQLException, InvalidGameException {
+        SQLiteDB sdb = GameController.getDB();
+
+        /* Get puzzles */
+        ArrayList<Puzzle> puzzles = new ArrayList<Puzzle>();
+        String sql = "Select * from Puzzle where roomID = " + roomID;
+
+        ResultSet rs = sdb.queryDB(sql);
+
+        while (rs.next()) {
+            PuzzleDB pdb = new PuzzleDB();
+            Puzzle puzzle = new Puzzle();
+            pdb.loadPuzzle(rs, puzzle);
+            puzzles.add(puzzle);
+        }
+
+        /* Close the SQLiteDB connection since SQLite only allows one update */
+        sdb.close();
+        return puzzles;
     }
 
     /*

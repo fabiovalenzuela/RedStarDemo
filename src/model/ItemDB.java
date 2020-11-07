@@ -44,24 +44,13 @@ public class ItemDB {
      * @return Item
      * @throws SQLException
      */
-    public Item getItem(int id) throws SQLException {
+    public Item getItem(int id) throws SQLException, InvalidGameException {
         SQLiteDB sdb = GameController.getDB();
         Item item = new Item();
         String sql = "Select * from Item WHERE itemID = " + id;
         ResultSet rs = sdb.queryDB(sql);
         if (rs.next()) {
-            item.setItemID(rs.getInt("itemID"));
-            item.setName(rs.getString("name"));
-            item.setDescription(rs.getString("description"));
-            item.setDamageRate(rs.getInt("damageRate"));
-            item.setItemRoomID(rs.getInt("itemRoomID"));
-            int used = rs.getInt("itemUsed");
-            if (used == 0) {
-                item.setItemUsed(false);
-            }
-            else {
-                item.setItemUsed(true);
-            }
+            loadItem(rs, item);
         } else {
             throw new SQLException("Item " + id + " not found");
         }
@@ -86,18 +75,7 @@ public class ItemDB {
                 name +"%');";
         ResultSet rs = sdb.queryDB(sql);
         if (rs.next()) {
-            item.setItemID(rs.getInt("itemID"));
-            item.setName(rs.getString("name"));
-            item.setDescription(rs.getString("description"));
-            item.setDamageRate(rs.getInt("damageRate"));
-            item.setItemRoomID(rs.getInt("itemRoomID"));
-            int used = rs.getInt("itemUsed");
-            if (used == 0) {
-                item.setItemUsed(false);
-            }
-            else {
-                item.setItemUsed(true);
-            }
+            loadItem(rs, item);
         } else {
             throw new InvalidGameException("Item " + name + " not found");
         }
@@ -141,18 +119,7 @@ public class ItemDB {
         try {
             while (rs.next()) {
                 Item item = new Item();
-                item.setItemID(rs.getInt("itemID"));
-                item.setName(rs.getString("name"));
-                item.setDescription(rs.getString("description"));
-                item.setDamageRate(rs.getInt("damageRate"));
-                item.setItemRoomID(rs.getInt("itemRoomID"));
-                int used = rs.getInt("itemUsed");
-                if (used == 0) {
-                    item.setItemUsed(false);
-                }
-                else {
-                    item.setItemUsed(true);
-                }
+                loadItem(rs, item);
                 itemDesc = itemDesc + "itemID = " + item.getItemID() +
                         ", name = " + item.getName() +
                         ", description = " + item.getDescription() + "\n";
@@ -180,18 +147,7 @@ public class ItemDB {
         try {
             while (rs.next()) {
                 Item item = new Item();
-                item.setItemID(rs.getInt("itemID"));
-                item.setName(rs.getString("name"));
-                item.setDescription(rs.getString("description"));
-                item.setDamageRate(rs.getInt("damageRate"));
-                item.setItemRoomID(rs.getInt("itemRoomID"));
-                int used = rs.getInt("itemUsed");
-                if (used == 0) {
-                    item.setItemUsed(false);
-                }
-                else {
-                    item.setItemUsed(true);
-                }
+                loadItem(rs, item);
                 items.add(item);
             }
         } catch (SQLException ige) {
@@ -201,6 +157,21 @@ public class ItemDB {
         /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return items;
+    }
+
+    public void loadItem(ResultSet rs, Item item) throws SQLException, InvalidGameException {
+        item.setItemID(rs.getInt("itemID"));
+        item.setName(rs.getString("name"));
+        item.setDescription(rs.getString("description"));
+        item.setDamageRate(rs.getInt("damageRate"));
+        item.setItemRoomID(rs.getInt("itemRoomID"));
+        int used = rs.getInt("itemUsed");
+        if (used == 0) {
+            item.setItemUsed(false);
+        }
+        else {
+            item.setItemUsed(true);
+        }
     }
 }
 
