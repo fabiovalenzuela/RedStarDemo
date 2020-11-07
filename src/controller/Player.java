@@ -73,6 +73,7 @@ public class Player extends Being {
         /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
     }
+
     /*
      * Method: toString
      * Purpose: Returns a String of the Player class
@@ -89,7 +90,6 @@ public class Player extends Being {
                 "\nplayer chanceHit = " + getChanceHit() +
                 "\nplayer roomID = " + getRoomID();
     }
-
 
 }
 

@@ -374,6 +374,8 @@ public class ControllerUI {
         commandTF.setText("");
         msgTF.setVisible(false);
         player.setRoomID(nextRoomID);
+        pdb.updateRoomID(nextRoomID);
+
     }
 
     private Item getSelectedItem(String noun) throws InvalidGameException {
