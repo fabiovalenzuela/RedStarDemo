@@ -99,3 +99,4 @@ INSERT INTO Exit (exitID, direction, destination) Values(50, 47)
 INSERT INTO Exit (exitID, direction, destination) Values(51, 45)
 INSERT INTO Exit (exitID, direction, destination) Values(51, 52)
 INSERT INTO Exit (exitID, direction, destination) Values(52, 51)
+

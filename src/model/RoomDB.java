@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Class: RoomDB
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 28, 2020
+ * Date: October 29, 2020
  * For: ITEC 3860 Project RedStar
  * Copied/modified from Rick Price RoomDB
  */
@@ -78,7 +78,8 @@ public class RoomDB {
         sql = "Select b.exitID, b.direction, b.destination " +
                 "from ExitRoom a Inner Join Exit b " +
                 "ON a.exitID = b.exitID " +
-                "where roomID = " + id;
+                "where roomID = " + id +
+                " and hidden = 0";
 
         rs = sdb.queryDB(sql);
 
