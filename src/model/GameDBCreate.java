@@ -32,7 +32,6 @@ public class GameDBCreate {
         buildTable(gameID + "BuildMonster.txt");
         buildTable(gameID + "BuildPlayer.txt");
         buildTable(gameID + "BuildCharacter.txt");
-        buildTable(gameID + "BuildExitRoom.txt");
         buildTable(gameID + "BuildCharText.txt");
         buildTable(gameID + "BuildItem.txt");
         buildTable(gameID + "BuildPuzzle.txt");

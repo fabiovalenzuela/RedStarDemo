@@ -1,10 +1,5 @@
 package controller;
 
-import exceptions.InvalidGameException;
-import model.ExitDB;
-
-import java.sql.SQLException;
-
 /*
  * Class: Exit
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
@@ -13,8 +8,10 @@ import java.sql.SQLException;
  */
 public class Exit {
     private int exitID;
+    private int roomID;
     private String direction;
     private int destination;
+    private boolean hidden;
 
     /*
      --------------------------------
@@ -22,15 +19,24 @@ public class Exit {
      --------------------------------
     */
     public Exit() {
-        ExitDB exit = new ExitDB();
-        try {
-            exitID = exit.getNextExitID();
-        } catch (SQLException | InvalidGameException ige) {
-            System.out.println(ige.getMessage());
-        }
+        super();
+//        ExitDB exit = new ExitDB();
+//        try {
+//            exitID = exit.getNextExitID();
+//        } catch (SQLException | InvalidGameException ige) {
+//            System.out.println(ige.getMessage());
+//        }
     }
 
-//    /*
+    public Exit(int exitID, int roomID, String direction, int destination, boolean hidden) {
+        this.exitID = exitID;
+        this.roomID = roomID;
+        this.direction = direction;
+        this.destination = destination;
+        this.hidden = hidden;
+    }
+
+    //    /*
 //     ------------
 //     getExit
 //     Get one exit
@@ -54,6 +60,14 @@ public class Exit {
         this.exitID = exitID;
     }
 
+    public int getRoomID() {
+        return this.roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+
     public String getDirection() {
         return this.direction;
     }
@@ -70,6 +84,12 @@ public class Exit {
         this.destination = destination;
     }
 
+    public boolean getHidden() {
+        return this.hidden;
+    }
+
+    public void setHidden(boolean hidden) { this.hidden = hidden; }
+
     /*
      --------
      ToString
@@ -77,7 +97,10 @@ public class Exit {
     */
     @Override
     public String toString() {
-        return "Exit exitID = " + exitID + "\ndirection = " + direction +
-                 "\ndestination = " + destination;
+        return "Exit exitID = " + exitID +
+                "\nroom ID = " + roomID +
+                "\ndirection = " + direction +
+                 "\ndestination = " + destination +
+                "\n hidden = " + hidden;
     }
 }
