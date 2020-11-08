@@ -1,7 +1,7 @@
 CREATE TABLE Room(roomID int Primary Key not Null, name text not null, description text not null, visited int not null, visible int not null)
 INSERT INTO Room(roomID, name, description, visited, visible) Values(1, 'Start', 'You wake up drowsy and confused. You see a light to the East.', 0, 1)
 INSERT INTO Room(roomID, name, description, visited, visible) Values(2, 'CliffSide', 'you walk along a small trail and there is roaring of water from the east', 0, 1)
-INSERT INTO Room(roomID, name, description, visited, visible) Values(3, 'Bottom of the Waterfall',  'You hear roaring water and see a beautiful sight of a waterfall. |There is a small crack in the stone to the North. Maybe you can see the view from the top', 0, 1)
+INSERT INTO Room(roomID, name, description, visited, visible) Values(3, 'Bottom of the Waterfall',  'You hear roaring water and see a beautiful sight of a waterfall. |Maybe you can see the view from the top', 0, 1)
 INSERT INTO Room(roomID, name, description, visited, visible) Values(4, 'underside of waterfall', 'You discovered the hidden entrance! This seems like a hollowed out |cave was someone hiding here?', 0 , 1)
 INSERT INTO Room(roomID, name, description, visited, visible) Values(5, 'forest ', 'You walk into a thick forest. It''s dark and you''re alone. You hear a lot of |rustling and a |large dog standing on its hind legs approaches you ', 0 , 1)
 INSERT INTO Room(roomID, name, description, visited, visible) Values(6, 'Hiking Trail ', 'You follow a hiking trail north. It looks like it hasn''t had an upkeep |in some time. Possibly abandoned? Unsure ', 0 , 1)

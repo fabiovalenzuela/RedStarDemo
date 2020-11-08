@@ -92,6 +92,28 @@ public class Room {
             display = display + s + "\n";
         }
 
+
+
+        /*
+        display puzzleText if available
+        If a puzzle is in this room and there is text,
+        append the text here based on wheter or not the
+        puzzle is used or not
+        */
+        if (puzzles.size() > 0) {
+            Puzzle puzzle;
+            for (int i = 0; i < puzzles.size(); i++) {
+                puzzle = puzzles.get(i);
+                if (puzzle.isPuzzleUsed() && !puzzle.getUsedText().isEmpty()) {
+                    display = display + puzzle.getPuzzleText() + "\n" ;
+                } else if (!puzzle.isPuzzleUsed() && !puzzle.getPuzzleText().isEmpty()) {
+                    display = display + puzzle.getUsedText() + "\n" ;
+                }
+
+            }
+        }
+
+
         /*
         display characters in room
         */
