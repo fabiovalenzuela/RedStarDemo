@@ -119,6 +119,12 @@ public class RoomDB {
         ArrayList<Monster> monsters = new ArrayList<>();
         monsters = getRoomMonsters(id);
         rm.setMonsters(monsters);
+
+        /* Get puzzles */
+        ArrayList<Puzzle> puzzles = new ArrayList<>();
+        puzzles = getRoomPuzzles(id);
+        rm.setPuzzles(puzzles);
+
         return rm;
     }
 
@@ -191,7 +197,7 @@ public class RoomDB {
 
         /* Get puzzles */
         ArrayList<Puzzle> puzzles = new ArrayList<Puzzle>();
-        String sql = "Select * from Puzzle where roomID = " + roomID;
+        String sql = "Select * from Puzzle where puzzleInRoom = " + roomID;
 
         ResultSet rs = sdb.queryDB(sql);
 

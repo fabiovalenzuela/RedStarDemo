@@ -425,6 +425,7 @@ public class ControllerUI {
         if (valid) {
             pdb.updatePuzzleUsed(puzzle.getPuzzleID());
             pdb.updateSql(puzzle.getPuzzleSql());
+            puzzle.setPuzzleUsed(true);
             descTA.setText(gc.getRoomData(gc.room.getRoomID()));
             commandTF.setText("");
             commandTF.setVisible(true);

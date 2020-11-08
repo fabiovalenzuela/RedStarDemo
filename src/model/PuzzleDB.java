@@ -133,5 +133,6 @@ public class PuzzleDB {
         puzzle.setPuzzleSql(rs.getString("puzzleSql"));
         puzzle.setPuzzleObject(rs.getString("puzzleObject"));
         puzzle.setPuzzleText(rs.getString("puzzleText"));
+        puzzle.setUsedText(rs.getString("usedText"));
     }
 }

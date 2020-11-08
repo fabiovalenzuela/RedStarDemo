@@ -26,6 +26,8 @@ public class Puzzle {
     private String puzzleSql;
     private String puzzleObject;
     private String puzzleText;
+    private String usedText;
+
 
     /*
      ------------
@@ -42,7 +44,8 @@ public class Puzzle {
                   int puzzleItemID, int puzzleRoomID,
                   boolean puzzleUsed, String puzzleVerb,
                   String puzzleNoun, String puzzleSql,
-                  String puzzleObject, String puzzleText) {
+                  String puzzleObject, String puzzleText,
+                  String usedText) {
 
         setPuzzleID(puzzleID);
         setPuzzleName(puzzleName);
@@ -58,6 +61,7 @@ public class Puzzle {
         setPuzzleSql(puzzleSql);
         setPuzzleObject(puzzleObject);
         setPuzzleText(puzzleText);
+        setUsedText(usedText);
     }
 
     public Puzzle getPuzzle (int id) throws SQLException, InvalidGameException {
@@ -191,6 +195,14 @@ public class Puzzle {
         return puzzleUsed;
     }
 
+    public int getPuzzleUsed() {
+        if (isPuzzleUsed()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     public void setPuzzleUsed(boolean puzzleUsed) {
         this.puzzleUsed = puzzleUsed;
     }
@@ -234,4 +246,13 @@ public class Puzzle {
     public void setPuzzleText(String puzzleText) {
         this.puzzleText = puzzleText;
     }
+
+    public String getUsedText() {
+        return usedText;
+    }
+
+    public void setUsedText(String usedText) {
+        this.usedText = usedText;
+    }
+
 }
