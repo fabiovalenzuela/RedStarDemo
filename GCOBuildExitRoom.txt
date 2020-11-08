@@ -1,5 +1,4 @@
 CREATE TABLE ExitRoom(roomID int not Null, exitId int not null, hidden int not null)
-CREATE TABLE ExitRoom(roomID int not Null, exitId int not null, hidden int not null)
 INSERT INTO ExitRoom (roomID,exitID,hidden) Values(1, 2,0)
 INSERT INTO ExitRoom (roomID,exitID,hidden) Values(2, 3,0)
 INSERT INTO ExitRoom (roomID,exitID,hidden) Values(2, 1,0)

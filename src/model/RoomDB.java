@@ -75,9 +75,7 @@ public class RoomDB {
 
         /* Get exits */
         ArrayList<Exit> exits = new ArrayList<Exit>();
-        sql = "Select b.exitID, b.direction, b.destination " +
-                "from ExitRoom a Inner Join Exit b " +
-                "ON a.exitID = b.exitID " +
+        sql = "Select * from Exit " +
                 "where roomID = " + id +
                 " and hidden = 0";
 
