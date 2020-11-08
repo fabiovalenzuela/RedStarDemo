@@ -80,12 +80,11 @@ public class RoomDB {
                 " and hidden = 0";
 
         rs = sdb.queryDB(sql);
+        ExitDB edb = new ExitDB();
 
         while (rs.next()) {
             Exit exit = new Exit();
-            exit.setExitID(rs.getInt("exitID"));
-            exit.setDirection(rs.getString("direction"));
-            exit.setDestination(rs.getInt("destination"));
+            edb.loadExit(rs, exit);
             exits.add(exit);
         }
 

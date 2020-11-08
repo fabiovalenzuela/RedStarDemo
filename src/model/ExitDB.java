@@ -41,15 +41,13 @@ public class ExitDB {
      Get one exit
      ------------
     */
-    public Exit getExit(int id) throws SQLException {
+    public Exit getExit(int id) throws SQLException, InvalidGameException {
         SQLiteDB sdb = GameController.getDB();
         Exit exit = new Exit();
         String sql = "Select * from Exit WHERE exitNumber = " + id;
         ResultSet rs = sdb.queryDB(sql);
         if (rs.next()) {
-            exit.setExitID(rs.getInt("exitID"));
-            exit.setDirection(rs.getString("direction"));
-            exit.setDestination(rs.getInt("destination"));
+            loadExit(rs, exit);
         }
         else {
         	throw new SQLException("Exit " + id + " not found.");
@@ -58,6 +56,17 @@ public class ExitDB {
         /* Close the SQLiteDB connection since SQLite only allows one update */
         sdb.close();
         return exit;
+    }
+
+    public void loadExit(ResultSet rs, Exit exit) throws SQLException, InvalidGameException {
+        exit.setExitID(rs.getInt("exitID"));
+        exit.setRoomID(rs.getInt("roomID"));
+        exit.setDirection(rs.getString("direction"));
+        exit.setDestination(rs.getInt("destination"));
+        int hidn = rs.getInt("hidden");
+        if (hidn == 0) {
+            exit.setHidden(false);
+        } else { exit.setHidden(true); }
     }
 
 }
