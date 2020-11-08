@@ -3,7 +3,7 @@ package controller;
 /*
  * Class: GameController
  * Authors: Annette Vinson, Alejandrov Valenzuela, Adrian Argueta
- * Date: October 28, 2020
+ * Date: October 29, 2020
  * For: ITEC 3860 Project
  */
 
