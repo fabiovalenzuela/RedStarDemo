@@ -2,3 +2,8 @@ CREATE TABLE Item(itemID int Primary Key not Null, name text not null, descripti
 INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(1, 'sword', 'a shiny, sharp sword with rubies on the hilt', 80,2,0)
 INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(2, 'hammer', 'a rusty hammer', 30,1,0)
 INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(3, 'bomb', 'a very small bomb that doesn''t look very powerful', 30,1,0)
+INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(4, 'key', 'a small golden key, perhaps it could be used to open something?', 30,1,0)
+INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(5, 'bucket', 'a metal bucket thats empty, perhaps i could fill it with water to activate the shrine?', 30,1,0)
+INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(6, 'red gemstone', 'a very small bomb that doesn''t look very powerful', 30,1,0)
+INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(7, 'weight', 'a heavy bag of sand, maybe i can place this somewhere to ', 30,1,0)
+INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(8, 'red gemstone', 'a very small bomb that doesn''t look very powerful', 30,1,0)
