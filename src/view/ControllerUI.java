@@ -18,10 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.CharacterDB;
-import model.ItemDB;
-import model.PlayerDB;
-import model.RoomDB;
+import model.*;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -365,7 +362,7 @@ public class ControllerUI {
     private void processLOOK(String noun) throws SQLException, InvalidGameException {
         descTA.setText(gc.getRoomData(gc.room.getRoomID()));
         commandTF.setText("");
-        commandTF.setVisible(false);
+        commandTF.setVisible(true);
     }
 
     private void processATTACK(String noun) throws SQLException, InvalidGameException {
@@ -417,7 +414,24 @@ public class ControllerUI {
     private void processPUSH(String noun) {
 
     }
-    private void processTHROW(String noun) {
+    private void processTHROW(String noun) throws SQLException, InvalidGameException {
+        Puzzle puzzle = new Puzzle();
+        PuzzleDB pdb = new PuzzleDB();
+        String sql = "Select * from Puzzle where puzzleVerb = 'THROW' and " +
+                "puzzleNoun = '" + noun.toUpperCase() +
+                "' and puzzleInRoom = " + gc.room.getRoomID() +
+                " and puzzleUsed = 0";
+        boolean valid = pdb.puzzleSql(sql, puzzle);
+        if (valid) {
+            pdb.updatePuzzleUsed(puzzle.getPuzzleID());
+            pdb.updateSql(puzzle.getPuzzleSql());
+            descTA.setText(gc.getRoomData(gc.room.getRoomID()));
+            commandTF.setText("");
+            commandTF.setVisible(true);
+        } else {
+            descTA.setText(descTA.getText()
+                    + "\n You cannot throw that in this room");
+        }
 
     }
 

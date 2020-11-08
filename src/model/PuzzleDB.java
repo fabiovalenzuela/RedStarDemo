@@ -75,6 +75,43 @@ public class PuzzleDB {
         sdb.close();
     }
 
+
+    /*
+     * Method: updateSql
+     * Purpose: runs the SQL from  puzzleSql
+     * @throws SQLException
+     */
+    public void updateSql(String sql) throws SQLException {
+        SQLiteDB sdb = GameController.getDB();
+        sdb.updateDB(sql);
+        /* Close the SQLiteDB connection since SQLite only allows one update */
+        sdb.close();
+    }
+
+
+    /*
+     * Method: puzzleSql
+     * Purpose: run Sql from the puzzle to see
+     *          if this is a valid puzzle
+     * return true if a puzzle was found
+     * @throws SQLException
+     */
+    public boolean puzzleSql(String sql, Puzzle puzzle) throws SQLException, InvalidGameException {
+        SQLiteDB sdb = GameController.getDB();
+        boolean valid = false;
+
+        ResultSet rs = sdb.queryDB(sql);
+
+        if (rs.next()) {
+            loadPuzzle(rs, puzzle);
+            valid = true;
+        }
+        /* Close the SQLiteDB connection since SQLite only allows one update */
+        sdb.close();
+        return valid;
+    }
+
+
     public void loadPuzzle(ResultSet rs, Puzzle puzzle) throws SQLException, InvalidGameException {
         puzzle.setPuzzleID(rs.getInt("puzzleID"));
         puzzle.setPuzzleName(rs.getString("puzzleName"));
