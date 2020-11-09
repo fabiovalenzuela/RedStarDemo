@@ -1,4 +1,7 @@
 CREATE TABLE CharText(iD int not Null, seq int not null, usedFlag int not null, text text not null, monID int not null, itemID int not null, roomID int not null, answers text not null, puzzleID int not null)
-INSERT INTO CharText(iD, seq, usedFlag, text, monID, itemID, roomID,answers,puzzleID) Values(1,1,0,"Hi.  You're in a dark place. Where are you going?",0,0,0,' ' ,0)
+INSERT INTO CharText(iD, seq, usedFlag, text, monID, itemID, roomID,answers,puzzleID) Values(1,1,0,"Hi.  You're in a dark place. You might want to turn around.",0,0,0,' ' ,0)
 INSERT INTO CharText(iD, seq, usedFlag, text, monID, itemID, roomID,answers,puzzleID) Values(1,2,0,"This is not a safe place for you.",0,0,0,' ',0)
 INSERT INTO CharText(iD, seq, usedFlag, text, monID, itemID, roomID,answers,puzzleID) Values(1,3,0,"I am a magic worm.  I come from the land of giant magic worms.  My father is the king | of magic worms.  Would you like to meet my family?",0,1,0,'YES|NO',2)
+INSERT INTO CharText(iD, seq, usedFlag, text, monID, itemID, roomID,answers,puzzleID) Values(2,1,0,"You will be safe here tonight.",0,0,0,' ' ,0)
+INSERT INTO CharText(iD, seq, usedFlag, text, monID, itemID, roomID,answers,puzzleID) Values(2,2,0,"If you keep going, you might find something scary.",0,0,0,' ' ,0)
+INSERT INTO CharText(iD, seq, usedFlag, text, monID, itemID, roomID,answers,puzzleID) Values(2,3,0,"Stay here for the night.  You will be comfortable.",0,0,0,' ' ,0)

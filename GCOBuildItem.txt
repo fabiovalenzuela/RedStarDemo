@@ -13,3 +13,5 @@ INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Va
 INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(12, 'moon gemstone', 'a crescent moon shaped gemstone, perhaps this one is related to the sunstone?', 30,1,0)
 INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(13, 'dog statue', 'a small status depicting the legendary cerberus dog', 30,1,0)
 INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(14, 'shield', 'a beautifully decorated shield made of a strong metal', 30,-1,0)
+INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(15, 'knife', 'a very large knife', 30,-1,0)
+INSERT INTO Item(itemID, name, description, damageRate, itemRoomID, itemUsed) Values(16, 'rock', 'a large rock with sharp edges', 30,39,0)
