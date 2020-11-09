@@ -11,3 +11,4 @@ INSERT INTO Monster(iD, name, description, health, minDamage, maxDamage, chanceH
 INSERT INTO Monster(iD, name, description, health, minDamage, maxDamage, chanceHit, roomID) Values(10, 'Cerberus', 'The legendary God like dog who was presumed dead in the ancient times', 90, 10, 80, 0.7, 31)
 INSERT INTO Monster(iD, name, description, health, minDamage, maxDamage, chanceHit, roomID) Values(11, 'Dogamy', 'The owner of the doghouse, a friendly face to see around', 90, 10, 80, 0.7, 36)
 INSERT INTO Monster(iD, name, description, health, minDamage, maxDamage, chanceHit, roomID) Values(12, 'Dogaressa', 'Dogamy''s wife, who is currently foraging for supplies', 90, 10, 80, 0.7, 39)
+INSERT INTO Monster(iD, name, description, health, minDamage, maxDamage, chanceHit, roomID) Values(13, 'Big Boss', 'A big hairy monster with large fangs', 100, 10, 50, 0.7, 51)
