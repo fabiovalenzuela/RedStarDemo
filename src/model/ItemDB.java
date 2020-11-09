@@ -109,19 +109,26 @@ public class ItemDB {
         String sql = "Select * from Item where itemRoomID = " + roomID;
 
         if (roomID == 0) {
-            itemDesc = "\nItems in backpack:  ";
-        } else {
-            itemDesc = "\nItems in room " + roomID + ":  ";
+            itemDesc = "\nNo items in backpack";
         }
 
+        boolean firstItem = true;
         ResultSet rs = sdb.queryDB(sql);
 
         try {
             while (rs.next()) {
+                if (firstItem) {
+                    firstItem = false;
+                    if (roomID == 0) {
+                        itemDesc = "\nItems in backpack:\n";
+                    } else {
+                        itemDesc = "\nItems in room " + roomID + ":\n";
+                    }
+                }
                 Item item = new Item();
                 loadItem(rs, item);
-                itemDesc = itemDesc + "itemID = " + item.getItemID() +
-                        ", name = " + item.getName() +
+                itemDesc = itemDesc +
+                        "item = " + item.getName() +
                         ", description = " + item.getDescription() + "\n";
             }
         } catch (SQLException ige) {
