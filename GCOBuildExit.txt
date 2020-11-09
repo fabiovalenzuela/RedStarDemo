@@ -68,7 +68,7 @@ INSERT INTO Exit (exitID, roomID, direction, destination, hidden) Values(60, 32,
 INSERT INTO Exit (exitID, roomID, direction, destination, hidden) Values(61, 33, 'SOUTH',32 ,0 )
 INSERT INTO Exit (exitID, roomID, direction, destination, hidden) Values(62, 34, 'WEST',33 ,0 )
 INSERT INTO Exit (exitID, roomID, direction, destination, hidden) Values(63, 34, 'EAST',41 ,0 )
-INSERT INTO Exit (exitID, roomID, direction, destination, hidden) Values(64, 35, 'SOUTH',36 ,0 )
+INSERT INTO Exit (exitID, roomID, direction, destination, hidden) Values(64, 35, 'SOUTH',36 ,1 )
 INSERT INTO Exit (exitID, roomID, direction, destination, hidden) Values(65, 35, 'EAST',39 ,0 )
 INSERT INTO Exit (exitID, roomID, direction, destination, hidden) Values(105, 35, 'WEST',29 ,0 )
 INSERT INTO Exit (exitID, roomID, direction, destination, hidden) Values(66, 36, 'NORTH',35 ,0 )
