@@ -56,8 +56,11 @@ abstract public class Being {
      ----------------------------------*/
     public void updateHealth() {
         /* create instance of Random class */
-        Random rand = new Random();
-        int change = rand.nextInt(maxDamage-minDamage);
+        int change = 0;
+        if (maxDamage != 0 && maxDamage >minDamage) {
+            Random rand = new Random();
+            change = rand.nextInt(maxDamage - minDamage);
+        }
         health -= change;
         if (health<0) { health = 0; }
         setHealth(health);

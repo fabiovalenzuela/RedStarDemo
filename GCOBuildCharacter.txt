@@ -1,2 +1,3 @@
 CREATE TABLE Character(iD int Primary Key not Null, name text not null, description text not null, health int not null, minDamage int not null, maxDamage int not null, chanceHit int not null, roomID int not null)
-INSERT INTO Character(iD, name, description, health, minDamage, maxDamage, chanceHit, roomID) Values(1, 'worm', 'A large slimey worm', 0, 0, 0, 0.0, 2)
+INSERT INTO Character(iD, name, description, health, minDamage, maxDamage, chanceHit, roomID) Values(1, 'worm', 'A large slimey worm', 100, 0, 0, 0.0, 2)
+INSERT INTO Character(iD, name, description, health, minDamage, maxDamage, chanceHit, roomID) Values(2, 'Inn Keeper', 'A small, fat inn keeper', 100, 0, 0, 0.0, 49)
