@@ -95,7 +95,7 @@ public class PlayerDB {
      * Purpose: update the health
      * @throws SQLException
      */
-    public void updateHealth(int health) throws SQLException {
+    public void updateHp(int health) throws SQLException {
         SQLiteDB sdb = GameController.getDB();
         String sql = "Update Player set health = " + health;
         sdb.updateDB(sql);
