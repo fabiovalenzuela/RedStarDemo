@@ -117,7 +117,7 @@ public class ControllerUI {
                 }
 
                 /* process the command */
-                this.processCommand(command, noun);
+                this.processCommand(command, verb, noun);
 
             } catch (InvalidGameException e) {
                 msgTF.setId("#errorMsg");
@@ -149,7 +149,7 @@ public class ControllerUI {
  Process the command
  -------------------
 */
-    public void processCommand(String command, String noun) {
+    public void processCommand(String command, String verb, String noun) {
         try {
             switch (command) {
                 case "EXIT":
@@ -176,7 +176,7 @@ public class ControllerUI {
                     processPUSH(noun);
                     break;
                 case "THROW":
-                    processTHROW(noun);
+                    processTHROW(verb, noun);
                     break;
                 /* Default checks for direction */
                 default:
@@ -368,6 +368,7 @@ public class ControllerUI {
     private void processATTACK(String noun) throws SQLException, InvalidGameException {
         boolean win = false;
         int hp = 0;
+        int playerHp = 0;
         int sizeM = gc.room.getMonsters().size();
         int sizeC = gc.room.getChars().size();
         commandTF.setText("");
@@ -379,6 +380,8 @@ public class ControllerUI {
                 Monster monster = gc.room.getMonsters().get(0);
                 monster.updateHealth();
                 hp = monster.getHealth();
+                MonsterDB mdb = new MonsterDB();
+                mdb.updateHp(hp);
                 if (hp <= 0) {
                     descTA.setText(descTA.getText() + "\nYou have defeated the monster");
                     gc.room.getMonsters().remove(0);
@@ -390,6 +393,8 @@ public class ControllerUI {
                 Character character = gc.room.getChars().get(0);
                 character.updateHealth();
                 hp = character.getHealth();
+                CharacterDB cdb = new CharacterDB();
+                cdb.updateHp(hp);
                 if (hp <= 0) {
                     descTA.setText(descTA.getText() + "\nYou have defeated your enemy");
                     gc.room.getChars().remove(0);
@@ -399,7 +404,10 @@ public class ControllerUI {
             }
             if (!win) {
                 player.updateHealth();
-                if (player.getHealth() <= 0) {
+                playerHp = player.getHealth();
+                PlayerDB pdb = new PlayerDB();
+                pdb.updateHp(playerHp);
+                if (playerHp <= 0) {
                     descTA.setText(descTA.getText() + "\nYou have lost. Better luck next time.");
                     healthTA.setText("Player Health: " + player.getHealth() +
                             "\nEnemy Health: " + hp);
@@ -414,7 +422,7 @@ public class ControllerUI {
     private void processPUSH(String noun) {
 
     }
-    private void processTHROW(String noun) throws SQLException, InvalidGameException {
+    private void processTHROW(String verb, String noun) throws SQLException, InvalidGameException {
         Puzzle puzzle = new Puzzle();
         PuzzleDB pdb = new PuzzleDB();
         String sql = "Select * from Puzzle where puzzleVerb = 'THROW' and " +
@@ -431,7 +439,7 @@ public class ControllerUI {
             commandTF.setVisible(true);
         } else {
             descTA.setText(descTA.getText()
-                    + "\n You cannot throw that in this room");
+                    + "\n You cannot " + verb + " that in this room");
         }
 
     }

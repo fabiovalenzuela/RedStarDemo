@@ -109,8 +109,8 @@ public class GameController {
         else if (command.matches("BACKPACK|B")) { commandStr = "BACKPACK"; }
         else if (command.matches("TALK|T")) { commandStr = "TALK"; }
         else if (command.matches("ATTACK|A")) { commandStr = "ATTACK"; }
+        else if (command.matches("THROW|PUSH|PULL|USE")) { commandStr = "THROW"; }
         else if (command.matches("PUSH")) { commandStr = "PUSH"; }
-        else if (command.matches("THROW")) { commandStr = "THROW"; }
         else if (command.matches("X")) { commandStr = "EXIT"; }
         else {
             throw new InvalidGameException("Invalid Command");

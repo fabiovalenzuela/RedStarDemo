@@ -104,9 +104,11 @@ public class Room {
             Puzzle puzzle;
             for (int i = 0; i < puzzles.size(); i++) {
                 puzzle = puzzles.get(i);
-                if (puzzle.isPuzzleUsed() && !puzzle.getUsedText().isEmpty()) {
+                if (!puzzle.isPuzzleUsed() && !puzzle.getPuzzleText().isEmpty() &&
+                     !puzzle.getPuzzleText().equals(" ")) {
                     display = display + puzzle.getPuzzleText() + "\n" ;
-                } else if (!puzzle.isPuzzleUsed() && !puzzle.getPuzzleText().isEmpty()) {
+                } else if (puzzle.isPuzzleUsed() && !puzzle.getUsedText().isEmpty() &&
+                        !puzzle.getUsedText().equals(" ")) {
                     display = display + puzzle.getUsedText() + "\n" ;
                 }
 
@@ -118,18 +120,26 @@ public class Room {
         display characters in room
         */
         if (chars.size() > 0) {
-            display = display + "You see a ";
+            boolean firstCharacter = true;
             Character character = new Character();
             for (int i = 0; i < chars.size(); i++) {
                 character = chars.get(i);
-                display = display + character.getName();
-                if ((i < (chars.size() - 2))) {
-                    display = display + ", ";
-                } else if ((chars.size() > 1) && (i != (chars.size() - 1))) {
-                    display = display + " and a ";
+                if (character.getHealth()>0) {
+                    if (firstCharacter) {
+                        display = display + "You see a ";
+                        firstCharacter = false;
+                    }
+                    display = display + character.getName();
+                    if ((i < (chars.size() - 2))) {
+                        display = display + ", ";
+                    } else if ((chars.size() > 1) && (i != (chars.size() - 1))) {
+                        display = display + " and a ";
+                    }
                 }
             }
-            display = display + "\n";
+            if (!firstCharacter) {
+                display = display + "\n";
+            }
         }
 
         /*
@@ -154,19 +164,28 @@ public class Room {
         /*
         display monsters in room
         */
+        boolean firstMonster = true;
         if (monsters.size() > 0) {
-            display = display + "There is ";
+
             Monster mon = new Monster();
             for (int i = 0; i < monsters.size(); i++) {
                 mon = monsters.get(i);
-                display = display + mon.getDescription();
-                if ((i < (monsters.size() - 2))) {
-                    display = display + ", a ";
-                } else if ((monsters.size() > 1) && (i != (monsters.size() - 1))) {
-                    display = display + " and ";
+                if (mon.getHealth()>0) {
+                    if (firstMonster) {
+                        display = display + "There is ";
+                        firstMonster = false;
+                    }
+                    display = display + mon.getDescription();
+                    if ((i < (monsters.size() - 2))) {
+                        display = display + ", a ";
+                    } else if ((monsters.size() > 1) && (i != (monsters.size() - 1))) {
+                        display = display + " and ";
+                    }
                 }
             }
-            display = display + "\n";
+            if (!firstMonster) {
+                display = display + "\n";
+            }
         }
 
 
