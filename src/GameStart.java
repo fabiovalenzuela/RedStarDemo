@@ -1,4 +1,3 @@
-import controller.CreateFilesController;
 import model.LoginDB;
 import model.SQLiteDB;
 import view.Login;
@@ -18,13 +17,7 @@ public class GameStart {
 
     public static void main(String[] args) {
         File dbFile;
-//        File dbFile = new File("GCO.db");
-//        if (!dbFile.exists()) {
-//            CreateFilesController cfc = new CreateFilesController();
-//            cfc.createFile();
-//        }
 
-//        GameUI.launch(GameUI.class);
 
         /* Create User file if not found */
         try {
