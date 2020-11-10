@@ -1,0 +1,3 @@
+CREATE TABLE Help(helpID int Primary Key not Null, roomID int not null, helpText text not null)
+INSERT INTO Help (helpID, roomID, helpText) Values(1, 1, 'Hint for room 1')
+INSERT INTO Help (helpID, roomID, helpText) Values(2, 2, 'Hint for room 2')
