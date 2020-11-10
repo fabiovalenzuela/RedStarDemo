@@ -152,6 +152,8 @@ public class ControllerUI {
     public void processCommand(String command, String verb, String noun) {
         try {
             switch (command) {
+//                case"HELP":
+//                    processHelp(noun);
                 case "EXIT":
                     processExit();
                 case "GET":
@@ -365,6 +367,27 @@ public class ControllerUI {
         commandTF.setVisible(true);
     }
 
+//    private void processHelp(String noun) throws SQLException, InvalidGameException {
+//        String cmd="BACKPACK";
+//        try {
+//            processBACKPACK(cmd);
+//
+//        } catch (InvalidGameException | SQLException e) {
+//            msgTF.setId("#errorMsg");
+//            msgTF.setText(e.getMessage());
+//            msgTF.setVisible(true);
+//        }
+//         cmd="LOOK";
+//        try {
+//            if ("LOOK".equals(cmd)) {
+//                processBACKPACK(cmd);
+//            }
+//        } catch (InvalidGameException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
     private void processATTACK(String noun) throws SQLException, InvalidGameException {
         boolean win = false;
         int hp = 0;
@@ -444,6 +467,7 @@ public class ControllerUI {
 
     }
 
+
     /*
      roomProcess
      Command string is passed in.
@@ -461,6 +485,7 @@ public class ControllerUI {
         pdb.updateRoomID(nextRoomID);
 
     }
+
 
     private Item getSelectedItem(String noun) throws InvalidGameException {
         ArrayList<Item> items = new ArrayList<>();
@@ -546,6 +571,8 @@ public class ControllerUI {
             cfc.createFile();
         }
     }
+
+
 
     /* -------------------------------
         Method: updPlayer
